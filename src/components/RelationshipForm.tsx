@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface FormData {
   name1: string;
@@ -252,7 +253,7 @@ export default function RelationshipForm() {
           <h3 className="text-lg font-bold mb-2 text-primary">
             Seu Relatório Emocional
           </h3>
-          <div>{report}</div>
+          <ReactMarkdown>{report}</ReactMarkdown>
         </div>
       )}
     </>
