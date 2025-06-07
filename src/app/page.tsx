@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
+import LetterIcon from "../components/LetterIcon";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,94 +16,52 @@ const fadeIn = {
 
 const steps = [
   {
-    title: "Preencha seus dados",
-    description: "Conte sobre você e a pessoa, sem julgamentos.",
-    icon: (
-      <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-        <circle cx="18" cy="18" r="18" fill="#ede9fe" />
-        <path
-          d="M12 18h12M12 22h8"
-          stroke="#7c3aed"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    title: "1. Preencha os dados",
+    description: "Forneça os nomes e datas de nascimento. Simples e rápido.",
+    icon: <svg>...</svg>,
   },
   {
-    title: "Análise emocional",
-    description: "Nossa IA analisa padrões e sentimentos únicos.",
-    icon: (
-      <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-        <circle cx="18" cy="18" r="18" fill="#dbeafe" />
-        <path
-          d="M18 12v12M12 18h12"
-          stroke="#2563eb"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    title: "2. Geramos a Análise",
+    description: "Nossa IA cruza os dados para revelar a dinâmica da conexão.",
   },
   {
-    title: "Receba seu diagnóstico",
-    description: "Um relatório íntimo, direto e personalizado.",
-    icon: (
-      <svg width="36" height="36" fill="none" viewBox="0 0 36 36">
-        <circle cx="18" cy="18" r="18" fill="#f0fdf4" />
-        <path
-          d="M12 16l6 6 6-6"
-          stroke="#22c55e"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    title: "3. Receba o Diagnóstico",
+    description: "Um relatório completo com insights e conselhos práticos.",
   },
 ];
 
 const benefits = [
   {
-    text: "Descubra padrões invisíveis que afetam sua relação",
-    icon: (
-      <svg width="32" height="32" fill="none" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="16" fill="#ede9fe" />
-        <path
-          d="M10 16l4 4 8-8"
-          stroke="#7c3aed"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    title: "Padrões Invisíveis",
+    description:
+      "Descubra os padrões de comportamento que sabotam a relação sem que vocês percebam.",
+    size: "large",
+    icon: "🧩",
+    gradient: "from-violet-100 to-violet-50",
   },
   {
-    text: "Entenda sentimentos que você não consegue explicar",
-    icon: (
-      <svg width="32" height="32" fill="none" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="16" fill="#dbeafe" />
-        <path
-          d="M16 10v8M16 22h.01"
-          stroke="#2563eb"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    title: "Sentimentos Reais",
+    description:
+      "Entenda por que você sente o que sente, mesmo tentando esquecer.",
+    size: "small",
+    icon: "❤️‍🔥",
+    gradient: "from-blue-100 to-blue-50",
   },
   {
-    text: "Receba conselhos reais para agir com clareza",
-    icon: (
-      <svg width="32" height="32" fill="none" viewBox="0 0 32 32">
-        <circle cx="16" cy="16" r="16" fill="#f0fdf4" />
-        <path
-          d="M12 20l8-8M12 12h8v8"
-          stroke="#22c55e"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    title: "Verdade vs. Ilusão",
+    description:
+      "Saiba o que é verdadeiro na conexão e o que pode ser apenas uma projeção.",
+    size: "small",
+    icon: "🎭",
+    gradient: "from-green-100 to-green-50",
+  },
+  {
+    title: "Quebra de Ciclos",
+    description:
+      "Receba conselhos práticos para parar de repetir os mesmos erros que machucam.",
+    size: "large",
+    icon: "🔄",
+    gradient: "from-orange-100 to-orange-50",
   },
 ];
 
@@ -199,6 +158,9 @@ export default function LandingPage() {
 
   return (
     <div className={`min-h-screen bg-white ${inter.className}`}>
+      {/* Grid Pontilhado de Fundo */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5 pointer-events-none select-none z-0"></div>
+
       {/* HERO SECTION */}
       <section className="relative overflow-hidden pt-24 pb-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         {/* Ilustração SVG decorativa */}
@@ -227,22 +189,24 @@ export default function LandingPage() {
           </svg>
         </div>
         <div className="relative z-10 max-w-3xl mx-auto">
+          <div className="mb-8">
+            <LetterIcon />
+          </div>
           <motion.h1
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
           >
             Descubra o{" "}
             <span className="text-violet-600">verdadeiro significado</span> da
             sua conexão
-            <span className="inline-block align-middle ml-2">💜</span>
           </motion.h1>
           <motion.p
             className="text-lg sm:text-xl text-slate-600 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
+            transition={{ delay: 0.6, duration: 0.7 }}
           >
             Um diagnóstico emocional único, feito sob medida para sua história.
             Entenda padrões, sentimentos e caminhos possíveis para o seu
@@ -251,7 +215,7 @@ export default function LandingPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
+            transition={{ delay: 0.8, duration: 0.7 }}
           >
             <Link
               href="/formulario"
@@ -290,71 +254,142 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* PROVA SOCIAL SUTIL */}
+      <section className="py-16 px-4 text-center">
+        <p className="text-sm text-slate-500 mb-6 uppercase tracking-wider">
+          Usado por pessoas em busca de clareza
+        </p>
+        <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-4 opacity-70">
+          <span className="font-medium text-slate-400">Ana C.</span>
+          <span className="font-medium text-slate-400">Marcos V.</span>
+          <span className="font-medium text-slate-400">Juliana P.</span>
+          <span className="font-medium text-slate-400">Fernando R.</span>
+          <span className="font-medium text-slate-400">Beatriz S.</span>
+        </div>
+      </section>
+
       {/* COMO FUNCIONA */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 text-center mb-12">
-            Como funciona
+      <section className="py-24 px-4 bg-slate-50/50">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-16">
+            Um caminho simples para a clareza
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl shadow-md p-8 flex flex-col items-center text-center border border-violet-50 hover:shadow-lg transition-all"
+                className="bg-white rounded-2xl p-8 border border-slate-100/80 shadow-sm hover:shadow-lg transition-shadow"
               >
-                <div className="mb-4">{step.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">
+                <div className="mb-5 flex justify-center">{step.icon}</div>
+                <h3 className="text-xl font-bold text-slate-800 mb-3">
                   {step.title}
                 </h3>
-                <p className="text-slate-600 text-base">{step.description}</p>
+                <p className="text-slate-600">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* BENEFÍCIOS */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 text-center mb-12">
-            O que você vai descobrir
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      {/* BENEFÍCIOS - BENTO GRID */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-4">
+              Um Diagnóstico Profundo e Moderno
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Visualizamos sua conexão de uma forma que você nunca viu,
+              revelando insights claros e diretos sobre o que realmente importa.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {benefits.map((benefit, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="bg-white rounded-2xl shadow p-6 flex flex-col items-center text-center border border-violet-100 hover:shadow-lg transition-all"
+                className={`
+                  p-8 rounded-3xl border border-slate-200/50 shadow-sm relative overflow-hidden
+                  flex flex-col justify-between min-h-[250px]
+                  ${
+                    benefit.size === "large" ? "md:col-span-2" : "md:col-span-1"
+                  }
+                  bg-gradient-to-br ${benefit.gradient}
+                `}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                viewport={{ once: true }}
               >
-                <div className="mb-4">{benefit.icon}</div>
-                <p className="text-slate-700 text-base font-medium">
-                  {benefit.text}
-                </p>
-              </div>
+                <div>
+                  <div className="text-4xl mb-5">{benefit.icon}</div>
+                  <h3 className="text-2xl font-bold text-slate-800 mb-3">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {benefit.description}
+                  </p>
+                </div>
+                <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-white/40 rounded-full blur-2xl opacity-80"></div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* DEPOIMENTOS */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 text-center mb-12">
+      {/* DEPOIMENTOS - GLASSMORPHISM */}
+      <section className="py-24 px-4 relative overflow-hidden">
+        {/* Fundo com gradiente decorativo */}
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-100 via-blue-50 to-white blur-2xl opacity-60 z-0"></div>
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl font-extrabold text-slate-900 mb-16">
             O que dizem sobre o diagnóstico
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl shadow p-8 flex flex-col items-center text-center border border-violet-100 hover:shadow-lg transition-all"
-              >
-                <div className="mb-4">{t.icon}</div>
-                <p className="text-slate-700 text-base mb-4">“{t.text}”</p>
-                <span className="text-violet-700 font-semibold text-sm">
-                  {t.author}
-                </span>
-              </div>
-            ))}
-          </div>
+
+          <motion.div
+            className="flex flex-col items-center justify-center -space-y-24 md:-space-y-32"
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {testimonials.map((testimonial, i) => {
+              const variants = {
+                initial: { opacity: 0, y: 50, rotate: 0 },
+                animate: {
+                  opacity: 1,
+                  y: i * 40, // Espaçamento vertical entre os cards
+                  rotate: (i - (testimonials.length - 1) / 2) * 5, // Rotação para criar o efeito de leque
+                  transition: { type: "spring", stiffness: 50, delay: i * 0.2 },
+                },
+              };
+
+              return (
+                <motion.div
+                  key={i}
+                  className="w-full max-w-lg p-6 rounded-2xl shadow-lg border border-white/30 bg-white/40 backdrop-blur-xl"
+                  variants={variants}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-full bg-white/70 flex-shrink-0 flex items-center justify-center shadow-inner">
+                      {testimonial.icon}
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-800">
+                        {testimonial.author}
+                      </p>
+                      <p className="text-sm text-slate-600">
+                        Cliente Verificado
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-slate-700 leading-relaxed text-left">
+                    "{testimonial.text}"
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
@@ -455,49 +490,31 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-24 px-4">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 text-center mb-12">
-            Perguntas frequentes
-          </h2>
-          <div className="space-y-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-4">
+              Perguntas Frequentes
+            </h2>
+            <p className="text-lg text-slate-600">
+              Respostas rápidas para as dúvidas mais comuns.
+            </p>
+          </div>
+          <div className="space-y-8">
             {faqs.map((faq, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl shadow p-6 border border-violet-100 flex items-start gap-4"
-              >
-                <div className="mt-1">
-                  <svg width="28" height="28" fill="none" viewBox="0 0 28 28">
-                    <circle
-                      cx="14"
-                      cy="14"
-                      r="14"
-                      fill="#a78bfa"
-                      fillOpacity="0.18"
-                    />
-                    <path
-                      d="M14 8v6m0 4h.01"
-                      stroke="#7c3aed"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">
-                    {faq.question}
-                  </h3>
-                  <p className="text-slate-700 text-base">{faq.answer}</p>
-                </div>
+              <div key={i} className="border-b border-slate-200/80 pb-6">
+                <h3 className="text-xl font-bold text-slate-800 mb-3">
+                  {faq.question}
+                </h3>
+                <p className="text-slate-600 leading-relaxed">{faq.answer}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
+      {/* FINAL CTA - DEDICADO E COM IMPACTO */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white text-center relative overflow-hidden">
-        {/* Radial violeta decorativo no fundo */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2),transparent_60%)] pointer-events-none select-none"></div>
         <div className="relative z-10 max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-6">
@@ -505,8 +522,7 @@ export default function LandingPage() {
           </h2>
           <p className="text-lg mb-8 opacity-90">
             Receba um diagnóstico emocional único, feito sob medida para sua
-            história. Descubra padrões, sentimentos e caminhos possíveis para o
-            seu relacionamento.
+            história. Descubra padrões, sentimentos e caminhos possíveis.
           </p>
           <Link
             href="/formulario"
@@ -517,6 +533,13 @@ export default function LandingPage() {
           </Link>
         </div>
       </section>
+
+      {/* RODAPÉ MINIMALISTA */}
+      <footer className="py-8 px-4 text-center text-sm text-slate-500 border-t border-slate-100/80">
+        <p>
+          &copy; {new Date().getFullYear()} Cora. Todos os direitos reservados.
+        </p>
+      </footer>
     </div>
   );
 }
