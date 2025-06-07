@@ -253,7 +253,7 @@ export default function RelationshipForm() {
           <h3 className="text-lg font-bold mb-2 text-primary">
             Seu Relatório Emocional
           </h3>
-          <ReactMarkdown>{report}</ReactMarkdown>
+          <ReactMarkdown children={report} skipHtml />
         </div>
       )}
     </>
