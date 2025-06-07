@@ -82,9 +82,9 @@ export default function RelationshipForm() {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white/90 shadow-xl rounded-3xl px-6 py-8 md:px-8 md:py-10 space-y-6 border border-white/60 backdrop-blur-sm"
+        className="bg-white shadow-xl rounded-3xl px-6 py-8 md:px-8 md:py-10 space-y-6 border border-violet-100"
       >
-        <h2 className="text-xl font-semibold text-gray-800 mb-2 text-center">
+        <h2 className="text-xl font-semibold text-slate-800 mb-2 text-center">
           Formulário do Relacionamento
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -92,7 +92,7 @@ export default function RelationshipForm() {
           <div className="space-y-2">
             <label
               htmlFor="name1"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-slate-700"
             >
               Seu Nome
             </label>
@@ -100,7 +100,7 @@ export default function RelationshipForm() {
               {...register("name1")}
               type="text"
               id="name1"
-              className={`w-full px-4 py-2 rounded-xl border-none bg-gray-100 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-gray-900 placeholder-gray-400 ${
+              className={`w-full px-4 py-2 rounded-xl border-none bg-slate-50 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-slate-900 placeholder-slate-400 ${
                 errors.name1 ? "ring-2 ring-red-400" : ""
               }`}
               placeholder="Digite seu nome"
@@ -114,7 +114,7 @@ export default function RelationshipForm() {
           <div className="space-y-2">
             <label
               htmlFor="birthdate1"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-slate-700"
             >
               Seu Nascimento
             </label>
@@ -122,7 +122,7 @@ export default function RelationshipForm() {
               {...register("birthdate1")}
               type="date"
               id="birthdate1"
-              className={`w-full px-4 py-2 rounded-xl border-none bg-gray-100 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-gray-900 placeholder-gray-400 ${
+              className={`w-full px-4 py-2 rounded-xl border-none bg-slate-50 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-slate-900 placeholder-slate-400 ${
                 errors.birthdate1 ? "ring-2 ring-red-400" : ""
               }`}
             />
@@ -135,7 +135,7 @@ export default function RelationshipForm() {
           <div className="space-y-2">
             <label
               htmlFor="name2"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-slate-700"
             >
               Nome da Pessoa
             </label>
@@ -143,7 +143,7 @@ export default function RelationshipForm() {
               {...register("name2")}
               type="text"
               id="name2"
-              className={`w-full px-4 py-2 rounded-xl border-none bg-gray-100 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-gray-900 placeholder-gray-400 ${
+              className={`w-full px-4 py-2 rounded-xl border-none bg-slate-50 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-slate-900 placeholder-slate-400 ${
                 errors.name2 ? "ring-2 ring-red-400" : ""
               }`}
               placeholder="Digite o nome da outra pessoa"
@@ -157,7 +157,7 @@ export default function RelationshipForm() {
           <div className="space-y-2">
             <label
               htmlFor="birthdate2"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-slate-700"
             >
               Nascimento da Pessoa
             </label>
@@ -165,7 +165,7 @@ export default function RelationshipForm() {
               {...register("birthdate2")}
               type="date"
               id="birthdate2"
-              className={`w-full px-4 py-2 rounded-xl border-none bg-gray-100 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-gray-900 placeholder-gray-400 ${
+              className={`w-full px-4 py-2 rounded-xl border-none bg-slate-50 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-slate-900 placeholder-slate-400 ${
                 errors.birthdate2 ? "ring-2 ring-red-400" : ""
               }`}
             />
@@ -178,7 +178,7 @@ export default function RelationshipForm() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-slate-700">
               Seu Gênero
             </label>
             <div className="flex gap-4 mt-1">
@@ -187,18 +187,18 @@ export default function RelationshipForm() {
                   {...register("gender1")}
                   type="radio"
                   value="male"
-                  className="w-4 h-4 text-violet-500 border-gray-300 focus:ring-violet-400"
+                  className="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-400 bg-slate-50"
                 />
-                <span className="ml-2 text-sm text-gray-700">Masculino</span>
+                <span className="ml-2 text-sm text-slate-700">Masculino</span>
               </label>
               <label className="inline-flex items-center">
                 <input
                   {...register("gender1")}
                   type="radio"
                   value="female"
-                  className="w-4 h-4 text-violet-500 border-gray-300 focus:ring-violet-400"
+                  className="w-4 h-4 text-violet-500 border-slate-300 focus:ring-violet-400 bg-slate-50"
                 />
-                <span className="ml-2 text-sm text-gray-700">Feminino</span>
+                <span className="ml-2 text-sm text-slate-700">Feminino</span>
               </label>
             </div>
             {errors.gender1 && (
@@ -210,14 +210,14 @@ export default function RelationshipForm() {
           <div className="space-y-2">
             <label
               htmlFor="relationshipStatus"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-slate-700"
             >
               Status do Relacionamento
             </label>
             <select
               {...register("relationshipStatus")}
               id="relationshipStatus"
-              className={`w-full px-4 py-2 rounded-xl border-none bg-gray-100 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-gray-900 ${
+              className={`w-full px-4 py-2 rounded-xl border-none bg-slate-50 focus:bg-white focus:ring-2 focus:ring-violet-400 transition-colors text-slate-900 ${
                 errors.relationshipStatus ? "ring-2 ring-red-400" : ""
               }`}
             >
@@ -237,20 +237,20 @@ export default function RelationshipForm() {
         </div>
         <button
           type="submit"
-          className="w-full bg-primary text-white py-3 px-6 rounded-2xl font-semibold text-lg shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full bg-violet-600 text-white py-3 px-6 rounded-2xl font-semibold text-lg shadow-lg hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
           disabled={loading}
         >
           {loading ? "Gerando relatório..." : "Enviar"}
         </button>
         {error && (
-          <div className="mt-4 text-center text-red-600 text-sm font-medium">
+          <div className="mt-4 text-center text-red-500 text-sm font-medium">
             {error}
           </div>
         )}
       </form>
       {report && (
-        <div className="mt-8 p-6 bg-white/80 rounded-2xl shadow border border-gray-100 text-gray-900 whitespace-pre-line">
-          <h3 className="text-lg font-bold mb-2 text-primary">
+        <div className="mt-8 p-6 bg-white rounded-2xl shadow border border-violet-100 text-slate-700 whitespace-pre-line">
+          <h3 className="text-lg font-bold mb-2 text-slate-800">
             Seu Relatório Emocional
           </h3>
           <ReactMarkdown children={report} skipHtml />
