@@ -16,7 +16,7 @@ const fadeIn = {
 
 const steps = [
   {
-    title: "1. Preencha os Dados",
+    title: "Preencha os dados",
     description: "Forneça os nomes e datas de nascimento. Simples e rápido.",
     icon: (
       <svg
@@ -37,7 +37,7 @@ const steps = [
     iconBg: "bg-red-100",
   },
   {
-    title: "2. Análise por IA",
+    title: "IA analisa a conexão",
     description: "Nossa IA cruza os dados para revelar a dinâmica da conexão.",
     icon: (
       <svg
@@ -58,7 +58,7 @@ const steps = [
     iconBg: "bg-green-100",
   },
   {
-    title: "3. Receba o Diagnóstico",
+    title: "Receba o relatório exclusivo",
     description: "Um relatório completo com insights e conselhos práticos.",
     icon: (
       <svg
@@ -80,80 +80,65 @@ const steps = [
   },
 ];
 
-const benefits = [
+const discoveries = [
   {
-    title: "Padrões Invisíveis",
+    title: "Padrões que sabotam",
     description:
-      "Descubra os padrões de comportamento que sabotam a relação sem que vocês percebam.",
-    size: "large",
+      "Identifique os ciclos repetitivos que minam a conexão sem que você perceba.",
     icon: "🧩",
-    gradient: "from-violet-100 to-violet-50",
-  },
-  {
-    title: "Sentimentos Reais",
-    description:
-      "Entenda por que você sente o que sente, mesmo tentando esquecer.",
-    size: "small",
-    icon: "❤️‍🔥",
-    gradient: "from-blue-100 to-blue-50",
-  },
-  {
-    title: "Verdade vs. Ilusão",
-    description:
-      "Saiba o que é verdadeiro na conexão e o que pode ser apenas uma projeção.",
-    size: "small",
-    icon: "🎭",
-    gradient: "from-green-100 to-green-50",
-  },
-  {
-    title: "Quebra de Ciclos",
-    description:
-      "Receba conselhos práticos para parar de repetir os mesmos erros que machucam.",
     size: "large",
+  },
+  {
+    title: "Por que ainda sente?",
+    description:
+      "Entenda a raiz emocional que te prende à essa memória, mesmo tentando esquecer.",
+    icon: "❤️‍🔥",
+    size: "small",
+  },
+  {
+    title: "Realidade vs. Ilusão",
+    description:
+      "Diferencie o que era verdadeiro na relação do que era apenas uma projeção ou expectativa.",
+    icon: "🎭",
+    size: "small",
+  },
+  {
+    title: "Como sair do ciclo",
+    description:
+      "Receba clareza sobre os próximos passos para quebrar o padrão e parar de se machucar.",
     icon: "🔄",
-    gradient: "from-orange-100 to-orange-50",
+    size: "large",
+  },
+  {
+    title: "Seguir, soltar ou tentar?",
+    description:
+      "Ganhe uma nova perspectiva para decidir o que fazer com esse sentimento: ressignificar o passado, seguir em frente ou, se for o caso, tentar de novo com clareza.",
+    icon: "🗺️",
+    size: "full",
   },
 ];
 
 const testimonials = [
   {
-    text: "Nunca vi nossa história com tanta clareza. Me deu paz.",
-    author: "Ana, 28 anos",
-    icon: (
-      <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r="20" fill="#ede9fe" />
-        <path
-          d="M20 14a6 6 0 0 1 6 6c0 2.5-2 4.5-6 8-4-3.5-6-5.5-6-8a6 6 0 0 1 6-6Z"
-          fill="#7c3aed"
-        />
-      </svg>
-    ),
+    quote:
+      "Nunca vi nossa história com tanta clareza. Doeu, mas me deu uma paz que eu não sentia há anos. Foi libertador.",
+    name: "Ana C.",
+    age: 28,
+    avatar: "/avatars/avatar-1.png",
   },
   {
-    text: "Foi como conversar com alguém que me conhecia mais do que eu mesmo.",
-    author: "Pedro, 32 anos",
-    icon: (
-      <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r="20" fill="#dbeafe" />
-        <path
-          d="M20 14a6 6 0 0 1 6 6c0 2.5-2 4.5-6 8-4-3.5-6-5.5-6-8a6 6 0 0 1 6-6Z"
-          fill="#2563eb"
-        />
-      </svg>
-    ),
+    quote:
+      "Achava que era só mais uma dessas coisas da internet. Mas foi como conversar com alguém que me entendia de verdade.",
+    name: "Marcos V.",
+    age: 32,
+    avatar: "/avatars/avatar-2.png",
   },
   {
-    text: "Achei que ia doer. E doeu. Mas foi a melhor coisa que li esse ano.",
-    author: "Marina, 25 anos",
-    icon: (
-      <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r="20" fill="#f0fdf4" />
-        <path
-          d="M20 14a6 6 0 0 1 6 6c0 2.5-2 4.5-6 8-4-3.5-6-5.5-6-8a6 6 0 0 1 6-6Z"
-          fill="#22c55e"
-        />
-      </svg>
-    ),
+    quote:
+      "Finalmente entendi por que eu não conseguia seguir em frente. Foi o ponto final que eu precisava pra começar de novo.",
+    name: "Juliana P.",
+    age: 25,
+    avatar: "/avatars/avatar-3.png",
   },
 ];
 
@@ -167,19 +152,19 @@ const logos = [
 
 const faqs = [
   {
-    question: "Isso é só mais um horóscopo bonito?",
+    question: "Isso é tipo horóscopo?",
     answer:
-      "Não. É uma leitura emocional personalizada, sem clichês ou signos.",
+      "Não. Longe disso. Enquanto o horóscopo oferece generalidades, nosso diagnóstico cria uma leitura simbólica e única baseada nos dados específicos da sua história. É um mapa da sua conexão, não das estrelas.",
   },
   {
-    question: "É seguro?",
+    question: "É seguro? Meus dados estão protegidos?",
     answer:
-      "Totalmente confidencial. Seus dados são usados só para gerar o relatório.",
+      "Totalmente. Usamos seus dados apenas para gerar o relatório. Eles são processados de forma anônima e nunca são compartilhados ou armazenados. Sua privacidade é nossa prioridade máxima.",
   },
   {
-    question: "Em quanto tempo recebo?",
+    question: "Em quanto tempo recebo o diagnóstico?",
     answer:
-      "Em minutos. Depois do pagamento, o relatório já começa a ser gerado.",
+      "Imediatamente. Após a confirmação do pagamento, seu relatório exclusivo é gerado e disponibilizado na hora para você acessar.",
   },
 ];
 
@@ -194,6 +179,39 @@ const targetAudience = [
   "Quer clareza emocional sem papo de autoajuda",
   "Gosta de ouvir a verdade — mesmo que doa",
 ];
+
+function StickyMobileCTA() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 400) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  return (
+    <motion.div
+      className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-4 border-t border-slate-200 z-50"
+      initial={{ y: 100 }}
+      animate={{ y: visible ? 0 : 100 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
+      <Link
+        href="/formulario"
+        className="w-full text-center inline-block bg-gradient-to-r from-slate-900 to-slate-700 text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg"
+      >
+        Quero meu diagnóstico agora →
+      </Link>
+    </motion.div>
+  );
+}
 
 export default function LandingPage() {
   const { scrollYProgress } = useScroll();
@@ -246,103 +264,69 @@ export default function LandingPage() {
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Descubra o{" "}
-            <span className="text-violet-600">verdadeiro significado</span> da
-            sua conexão
+            Você sente que essa conexão te marcou… mas não sabe por quê?
           </motion.h1>
           <motion.p
             className="text-lg sm:text-xl text-slate-600 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.7 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
           >
-            Um diagnóstico emocional único, feito sob medida para sua história.
-            Entenda padrões, sentimentos e caminhos possíveis para o seu
-            relacionamento.
+            Descubra o que existe entre vocês com um diagnóstico simbólico e
+            verdadeiro. Feito sob medida para a sua história.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.7 }}
+            transition={{ delay: 0.6, duration: 0.7 }}
+            className="flex flex-col items-center"
           >
             <Link
               href="/formulario"
-              className="inline-block bg-gradient-to-r from-slate-900 to-slate-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2"
+              className="inline-block bg-gradient-to-r from-slate-900 to-slate-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg transition-all hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2"
             >
-              Quero meu diagnóstico
-              <span className="ml-2 align-middle">✨</span>
+              Quero entender o que foi isso tudo
+              <span className="ml-2 align-middle">→</span>
             </Link>
+            <p className="mt-4 text-sm text-slate-500">
+              Leitura única, personalizada e imediata
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* HOOK EMOCIONAL - VERSÃO CLEAN/CORPORATE */}
+      {/* SEÇÃO DE IDENTIFICAÇÃO */}
       <section className="bg-slate-50 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* Conteúdo */}
-          <div className="mx-auto max-w-5xl">
-            <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2">
-              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
-                <p>Você já se pegou revivendo conversas antigas?</p>
-                <p>
-                  Já sentiu que algo entre vocês ainda pulsa, mesmo separados?
-                </p>
+        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
+          <p className="text-lg text-slate-600 mb-8">
+            Você já se pegou revivendo conversas antigas?
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+            {[
+              "Reviveu conversas antigas?",
+              "Sentiu que algo entre vocês ainda pulsa?",
+              "Estão juntos, mas parece que algo sempre volta ao mesmo ponto?",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-start space-x-3 p-4 bg-white rounded-2xl border border-slate-200/80 shadow-sm"
+              >
+                <span className="text-violet-500 mt-1">✓</span>
+                <p className="text-slate-700">{item}</p>
               </div>
-              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
-                <p>
-                  Ou talvez vocês estejam juntos… mas parece que sempre voltam
-                  ao mesmo ponto.
-                </p>
-                <p className="font-semibold text-slate-800">
-                  Não é só você. Existe uma estrutura emocional entre vocês — e
-                  ela pode ser lida.
-                </p>
-              </div>
-            </div>
-            <div className="mt-16 border-t border-slate-200 pt-12">
-              <dl className="grid grid-cols-2 gap-x-8 gap-y-10 text-center md:grid-cols-4">
-                <div className="flex flex-col items-center">
-                  <dt className="text-lg font-semibold text-slate-800">
-                    Analisa
-                  </dt>
-                  <dd className="mt-1 text-sm text-slate-500">
-                    Padrões e ciclos
-                  </dd>
-                </div>
-                <div className="flex flex-col items-center">
-                  <dt className="text-lg font-semibold text-slate-800">
-                    Revela
-                  </dt>
-                  <dd className="mt-1 text-sm text-slate-500">
-                    Sentimentos ocultos
-                  </dd>
-                </div>
-                <div className="flex flex-col items-center">
-                  <dt className="text-lg font-semibold text-slate-800">
-                    Orienta
-                  </dt>
-                  <dd className="mt-1 text-sm text-slate-500">
-                    Caminhos possíveis
-                  </dd>
-                </div>
-                <div className="flex flex-col items-center">
-                  <dt className="text-lg font-semibold text-slate-800">
-                    Transforma
-                  </dt>
-                  <dd className="mt-1 text-sm text-slate-500">
-                    A sua perspectiva
-                  </dd>
-                </div>
-              </dl>
-            </div>
+            ))}
           </div>
+          <p className="mt-12 text-xl font-medium text-slate-800">
+            Não é só você. Existe uma estrutura emocional entre vocês — e ela
+            pode ser lida.
+          </p>
         </div>
       </section>
 
       {/* COMO FUNCIONA */}
-      <section id="how-it-works" className="py-24 px-4 bg-slate-50/50">
+      <section id="how-it-works" className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-16">
             Um caminho simples para a clareza
@@ -373,30 +357,28 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* BENEFÍCIOS - BENTO GRID */}
-      <section className="py-24 px-4 bg-white">
+      {/* O QUE VOCÊ VAI DESCOBRIR - BENTO GRID */}
+      <section className="py-24 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold text-slate-900 mb-4">
-              Um Diagnóstico Profundo e Moderno
+              O que você vai descobrir
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Visualizamos sua conexão de uma forma que você nunca viu,
-              revelando insights claros e diretos sobre o que realmente importa.
+              Seu relatório é um mapa da dinâmica emocional entre vocês,
+              revelando pontos que ninguém nunca te mostrou.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {benefits.map((benefit, i) => (
+            {discoveries.map((item, i) => (
               <motion.div
                 key={i}
                 className={`
-                  p-8 rounded-3xl border border-slate-200/50 shadow-sm relative overflow-hidden
-                  flex flex-col justify-between min-h-[250px]
-                  ${
-                    benefit.size === "large" ? "md:col-span-2" : "md:col-span-1"
-                  }
-                  bg-gradient-to-br ${benefit.gradient}
+                  p-8 rounded-3xl border border-slate-200/80 shadow-sm relative overflow-hidden
+                  flex flex-col justify-between min-h-[250px] bg-white
+                  ${item.size === "large" ? "md:col-span-2" : ""}
+                  ${item.size === "full" ? "md:col-span-3" : ""}
                 `}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -404,129 +386,114 @@ export default function LandingPage() {
                 viewport={{ once: true }}
               >
                 <div>
-                  <div className="text-4xl mb-5">{benefit.icon}</div>
+                  <div className="text-4xl mb-5">{item.icon}</div>
                   <h3 className="text-2xl font-bold text-slate-800 mb-3">
-                    {benefit.title}
+                    {item.title}
                   </h3>
                   <p className="text-slate-600 leading-relaxed">
-                    {benefit.description}
+                    {item.description}
                   </p>
                 </div>
-                <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-white/40 rounded-full blur-2xl opacity-80"></div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* DEPOIMENTOS - GLASSMORPHISM */}
-      <section className="py-24 px-4 relative overflow-hidden">
-        {/* Fundo com gradiente decorativo */}
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-100 via-blue-50 to-white blur-2xl opacity-60 z-0"></div>
-
+      {/* DEPOIMENTOS - NOTION STYLE */}
+      <section className="py-24 px-4 bg-white">
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-16">
             O que dizem sobre o diagnóstico
           </h2>
-
-          <motion.div
-            className="flex flex-col items-center justify-center -space-y-24 md:-space-y-32"
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true, amount: 0.3 }}
-          >
-            {testimonials.map((testimonial, i) => {
-              const variants = {
-                initial: { opacity: 0, y: 50, rotate: 0 },
-                animate: {
-                  opacity: 1,
-                  y: i * 40, // Espaçamento vertical entre os cards
-                  rotate: (i - (testimonials.length - 1) / 2) * 5, // Rotação para criar o efeito de leque
-                  transition: { type: "spring", stiffness: 50, delay: i * 0.2 },
-                },
-              };
-
-              return (
-                <motion.div
-                  key={i}
-                  className="w-full max-w-lg p-6 rounded-2xl shadow-lg border border-white/30 bg-white/40 backdrop-blur-xl"
-                  variants={variants}
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-white/70 flex-shrink-0 flex items-center justify-center shadow-inner">
-                      {testimonial.icon}
-                    </div>
-                    <div>
-                      <p className="font-bold text-slate-800">
-                        {testimonial.author}
-                      </p>
-                      <p className="text-sm text-slate-600">
-                        Cliente Verificado
-                      </p>
-                    </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, i) => (
+              <motion.div
+                key={i}
+                className="bg-slate-50 border border-slate-200/80 rounded-2xl p-6 text-left flex flex-col"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                viewport={{ once: true }}
+              >
+                <p className="text-slate-700 leading-relaxed flex-grow">
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex items-center gap-4 mt-6 pt-6 border-t border-slate-200">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-bold text-slate-800">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-slate-600">
+                      {testimonial.age} anos
+                    </p>
                   </div>
-                  <p className="text-slate-700 leading-relaxed text-left">
-                    "{testimonial.text}"
-                  </p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Report Preview */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.05),transparent_50%)]"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="bg-white p-8 rounded-2xl shadow-lg border border-violet-100 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white to-white opacity-90"></div>
-            <h3 className="text-2xl font-semibold mb-4 text-slate-800 font-clash font-[600]">
-              Preview do Relatório
-            </h3>
-            <div className="relative">
-              <div className="text-lg text-slate-700 leading-relaxed">
-                {reportPreview.text}
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-            </div>
-            <div className="mt-4 flex items-center justify-center gap-2 text-sm text-violet-600">
-              <span className="text-xl">🔒</span>
-              <span>acesso completo só após o pagamento</span>
+      {/* PREVIEW DO RELATÓRIO */}
+      <section className="py-24 px-4 bg-slate-50">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-slate-800 mb-4">
+            Um trecho do que te espera...
+          </h2>
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm relative">
+            <p className="text-lg text-slate-600 leading-relaxed text-left">
+              "A dinâmica entre vocês é marcada por uma dualidade intensa: a
+              busca por um refúgio seguro e a necessidade de uma transformação
+              radical. É como se um buscasse no outro um porto seguro contra as
+              tempestades da vida, enquanto o outro enxergasse a relação como a
+              própria tempestade — uma força caótica, mas necessária para o
+              crescimento..."
+            </p>
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
+          </div>
+          <div className="mt-8">
+            <div className="inline-flex items-center gap-2 bg-violet-100 text-violet-700 font-semibold px-4 py-2 rounded-full">
+              <span className="text-lg">🔒</span>
+              Acesso completo após o pagamento
             </div>
           </div>
         </div>
       </section>
 
-      {/* Target Audience */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.05),transparent_50%)]"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <h2 className="text-3xl font-bold text-center mb-12 text-slate-800 font-clash font-[700]">
-            O relatório é pra você se...
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {targetAudience.map((item, index) => (
-              <motion.div
-                key={index}
-                className="group flex items-center space-x-3 p-4 rounded-xl bg-white shadow-md border border-violet-100 hover:border-violet-200 transition-all hover:shadow-lg hover:-translate-x-1"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <span className="text-violet-500 text-xl group-hover:scale-110 transition-transform">
-                  🟣
+      {/* É PRA VOCÊ SE... */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-4">
+              Este diagnóstico é para você se...
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
+            {[
+              "Já tentou seguir em frente mas sente algo",
+              "Quer clareza emocional sem autoajuda",
+              "Sente que tem algo que ninguém explica",
+              "Gosta de verdade — mesmo que doa",
+            ].map((item, i) => (
+              <div key={i} className="flex items-center space-x-4">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                  ✓
                 </span>
-                <p className="text-slate-700 leading-relaxed">{item}</p>
-              </motion.div>
+                <p className="text-lg text-slate-700">{item}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 bg-slate-50">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-extrabold text-slate-900 mb-4">
@@ -536,9 +503,12 @@ export default function LandingPage() {
               Respostas rápidas para as dúvidas mais comuns.
             </p>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-6">
             {faqs.map((faq, i) => (
-              <div key={i} className="border-b border-slate-200/80 pb-6">
+              <div
+                key={i}
+                className="bg-white p-6 rounded-2xl border border-slate-200/80"
+              >
                 <h3 className="text-xl font-bold text-slate-800 mb-3">
                   {faq.question}
                 </h3>
@@ -549,33 +519,36 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FINAL CTA - DEDICADO E COM IMPACTO */}
+      {/* FINAL CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.2),transparent_60%)] pointer-events-none select-none"></div>
         <div className="relative z-10 max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-extrabold mb-6">
-            Pronto para entender o que existe entre vocês?
+            Você pode continuar tentando entender tudo sozinho...
           </h2>
           <p className="text-lg mb-8 opacity-90">
-            Receba um diagnóstico emocional único, feito sob medida para sua
-            história. Descubra padrões, sentimentos e caminhos possíveis.
+            Ou pode finalmente ver o que ninguém nunca te contou sobre vocês
+            dois.
           </p>
           <Link
             href="/formulario"
-            className="inline-block bg-white text-violet-700 font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:bg-violet-100 transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
+            className="inline-block bg-white text-violet-700 font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:bg-violet-100 transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
           >
             Quero meu diagnóstico agora
-            <span className="ml-2 align-middle">💜</span>
+            <span className="ml-2 align-middle">→</span>
           </Link>
         </div>
       </section>
 
-      {/* RODAPÉ MINIMALISTA */}
-      <footer className="py-8 px-4 text-center text-sm text-slate-500 border-t border-slate-100/80">
+      {/* RODAPÉ */}
+      <footer className="py-8 px-4 text-center text-sm text-slate-500 border-t border-slate-100">
         <p>
           &copy; {new Date().getFullYear()} Cora. Todos os direitos reservados.
         </p>
       </footer>
+
+      {/* STICKY MOBILE CTA */}
+      <StickyMobileCTA />
     </div>
   );
 }
