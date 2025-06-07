@@ -212,7 +212,7 @@ export default function RelationshipForm() {
       </div>
       <button
         type="submit"
-        className="w-full bg-violet-500 text-white py-3 px-6 rounded-2xl font-semibold text-lg shadow-md hover:bg-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 transition-colors mt-2"
+        className="w-full bg-primary text-white py-3 px-6 rounded-2xl font-semibold text-lg shadow-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors mt-2"
       >
         Enviar
       </button>

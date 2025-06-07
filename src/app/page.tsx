@@ -7,13 +7,10 @@ export default function Home() {
         {/* Left Side: Title and Description */}
         <div className="flex-1 max-w-md text-center md:text-left">
           <span className="text-sm text-gray-500 mb-2 block">Para todos.</span>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-            Descubra a{" "}
-            <span className="relative inline-block">
-              <span className="z-10 relative">compatibilidade</span>
-              <span className="absolute left-0 right-0 bottom-1 h-2 bg-yellow-200 rounded-full -z-10"></span>
-            </span>
-            <br /> do seu relacionamento.
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 text-gray-900">
+            Descubra a <span className="text-purple-800">compatibilidade</span>
+            <br />
+            no <span className="text-purple-800">relacionamento</span>.
           </h1>
           <p className="text-gray-600 mb-6">
             Preencha o formulário ao lado para saber mais sobre o seu
