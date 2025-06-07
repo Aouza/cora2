@@ -16,17 +16,67 @@ const fadeIn = {
 
 const steps = [
   {
-    title: "1. Preencha os dados",
+    title: "1. Preencha os Dados",
     description: "Forneça os nomes e datas de nascimento. Simples e rápido.",
-    icon: <svg>...</svg>,
+    icon: (
+      <svg
+        className="w-6 h-6 text-red-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+        />
+      </svg>
+    ),
+    gradient: "from-red-50 to-white",
+    iconBg: "bg-red-100",
   },
   {
-    title: "2. Geramos a Análise",
+    title: "2. Análise por IA",
     description: "Nossa IA cruza os dados para revelar a dinâmica da conexão.",
+    icon: (
+      <svg
+        className="w-6 h-6 text-green-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V3m0 18v-3m6-6h3m-3 6h3m-9-9a6 6 0 100 12 6 6 0 000-12z"
+        />
+      </svg>
+    ),
+    gradient: "from-green-50 to-white",
+    iconBg: "bg-green-100",
   },
   {
     title: "3. Receba o Diagnóstico",
     description: "Um relatório completo com insights e conselhos práticos.",
+    icon: (
+      <svg
+        className="w-6 h-6 text-blue-500"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+        />
+      </svg>
+    ),
+    gradient: "from-blue-50 to-white",
+    iconBg: "bg-blue-100",
   },
 ];
 
@@ -189,7 +239,7 @@ export default function LandingPage() {
           </svg>
         </div>
         <div className="relative z-10 max-w-3xl mx-auto">
-          <div className="mb-8">
+          <div className="relative w-24 h-24 mb-8 -mt-12">
             <LetterIcon />
           </div>
           <motion.h1
@@ -228,49 +278,72 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Storytelling Section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.05),transparent_50%)]"></div>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            className="text-center space-y-6 text-lg text-slate-700 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <p className="font-medium">
-              Você já se pegou revivendo conversas antigas?
-            </p>
-            <p>Já sentiu que algo entre vocês ainda pulsa, mesmo separados?</p>
-            <p>
-              Ou talvez vocês estejam juntos… mas parece que sempre voltam ao
-              mesmo ponto.
-            </p>
-            <p className="font-semibold text-violet-600 text-xl">
-              Não é só você. Existe uma estrutura emocional entre vocês — e ela
-              pode ser lida.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* PROVA SOCIAL SUTIL */}
-      <section className="py-16 px-4 text-center">
-        <p className="text-sm text-slate-500 mb-6 uppercase tracking-wider">
-          Usado por pessoas em busca de clareza
-        </p>
-        <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-4 opacity-70">
-          <span className="font-medium text-slate-400">Ana C.</span>
-          <span className="font-medium text-slate-400">Marcos V.</span>
-          <span className="font-medium text-slate-400">Juliana P.</span>
-          <span className="font-medium text-slate-400">Fernando R.</span>
-          <span className="font-medium text-slate-400">Beatriz S.</span>
+      {/* HOOK EMOCIONAL - VERSÃO CLEAN/CORPORATE */}
+      <section className="bg-slate-50 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          {/* Conteúdo */}
+          <div className="mx-auto max-w-5xl">
+            <div className="grid grid-cols-1 gap-x-12 gap-y-12 md:grid-cols-2">
+              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+                <p>Você já se pegou revivendo conversas antigas?</p>
+                <p>
+                  Já sentiu que algo entre vocês ainda pulsa, mesmo separados?
+                </p>
+              </div>
+              <div className="space-y-6 text-lg text-slate-600 leading-relaxed">
+                <p>
+                  Ou talvez vocês estejam juntos… mas parece que sempre voltam
+                  ao mesmo ponto.
+                </p>
+                <p className="font-semibold text-slate-800">
+                  Não é só você. Existe uma estrutura emocional entre vocês — e
+                  ela pode ser lida.
+                </p>
+              </div>
+            </div>
+            <div className="mt-16 border-t border-slate-200 pt-12">
+              <dl className="grid grid-cols-2 gap-x-8 gap-y-10 text-center md:grid-cols-4">
+                <div className="flex flex-col items-center">
+                  <dt className="text-lg font-semibold text-slate-800">
+                    Analisa
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-500">
+                    Padrões e ciclos
+                  </dd>
+                </div>
+                <div className="flex flex-col items-center">
+                  <dt className="text-lg font-semibold text-slate-800">
+                    Revela
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-500">
+                    Sentimentos ocultos
+                  </dd>
+                </div>
+                <div className="flex flex-col items-center">
+                  <dt className="text-lg font-semibold text-slate-800">
+                    Orienta
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-500">
+                    Caminhos possíveis
+                  </dd>
+                </div>
+                <div className="flex flex-col items-center">
+                  <dt className="text-lg font-semibold text-slate-800">
+                    Transforma
+                  </dt>
+                  <dd className="mt-1 text-sm text-slate-500">
+                    A sua perspectiva
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* COMO FUNCIONA */}
-      <section className="py-24 px-4 bg-slate-50/50">
-        <div className="max-w-5xl mx-auto text-center">
+      <section id="how-it-works" className="py-24 px-4 bg-slate-50/50">
+        <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold text-slate-900 mb-16">
             Um caminho simples para a clareza
           </h2>
@@ -278,9 +351,18 @@ export default function LandingPage() {
             {steps.map((step, i) => (
               <div
                 key={i}
-                className="bg-white rounded-2xl p-8 border border-slate-100/80 shadow-sm hover:shadow-lg transition-shadow"
+                className={`
+                  p-8 rounded-3xl text-left
+                  bg-gradient-to-br ${step.gradient}
+                  border border-slate-100
+                  shadow-2xl shadow-slate-200/50
+                `}
               >
-                <div className="mb-5 flex justify-center">{step.icon}</div>
+                <div
+                  className={`w-14 h-14 rounded-2xl mb-6 flex items-center justify-center ${step.iconBg}`}
+                >
+                  {step.icon}
+                </div>
                 <h3 className="text-xl font-bold text-slate-800 mb-3">
                   {step.title}
                 </h3>
@@ -393,25 +475,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* PROVA SOCIAL */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg text-slate-700 mb-6">
-            +1200 diagnósticos gerados com 92% de satisfação
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-6 opacity-70">
-            {logos.map((logo, i) => (
-              <span
-                key={i}
-                className="text-slate-500 text-base font-bold tracking-wide uppercase"
-              >
-                {logo.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Report Preview */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.05),transparent_50%)]"></div>
@@ -459,33 +522,6 @@ export default function LandingPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Social Proof */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.05),transparent_50%)]"></div>
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative">
-          <motion.div
-            className="bg-white p-8 rounded-2xl shadow-lg border border-violet-100 backdrop-blur-sm bg-opacity-90"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-2xl font-semibold text-slate-800 mb-4 font-clash font-[600]">
-              Mais de 1.200 diagnósticos gerados com 92% de satisfação
-            </p>
-            <div className="flex justify-center space-x-4">
-              <span className="text-violet-600 flex items-center gap-1">
-                <span className="text-xl">🔒</span>
-                <span>100% confidencial</span>
-              </span>
-              <span className="text-violet-600 flex items-center gap-1">
-                <span className="text-xl">✨</span>
-                <span>Exclusivo e personalizado</span>
-              </span>
-            </div>
-          </motion.div>
         </div>
       </section>
 
