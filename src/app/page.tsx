@@ -239,12 +239,12 @@ export default function LandingPage() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
+              className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-5xl"
             >
-              Descubra o verdadeiro
+              Descubra o mapa emocional da sua relação
               <br />
               <span className="text-violet-600">
-                significado da sua conexão emocional
+                gerado com IA, feito pra você
               </span>
             </motion.h1>
             <motion.p
@@ -253,7 +253,8 @@ export default function LandingPage() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mt-6 text-lg leading-8 text-slate-600"
             >
-              (sem papo de signo, sem enrolação)
+              Entenda os padrões emocionais e descubra insights transformadores
+              sobre seu relacionamento
             </motion.p>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
