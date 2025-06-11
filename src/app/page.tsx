@@ -293,9 +293,9 @@ export default function LandingPage() {
             variants={sectionVariants}
           >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Você sente que essa conexão marcou...
+              Você ainda pensa nessa conexão...
               <br />
-              mas não sabe por quê?
+              mas não consegue entender o porquê?
             </h2>
           </motion.div>
           <motion.div
@@ -306,19 +306,34 @@ export default function LandingPage() {
             className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
           >
             {[
-              { icon: "😵‍💫", text: "Revendo conversas antigas?" },
-              { icon: "🫥", text: "Sentindo que algo ficou mal resolvido?" },
-              { icon: "🔄", text: "Repetindo a mesma dinâmica?" },
+              {
+                icon: "🔁",
+                title: "Revivendo o passado?",
+                text: "Você se pega relendo conversas antigas?",
+              },
+              {
+                icon: "🧩",
+                title: "Sentimento mal resolvido?",
+                text: "Algo ainda pulsa, mesmo depois do fim?",
+              },
+              {
+                icon: "🔒",
+                title: "Repetição de padrão?",
+                text: "Parece que a história se repete com outras pessoas?",
+              },
             ].map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex flex-col items-center justify-center text-center gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer"
+                className="flex flex-col items-start text-left gap-4 p-6 rounded-2xl bg-slate-50/80 border border-slate-200 transition-all duration-300 hover:shadow-xl hover:bg-slate-50 cursor-pointer"
               >
-                <span className="text-4xl">{item.icon}</span>
-                <p className="text-slate-800 text-lg font-semibold">
-                  {item.text}
-                </p>
+                <span className="text-3xl">{item.icon}</span>
+                <div>
+                  <h3 className="text-slate-800 text-lg font-semibold">
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-600 mt-1">{item.text}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -395,11 +410,10 @@ export default function LandingPage() {
             variants={sectionVariants}
           >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              O que o diagnóstico revela
+              Seu diagnóstico mostra o que está
+              <br />
+              escondido à vista de todos.
             </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Clareza sobre o que realmente importa, sem enrolação.
-            </p>
           </motion.div>
           <motion.div
             initial="offscreen"
@@ -410,24 +424,24 @@ export default function LandingPage() {
           >
             {[
               {
-                icon: "🧩",
-                title: "Padrões Invisíveis",
-                text: "Identifique as dinâmicas ocultas que definem suas interações e causam os mesmos resultados.",
+                icon: "🎭",
+                title: "Máscaras emocionais",
+                text: "Entenda as dinâmicas que você (ou o outro) repete sem perceber.",
               },
               {
-                icon: "🔁",
-                title: "Ciclos que se Repetem",
-                text: "Entenda por que certas situações acontecem de novo e de novo, e como sair desse loop.",
+                icon: "♻️",
+                title: "Ciclos que se repetem",
+                text: "Descubra por que as coisas travam no mesmo lugar.",
               },
               {
-                icon: "🧠",
-                title: "Sentimentos Reprimidos",
-                text: "Descubra o que não é dito mas é sentido por ambos, revelando as verdadeiras emoções por trás das ações.",
+                icon: "📦",
+                title: "Sentimentos não ditos",
+                text: "O que ficou guardado e continua sabotando a conexão.",
               },
               {
                 icon: "🛠️",
-                title: "Conselhos Práticos",
-                text: "Receba orientações diretas e aplicáveis para tomar decisões mais conscientes sobre o futuro da relação.",
+                title: "Conselhos práticos",
+                text: "Não é só análise — você recebe caminhos reais para agir com mais clareza.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -494,6 +508,36 @@ export default function LandingPage() {
             <p className="mt-6 text-center text-sm text-slate-400 italic">
               Seu relatório vem ainda mais completo que isso.
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Guarantee Section */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={sectionVariants}
+            className="relative overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-2xl bg-slate-50 p-8 border border-slate-200"
+          >
+            <Sparkles className="absolute -top-4 -right-4 w-24 h-24 text-violet-200/70 opacity-50" />
+            <div className="relative flex-shrink-0 text-4xl">🛡️</div>
+            <div className="relative text-center md:text-left">
+              <h3 className="text-xl font-bold text-slate-900">
+                ✨ Garantia Emocional: ou você sente valor, ou não paga.
+              </h3>
+              <p className="mt-3 text-slate-600">
+                Se em até 7 dias você sentir que o diagnóstico não fez diferença
+                pra você, a gente devolve o valor. Sem burocracia, sem
+                julgamento.
+                <br className="hidden sm:block" />
+                <span className="font-medium text-slate-700">
+                  A intenção aqui é clareza — não dúvida.
+                </span>
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -577,34 +621,11 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Guarantee Section */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={sectionVariants}
-            className="flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-2xl bg-slate-50 p-8 border border-slate-200"
-          >
-            <div className="text-4xl">🛡️</div>
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-slate-900">
-                Nossa Garantia Emocional
-              </h3>
-              <p className="mt-2 text-slate-600">
-                Se em 7 dias você sentir que o diagnóstico não te trouxe nenhuma
-                clareza ou não fez diferença na sua perspectiva, nós devolvemos
-                seu dinheiro. Sem perguntas, sem burocracia. O risco é todo
-                nosso.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* Floating CTA for Mobile */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-4 border-t border-slate-200 z-50">
+      <div className="md:hidden sticky bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-4 border-t border-slate-200 z-50 shadow-t-2xl">
+        <p className="text-center text-xs text-violet-600 font-semibold mb-2">
+          ✅ 1.200+ já gerados com 92% de satisfação
+        </p>
         <Link
           href="/formulario"
           className="w-full flex items-center justify-center bg-slate-900 text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg hover:bg-slate-800 transition-colors"
@@ -612,9 +633,6 @@ export default function LandingPage() {
           <span>Quero meu diagnóstico</span>
           <ChevronRight className="w-5 h-5 ml-1" />
         </Link>
-        <p className="text-center text-xs text-slate-500 mt-2">
-          Relatório entregue em minutos. 100% confidencial.
-        </p>
       </div>
 
       <footer className="bg-white py-8 border-t border-slate-200">
