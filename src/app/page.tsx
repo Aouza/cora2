@@ -22,11 +22,18 @@ import {
   Award,
   ShieldCheck,
   Check,
+  History,
+  Puzzle,
+  Drama,
+  Recycle,
+  MessageSquareQuote,
+  ClipboardCheck,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { ReportMockup } from "@/components/ReportMockup";
+import DiagnosticSection from "@/components/DiagnosticSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -370,33 +377,38 @@ export default function LandingPage() {
           >
             {[
               {
-                icon: "🔁",
+                icon: History,
+                color: "bg-yellow-100 text-yellow-700",
                 title: "Revivendo o passado?",
-                text: "Você se pega relendo conversas antigas?",
+                text: "Você se pega relendo conversas antigas, buscando respostas que não estão mais lá.",
               },
               {
-                icon: "🧩",
+                icon: Puzzle,
+                color: "bg-blue-100 text-blue-700",
                 title: "Sentimento mal resolvido?",
-                text: "Algo ainda pulsa, mesmo depois do fim?",
+                text: "Algo ainda pulsa e ocupa espaço, mesmo quando a razão diz para seguir em frente.",
               },
               {
-                icon: "🔒",
+                icon: Repeat,
+                color: "bg-violet-100 text-violet-700",
                 title: "Repetição de padrão?",
-                text: "Parece que a história se repete com outras pessoas?",
+                text: "A mesma dinâmica, os mesmos gatilhos. Parece que a história se repete, talvez com outra pessoa.",
               },
             ].map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex flex-col items-start text-left gap-4 p-6 rounded-2xl bg-slate-50/80 border border-slate-200 transition-all duration-300 hover:shadow-xl hover:bg-slate-50 cursor-pointer"
+                className="text-left p-8 rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
               >
-                <span className="text-3xl">{item.icon}</span>
-                <div>
-                  <h3 className="text-slate-800 text-lg font-semibold">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-600 mt-1">{item.text}</p>
+                <div
+                  className={`w-12 h-12 rounded-lg flex items-center justify-center ${item.color}`}
+                >
+                  <item.icon className="w-6 h-6" />
                 </div>
+                <h3 className="text-slate-900 text-xl font-bold mt-6">
+                  {item.title}
+                </h3>
+                <p className="text-slate-600 mt-2">{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -463,65 +475,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section id="features" className="py-20 sm:py-28 bg-white">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Seu diagnóstico mostra o que está
-              <br />
-              escondido à vista de todos.
-            </h2>
-          </motion.div>
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggeredGridVariants}
-            className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2"
-          >
-            {[
-              {
-                icon: "🎭",
-                title: "Máscaras emocionais",
-                text: "Entenda as dinâmicas que você (ou o outro) repete sem perceber.",
-              },
-              {
-                icon: "♻️",
-                title: "Ciclos que se repetem",
-                text: "Descubra por que as coisas travam no mesmo lugar.",
-              },
-              {
-                icon: "📦",
-                title: "Sentimentos não ditos",
-                text: "O que ficou guardado e continua sabotando a conexão.",
-              },
-              {
-                icon: "🛠️",
-                title: "Conselhos práticos",
-                text: "Não é só análise — você recebe caminhos reais para agir com mais clareza.",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="flex flex-col items-start text-left p-6 bg-slate-50/80 rounded-2xl shadow-sm hover:shadow-lg hover:bg-slate-50 transition-all duration-300 border border-slate-200"
-              >
-                <span className="text-3xl">{feature.icon}</span>
-                <h3 className="mt-4 text-xl font-semibold text-slate-900">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-base text-slate-600">{feature.text}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      <DiagnosticSection />
 
       {/* Report Preview Section */}
       <section id="preview" className="bg-white py-20 sm:py-28">
