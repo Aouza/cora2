@@ -17,10 +17,15 @@ import {
   Lock,
   Users,
   Eye,
+  FilePen,
+  Bot,
+  Award,
+  ShieldCheck,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
+import { ReportMockup } from "@/components/ReportMockup";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -272,44 +277,9 @@ export default function LandingPage() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 3 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: "backOut" }}
-            className="hidden lg:flex justify-center items-center mt-16 lg:mt-0 [perspective:1000px]"
-          >
-            <div className="relative w-[340px] h-[480px] bg-white rounded-lg shadow-2xl p-6 transform transition-transform duration-500 hover:rotate-0 hover:scale-105 border border-slate-100">
-              <div className="absolute inset-0 bg-white/70 backdrop-blur-sm z-10 flex items-center justify-center rounded-lg pointer-events-none">
-                <div className="text-center">
-                  <p className="text-violet-700 font-bold text-xl">
-                    Seu Relatório Completo
-                  </p>
-                  <p className="text-sm text-slate-600">
-                    Acesse para revelar a análise
-                  </p>
-                </div>
-              </div>
-              <h3 className="font-bold text-violet-800 text-lg">
-                Relatório de Conexão Emocional
-              </h3>
-              <p className="text-sm text-slate-500 mt-1">
-                Para [Seu Nome] e [Nome da Pessoa]
-              </p>
-              <div className="mt-6 space-y-3 text-sm text-slate-600">
-                <div className="space-y-2">
-                  <div className="h-3 w-1/3 bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-5/6 bg-slate-200 rounded-sm"></div>
-                </div>
-                <div className="space-y-2 pt-4">
-                  <div className="h-3 w-1/4 bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-3/4 bg-slate-200 rounded-sm"></div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <div className="hidden lg:flex justify-center items-center mt-16 lg:mt-0">
+            <ReportMockup />
+          </div>
         </div>
       </main>
 
@@ -355,51 +325,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How it works with cards */}
-      <section
-        id="how-it-works-cards"
-        className="py-24 sm:py-32 bg-slate-50/70"
-      >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Um caminho simples para a clareza
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Seu diagnóstico é gerado em 3 passos rápidos e seguros.
-            </p>
-          </div>
-          <div className="relative mt-16 sm:mt-20">
-            <div
-              className="absolute top-1/2 left-0 w-full h-0.5 border-t-2 border-dashed border-slate-300 z-0"
-              aria-hidden="true"
-            />
-            <div className="relative z-10 grid grid-cols-1 gap-12 md:grid-cols-3">
-              {howItWorksSteps.map((step, index) => (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  className={`relative w-full p-8 rounded-2xl shadow-xl border border-slate-100/50 text-left ${step.bgColor}`}
-                >
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 ${step.iconBg}`}
-                  >
-                    {step.icon}
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-800">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-slate-600">{step.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* How it Works Section */}
       <section id="how-it-works" className="py-20 sm:py-28 bg-slate-50">
         <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
@@ -416,7 +341,47 @@ export default function LandingPage() {
               Nada de longos testes, só o que importa.
             </p>
           </motion.div>
-          {/* Steps would go here if we wanted to detail them */}
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggeredGridVariants}
+            className="relative mt-16 grid grid-cols-1 md:grid-cols-3 items-start gap-x-8 gap-y-12"
+          >
+            <div className="absolute top-1/2 left-0 w-full h-px border-t-2 border-dashed border-slate-300 -translate-y-1/2 hidden md:block"></div>
+
+            {[
+              {
+                icon: FilePen,
+                title: "1. Preencha os dados",
+                text: "Você fornece nomes, datas e o contexto da relação.",
+              },
+              {
+                icon: Bot,
+                title: "2. A IA analisa",
+                text: "Nossa IA processa os padrões e a dinâmica da sua conexão.",
+              },
+              {
+                icon: Award,
+                title: "3. Receba a clareza",
+                text: "Seu diagnóstico chega em minutos, pronto para ser lido.",
+              },
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="relative flex flex-col items-center text-center bg-slate-50 z-10 p-6"
+              >
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-violet-100 ring-8 ring-slate-50">
+                  <step.icon className="w-7 h-7 text-violet-600" />
+                </div>
+                <h3 className="mt-5 text-lg font-semibold text-slate-900">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">{step.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -568,7 +533,7 @@ export default function LandingPage() {
 
       {/* Final CTA Section */}
       <section className="relative isolate overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-900 to-violet-900" />
+        <div className="absolute inset-0 -z-10 bg-slate-950" />
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -589,12 +554,11 @@ export default function LandingPage() {
             variants={sectionVariants}
           >
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Você pode continuar tentando entender sozinho...
+              Pronto para ter a clareza que você merece?
             </h2>
             <p className="mt-6 text-lg leading-8 text-violet-200 max-w-2xl mx-auto">
-              Ou descobrir <span className="font-bold text-white">agora</span>{" "}
-              tudo que nunca te contaram sobre vocês dois. Seu mapa emocional
-              está a poucos cliques.
+              Dê o primeiro passo agora e descubra o que ninguém nunca te contou
+              sobre vocês dois.
             </p>
             <div className="mt-10">
               <Link
@@ -653,8 +617,8 @@ export default function LandingPage() {
         </p>
       </div>
 
-      <footer className="bg-slate-900 py-8">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-slate-400">
+      <footer className="bg-white py-8 border-t border-slate-200">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-slate-500">
           <p>
             &copy; {new Date().getFullYear()} Cora. Todos os direitos
             reservados.
