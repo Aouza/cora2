@@ -11,8 +11,16 @@ import {
   Pencil,
   BrainCircuit,
   CloudDownload,
+  MessageSquareHeart,
+  Repeat,
+  Target,
+  Lock,
+  Users,
+  Eye,
 } from "lucide-react";
 import Header from "@/components/Header";
+import { TypeAnimation } from "react-type-animation";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -116,13 +124,71 @@ const testimonials = [
   },
 ];
 
+const sectionVariants = {
+  offscreen: {
+    opacity: 0,
+    y: 50,
+  },
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 1,
+    },
+  },
+};
+
+const staggeredListVariants = {
+  offscreen: {
+    opacity: 0,
+  },
+  onscreen: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const staggeredGridVariants = {
+  offscreen: {
+    opacity: 0,
+  },
+  onscreen: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  offscreen: {
+    opacity: 0,
+    y: 30,
+  },
+  onscreen: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8,
+    },
+  },
+};
+
 export default function LandingPage() {
   return (
     <div className={`bg-white text-slate-800 ${inter.className}`}>
       <Header />
 
       {/* Hero Section */}
-      <main className="relative isolate overflow-hidden pt-24 sm:pt-32 pb-32">
+      <main className="relative isolate overflow-hidden pt-32 sm:pt-40 pb-24">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -136,106 +202,156 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* Floating Documents */}
-        <div className="absolute inset-0 -z-10 pointer-events-none hidden md:block">
-          <motion.div
-            initial={{ opacity: 0, y: 100, rotate: -20 }}
-            animate={{ opacity: 1, y: 0, rotate: -15 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="absolute left-[10%] top-[15%]"
-          >
-            <DocumentIcon className="w-48 h-60" />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 100, rotate: 20 }}
-            animate={{ opacity: 1, y: 0, rotate: 15 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            className="absolute right-[10%] top-[10%]"
-          >
-            <DocumentIcon className="w-56 h-72" />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 100, rotate: -5 }}
-            animate={{ opacity: 1, y: 0, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            className="absolute right-[25%] bottom-[-5%]"
-          >
-            <DocumentIcon className="w-40 h-52" />
-          </motion.div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center relative">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl"
-          >
-            Descubra o verdadeiro <br />
-            significado da sua conexão
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-lg leading-8 text-slate-600 max-w-3xl mx-auto"
-          >
-            Um diagnóstico emocional único, feito sob medida para sua história.
-            Entenda padrões, sentimentos e caminhos possíveis para o seu
-            relacionamento.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-10 flex items-center justify-center gap-x-6"
-          >
-            <Link
-              href="/formulario"
-              className="inline-flex items-center bg-slate-900 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-slate-800 transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 grid lg:grid-cols-2 gap-x-12 items-center">
+          <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-6 flex flex-col sm:flex-row justify-center lg:justify-start gap-3"
             >
-              <span>Quero meu diagnóstico</span>
-              <Sparkles className="w-5 h-5 ml-2 text-yellow-400" />
-            </Link>
-          </motion.div>
-          <motion.div
-            className="mt-8 text-left max-w-lg mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-slate-600"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-violet-500">✔</span>
-              <span className="text-sm">Análise feita sob medida com IA</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-violet-500">✔</span>
-              <span className="text-sm">Conteúdo íntimo e revelador</span>
-            </div>
-            <div className="flex items-center gap-2 col-span-1 sm:col-span-2 justify-center">
-              <span className="text-violet-500">✔</span>
-              <span className="text-sm">
-                Entrega em minutos, 100% confidencial
+              <span className="inline-flex items-center justify-center gap-x-2 rounded-full bg-violet-100/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-violet-700 ring-1 ring-inset ring-violet-200">
+                🔍 IA Emocional + Análise Profunda
               </span>
+              <span className="inline-flex items-center justify-center gap-x-2 rounded-full bg-violet-100/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-violet-700 ring-1 ring-inset ring-violet-200">
+                ✅ 1.200+ Relatórios Gerados
+              </span>
+            </motion.div>
+            <motion.h1
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl"
+            >
+              Descubra o verdadeiro
+              <br />
+              <span className="text-violet-600">
+                significado da sua conexão emocional
+              </span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="mt-6 text-lg leading-8 text-slate-600"
+            >
+              (sem papo de signo, sem enrolação)
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="mt-10 flex items-center justify-center lg:justify-start gap-x-6"
+            >
+              <Link
+                href="/formulario"
+                className="inline-flex items-center bg-slate-900 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-slate-800 transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
+              >
+                <span>Quero meu diagnóstico</span>
+                <Sparkles className="w-5 h-5 ml-2 text-yellow-400" />
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-6 gap-y-3"
+            >
+              <div className="flex items-center gap-x-2 text-sm text-slate-600">
+                <Lock className="w-4 h-4 text-violet-600" />
+                <span>100% Anônimo</span>
+              </div>
+              <div className="flex items-center gap-x-2 text-sm text-slate-600">
+                <BrainCircuit className="w-4 h-4 text-violet-600" />
+                <span>Geração única com IA</span>
+              </div>
+              <div className="flex items-center gap-x-2 text-sm text-slate-600">
+                <ChevronRight className="w-4 h-4 text-violet-600" />
+                <span>Entrega em 3 minutos</span>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 3 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: "backOut" }}
+            className="hidden lg:flex justify-center items-center mt-16 lg:mt-0 [perspective:1000px]"
+          >
+            <div className="relative w-[340px] h-[480px] bg-white rounded-lg shadow-2xl p-6 transform transition-transform duration-500 hover:rotate-0 hover:scale-105 border border-slate-100">
+              <div className="absolute inset-0 bg-white/70 backdrop-blur-sm z-10 flex items-center justify-center rounded-lg pointer-events-none">
+                <div className="text-center">
+                  <p className="text-violet-700 font-bold text-xl">
+                    Seu Relatório Completo
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Acesse para revelar a análise
+                  </p>
+                </div>
+              </div>
+              <h3 className="font-bold text-violet-800 text-lg">
+                Relatório de Conexão Emocional
+              </h3>
+              <p className="text-sm text-slate-500 mt-1">
+                Para [Seu Nome] e [Nome da Pessoa]
+              </p>
+              <div className="mt-6 space-y-3 text-sm text-slate-600">
+                <div className="space-y-2">
+                  <div className="h-3 w-1/3 bg-slate-200 rounded-sm"></div>
+                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
+                  <div className="h-2 w-5/6 bg-slate-200 rounded-sm"></div>
+                </div>
+                <div className="space-y-2 pt-4">
+                  <div className="h-3 w-1/4 bg-slate-200 rounded-sm"></div>
+                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
+                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
+                  <div className="h-2 w-3/4 bg-slate-200 rounded-sm"></div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </main>
 
       {/* Pain Point Identification Section */}
-      <section className="py-20 sm:py-28 bg-white">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl leading-tight">
-            🧠 Já se pegou revivendo conversas antigas?
-          </h2>
-          <div className="mt-8 space-y-4 text-lg text-slate-700">
-            <p>💔 Ainda sente algo entre vocês — mesmo separados?</p>
-            <p>🔄 Voltam e se afastam, como se estivessem presos num ciclo?</p>
-          </div>
-          <p className="mt-10 text-xl font-semibold text-slate-900">
-            Você não está louco. Existe uma estrutura emocional entre vocês.
-            <br />E ela pode ser lida.
-          </p>
+      <section id="pain-points" className="py-20 sm:py-28 bg-white">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              Você sente que essa conexão marcou...
+              <br />
+              mas não sabe por quê?
+            </h2>
+          </motion.div>
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggeredGridVariants}
+            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {[
+              { icon: "😵‍💫", text: "Revendo conversas antigas?" },
+              { icon: "🫥", text: "Sentindo que algo ficou mal resolvido?" },
+              { icon: "🔄", text: "Repetindo a mesma dinâmica?" },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="flex flex-col items-center justify-center text-center gap-4 p-6 rounded-2xl bg-slate-50 border border-slate-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer"
+              >
+                <span className="text-4xl">{item.icon}</span>
+                <p className="text-slate-800 text-lg font-semibold">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
@@ -284,273 +400,266 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center">
+      {/* How it Works Section */}
+      <section id="how-it-works" className="py-20 sm:py-28 bg-slate-50">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
             <h2 className="text-base font-semibold leading-7 text-violet-600">
-              Benefícios Reais do Diagnóstico
+              Você só precisa de 3 passos
             </h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Muito mais do que "matar a curiosidade"
+              Nada de longos testes, só o que importa.
             </p>
-            <p className="mt-6 text-lg leading-8 text-slate-600">
-              Este diagnóstico é uma ferramenta de clareza. Ele te ajuda a
-              entender a fundo a dinâmica da sua conexão para que você possa
-              tomar decisões mais conscientes.
-            </p>
-          </div>
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-              <div className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-slate-900">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center text-xl">
-                    🧠
-                  </span>
-                  Entenda os padrões invisíveis da relação
-                </dt>
-              </div>
-              <div className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-slate-900">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center text-xl">
-                    🔍
-                  </span>
-                  Descubra o que ainda pulsa entre vocês
-                </dt>
-              </div>
-              <div className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-slate-900">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center text-xl">
-                    🛑
-                  </span>
-                  Saiba por que as coisas travam (mesmo com amor)
-                </dt>
-              </div>
-              <div className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-slate-900">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center text-xl">
-                    ♻️
-                  </span>
-                  Rompa ciclos que te fazem voltar para o mesmo ponto
-                </dt>
-              </div>
-              <div className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-lg font-semibold leading-7 text-slate-900">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-100 flex items-center justify-center text-xl">
-                    ✅
-                  </span>
-                  Receba conselhos práticos e personalizados
-                </dt>
-              </div>
-            </dl>
-          </div>
+          </motion.div>
+          {/* Steps would go here if we wanted to detail them */}
         </div>
       </section>
 
-      {/* Preview Section */}
-      <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <blockquote className="text-2xl font-semibold leading-9 text-slate-800">
-              <p>
-                "Foi como ler nossa história com uma lupa. Deu um soco de
-                realidade... e paz."
+      {/* Benefits Section */}
+      <section id="features" className="py-20 sm:py-28 bg-white">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              O que o diagnóstico revela
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Clareza sobre o que realmente importa, sem enrolação.
+            </p>
+          </motion.div>
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={staggeredGridVariants}
+            className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2"
+          >
+            {[
+              {
+                icon: "🧩",
+                title: "Padrões Invisíveis",
+                text: "Identifique as dinâmicas ocultas que definem suas interações e causam os mesmos resultados.",
+              },
+              {
+                icon: "🔁",
+                title: "Ciclos que se Repetem",
+                text: "Entenda por que certas situações acontecem de novo e de novo, e como sair desse loop.",
+              },
+              {
+                icon: "🧠",
+                title: "Sentimentos Reprimidos",
+                text: "Descubra o que não é dito mas é sentido por ambos, revelando as verdadeiras emoções por trás das ações.",
+              },
+              {
+                icon: "🛠️",
+                title: "Conselhos Práticos",
+                text: "Receba orientações diretas e aplicáveis para tomar decisões mais conscientes sobre o futuro da relação.",
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="flex flex-col items-start text-left p-6 bg-slate-50/80 rounded-2xl shadow-sm hover:shadow-lg hover:bg-slate-50 transition-all duration-300 border border-slate-200"
+              >
+                <span className="text-3xl">{feature.icon}</span>
+                <h3 className="mt-4 text-xl font-semibold text-slate-900">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 text-base text-slate-600">{feature.text}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Report Preview Section */}
+      <section id="preview" className="bg-white py-20 sm:py-28">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+            className="text-center"
+          >
+            <p className="font-semibold text-violet-600">
+              👀 Veja um trecho real do relatório gerado
+            </p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              Um gostinho do que você vai descobrir
+            </h2>
+          </motion.div>
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+            className="mt-12 p-8 rounded-2xl bg-slate-900 text-slate-300 font-mono text-base shadow-2xl shadow-violet-500/10 ring-1 ring-slate-800"
+          >
+            <div className="flex items-center gap-2">
+              <span className="h-3 w-3 rounded-full bg-red-500"></span>
+              <span className="h-3 w-3 rounded-full bg-yellow-400"></span>
+              <span className="h-3 w-3 rounded-full bg-green-500"></span>
+              <p className="ml-4 text-sm text-slate-400">
+                diagnostico-emocional.txt
               </p>
-            </blockquote>
-          </div>
-          <div className="mt-12 flex justify-center">
-            <div className="relative w-full max-w-md">
-              <div className="absolute -inset-4 bg-violet-200/50 blur-2xl"></div>
-              <div className="relative bg-white p-6 rounded-2xl shadow-lg ring-1 ring-slate-200/80">
-                <div className="flex justify-between items-center mb-4">
-                  <span className="inline-flex items-center rounded-md bg-violet-50 px-2 py-1 text-xs font-medium text-violet-700 ring-1 ring-inset ring-violet-700/10">
-                    🟣 Relatório de Reconexão • Geração com IA
-                  </span>
-                </div>
-                <div className="space-y-2 blur-sm select-none pointer-events-none">
-                  <div className="h-2.5 w-1/4 bg-slate-300 rounded-sm"></div>
-                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-full bg-slate-200 rounded-sm"></div>
-                  <div className="h-2 w-3/4 bg-slate-200 rounded-sm"></div>
-                </div>
-              </div>
             </div>
-          </div>
+            <div className="mt-6 border-t border-slate-700 pt-6">
+              <TypeAnimation
+                sequence={[
+                  'Análise de Conexão: [Pessoa A] e [Pessoa B]\n\n# Fase 1: A Dinâmica Central\nA interação é marcada por uma dualidade: a busca por um porto seguro emocional (sentimento de familiaridade, conforto) e uma tensão constante gerada pela necessidade de transformação pessoal de ambos. É um cabo de guerra entre o desejo de ficar junto como antes e a necessidade de evoluir para algo novo.\n\n# Fase 2: Padrão de Comunicação\nObserva-se um padrão de "comunicação implícita". Muito é dito no silêncio, nas ações e nas entrelinhas. Isso gera um campo fértil para mal-entendidos, onde as expectativas de um não são verbalizadas e, portanto, não são atendidas pelo outro...\n\n# Fase 3: Pontos de Bloqueio\nO principal bloqueio é o medo. Medo de que, ao mudar, a conexão se perca. Medo de que a vulnerabilidade necessária para o próximo passo seja recebida com rejeição. Este medo alimenta um ciclo de afastamento e reaproximação...',
+                  2000,
+                ]}
+                wrapper="span"
+                speed={60}
+                cursor={true}
+                repeat={0}
+                style={{ whiteSpace: "pre-wrap", display: "block" }}
+              />
+            </div>
+            <p className="mt-6 text-center text-sm text-slate-400 italic">
+              Seu relatório vem ainda mais completo que isso.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials Section */}
       <section
         id="testimonials"
-        className="relative isolate bg-white py-24 sm:py-32"
+        className="relative isolate overflow-hidden bg-slate-50 py-20 sm:py-28"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-xl text-center">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+            className="mx-auto max-w-2xl lg:text-center"
+          >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              O que dizem sobre a clareza que encontraram
+              O que dizem sobre a Cora
             </h2>
-          </div>
-          <div className="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-              {testimonials.map((testimonial) => (
-                <motion.div
-                  key={testimonial.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  className="rounded-2xl bg-slate-50/80 p-8 shadow-sm ring-1 ring-slate-900/5"
-                >
-                  <div className="flex items-center gap-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-5 w-5 text-yellow-500 fill-yellow-500"
-                      />
-                    ))}
-                  </div>
-                  <blockquote className="mt-6 text-lg leading-7 tracking-tight text-slate-900">
-                    <p>"{testimonial.quote}"</p>
-                  </blockquote>
-                  <figcaption className="mt-6 flex items-center gap-x-4">
-                    <img
-                      className="h-12 w-12 rounded-full bg-slate-50"
-                      src={testimonial.avatar}
-                      alt=""
-                    />
-                    <div>
-                      <div className="font-semibold text-slate-900">
-                        {testimonial.name}, 28
-                      </div>
-                      <div className="text-slate-600">
-                        {testimonial.company}
-                      </div>
-                    </div>
-                  </figcaption>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* For You If Section */}
-      <section className="py-24 sm:py-32 bg-white">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Este diagnóstico é para você se...
-            </h2>
-          </div>
-          <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-6 text-lg leading-7 text-slate-700 sm:grid-cols-2">
-            <div className="flex gap-x-3">
-              <span className="text-violet-500">✔</span>
-              <span>Já tentou seguir em frente, mas ainda sente algo</span>
-            </div>
-            <div className="flex gap-x-3">
-              <span className="text-violet-500">✔</span>
-              <span>Quer entender o que travou (e o que ainda pode ser)</span>
-            </div>
-            <div className="flex gap-x-3">
-              <span className="text-violet-500">✔</span>
-              <span>Busca clareza emocional sem papo de autoajuda</span>
-            </div>
-            <div className="flex gap-x-3">
-              <span className="text-violet-500">✔</span>
-              <span>Está cansado de adivinhar o que a outra pessoa sente</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-24 sm:py-32 bg-slate-50/70">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Perguntas Frequentes
-            </h2>
-          </div>
-          <div className="mt-12 space-y-8">
-            <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200/80">
-              <h3 className="text-lg font-semibold leading-7 text-slate-900">
-                Isso é só mais um horóscopo bonito?
-              </h3>
-              <p className="mt-3 text-base leading-7 text-slate-600">
-                Não. É um diagnóstico emocional baseado em padrões reais de
-                comportamento, não em signos.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200/80">
-              <h3 className="text-lg font-semibold leading-7 text-slate-900">
-                Em quanto tempo recebo?
-              </h3>
-              <p className="mt-3 text-base leading-7 text-slate-600">
-                Em minutos. Assim que concluir o pagamento, seu relatório começa
-                a ser gerado.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200/80">
-              <h3 className="text-lg font-semibold leading-7 text-slate-900">
-                É seguro?
-              </h3>
-              <p className="mt-3 text-base leading-7 text-slate-600">
-                100% confidencial. Seus dados são usados apenas para gerar o
-                relatório e nada mais.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-slate-50 py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="relative isolate overflow-hidden bg-slate-900 px-6 py-24 text-center shadow-2xl rounded-3xl sm:px-16">
-            <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Pronto para entender o que existe entre voces?
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-slate-300">
-              Receba um diagnóstico emocional único, feito sob medida para sua
-              história. Descubra padroes, sentimentos e caminhos possiveis.
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              Relatos de quem parou de adivinhar e começou a entender de
+              verdade.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+          </motion.div>
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+            className="mx-auto mt-16 flow-root"
+          >
+            <TestimonialsCarousel />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-900 to-violet-900" />
+        <div
+          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          aria-hidden="true"
+        >
+          <div
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#a855f7] to-[#eab308] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+            }}
+          />
+        </div>
+        <div className="mx-auto max-w-4xl py-24 px-6 text-center sm:py-32 lg:px-8">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={sectionVariants}
+          >
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+              Você pode continuar tentando entender sozinho...
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-violet-200 max-w-2xl mx-auto">
+              Ou descobrir <span className="font-bold text-white">agora</span>{" "}
+              tudo que nunca te contaram sobre vocês dois. Seu mapa emocional
+              está a poucos cliques.
+            </p>
+            <div className="mt-10">
               <Link
                 href="/formulario"
-                className="inline-flex items-center bg-white text-slate-900 px-7 py-3.5 rounded-xl text-base font-semibold shadow-sm hover:bg-slate-100 transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="inline-flex items-center bg-white text-slate-900 px-8 py-4 rounded-full text-lg font-bold shadow-2xl shadow-white/20 transition-transform duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                <span className="text-xl mr-2">🚀</span>
                 <span>Quero meu diagnóstico agora</span>
+                <ChevronRight className="w-5 h-5 ml-2" />
               </Link>
+              <p className="mt-4 text-xs text-violet-300">
+                <span className="opacity-80">🔒</span> Seguro e Anônimo —{" "}
+                <span className="opacity-80">⏱️</span> Entrega em até 3 minutos
+              </p>
             </div>
-            <svg
-              viewBox="0 0 1024 1024"
-              className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
-              aria-hidden="true"
-            >
-              <circle
-                cx={512}
-                cy={512}
-                r={512}
-                fill="url(#827591b1-ce8c-4110-b064-7cb85a0b1217)"
-                fillOpacity="0.7"
-              />
-              <defs>
-                <radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217">
-                  <stop stopColor="#a855f7" />
-                  <stop offset={1} stopColor="#eab308" />
-                </radialGradient>
-              </defs>
-            </svg>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 text-center text-sm text-slate-500 border-t border-slate-100">
-        <p>
-          &copy; {new Date().getFullYear()} Cora. Todos os direitos reservados.
+      {/* Guarantee Section */}
+      <section className="bg-white py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <motion.div
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={sectionVariants}
+            className="flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-2xl bg-slate-50 p-8 border border-slate-200"
+          >
+            <div className="text-4xl">🛡️</div>
+            <div className="text-center md:text-left">
+              <h3 className="text-xl font-bold text-slate-900">
+                Nossa Garantia Emocional
+              </h3>
+              <p className="mt-2 text-slate-600">
+                Se em 7 dias você sentir que o diagnóstico não te trouxe nenhuma
+                clareza ou não fez diferença na sua perspectiva, nós devolvemos
+                seu dinheiro. Sem perguntas, sem burocracia. O risco é todo
+                nosso.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Floating CTA for Mobile */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm p-4 border-t border-slate-200 z-50">
+        <Link
+          href="/formulario"
+          className="w-full flex items-center justify-center bg-slate-900 text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg hover:bg-slate-800 transition-colors"
+        >
+          <span>Quero meu diagnóstico</span>
+          <ChevronRight className="w-5 h-5 ml-1" />
+        </Link>
+        <p className="text-center text-xs text-slate-500 mt-2">
+          Relatório entregue em minutos. 100% confidencial.
         </p>
+      </div>
+
+      <footer className="bg-slate-900 py-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-slate-400">
+          <p>
+            &copy; {new Date().getFullYear()} Cora. Todos os direitos
+            reservados.
+          </p>
+        </div>
       </footer>
     </div>
   );
