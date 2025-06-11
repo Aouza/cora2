@@ -21,6 +21,7 @@ import {
   Bot,
   Award,
   ShieldCheck,
+  Check,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
@@ -282,6 +283,68 @@ export default function LandingPage() {
           </div>
         </div>
       </main>
+
+      {/* What is Cora Section */}
+      <section className="bg-white py-20 sm:py-28">
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={sectionVariants}
+          className="mx-auto max-w-7xl px-6 lg:px-8 grid lg:grid-cols-2 gap-x-16 gap-y-10 items-center"
+        >
+          {/* Left Column: Text */}
+          <div className="text-center lg:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+              🧠 O que é o Cora — e por que funciona?
+            </h2>
+            <p className="mt-6 text-lg text-slate-600">
+              O Cora é um diagnóstico emocional simbólico, feito sob medida para
+              a sua conexão. Sem papo de signo, sem autoajuda genérica.
+            </p>
+            <p className="mt-4 text-lg text-slate-600">
+              Só uma análise profunda, feita por IA emocional, que traduz
+              padrões, sentimentos e caminhos reais em um relatório direto,
+              simbólico e honesto.
+            </p>
+          </div>
+
+          {/* Right Column: Cards */}
+          <div className="space-y-6">
+            {[
+              {
+                text: "Por que você sente o que sente (e se isso é real ou projeção)",
+              },
+              {
+                text: "Onde as coisas começaram a dar errado (ou a se fortalecer)",
+              },
+              {
+                text: "Qual o ciclo invisível que prende ou distancia vocês",
+              },
+              {
+                text: "E o principal: o que fazer com tudo isso agora",
+                isStrong: true,
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:bg-slate-50 transition-colors duration-300"
+              >
+                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center">
+                  <Check className="w-5 h-5 text-violet-600" />
+                </div>
+                <p
+                  className={`text-slate-700 pt-1 ${
+                    item.isStrong ? "font-semibold text-slate-800" : ""
+                  }`}
+                >
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
 
       {/* Pain Point Identification Section */}
       <section id="pain-points" className="py-20 sm:py-28 bg-white">
