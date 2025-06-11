@@ -226,7 +226,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6 flex flex-col sm:flex-row justify-center lg:justify-start gap-3"
+              className="mb-6 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
             >
               <span className="inline-flex items-center justify-center gap-x-2 rounded-full bg-violet-100/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-violet-700 ring-1 ring-inset ring-violet-200">
                 🔍 IA Emocional + Análise Profunda
@@ -487,10 +487,12 @@ export default function LandingPage() {
                 <div className="flex items-center justify-center w-14 h-14 rounded-full bg-violet-100 ring-8 ring-slate-50">
                   <step.icon className="w-7 h-7 text-violet-600" />
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-slate-900">
+                <h3 className="mt-3 text-lg font-semibold text-slate-900 sm:mt-5">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-sm text-slate-600">{step.text}</p>
+                <p className="mt-1 text-sm text-slate-600 sm:mt-2">
+                  {step.text}
+                </p>
               </motion.div>
             ))}
           </motion.div>
