@@ -1,36 +1,32 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Drama,
-  Recycle,
-  MessageSquareQuote,
-  ClipboardCheck,
-} from "lucide-react";
+import { ArrowRight, Search, Puzzle, Map, Target } from "lucide-react";
 
 const featureCards = [
   {
-    icon: <Drama className="w-8 h-8" />,
-    title: "Máscaras emocionais",
-    description: "Entenda os papéis que você assume sem perceber.",
-  },
-  {
-    icon: <Recycle className="w-8 h-8" />,
-    title: "Ciclos que se repetem",
+    icon: <Search className="w-8 h-8" />,
+    title: "A verdade emocional da conexão",
     description:
-      "Descubra por que as coisas parecem travar sempre no mesmo lugar.",
+      "Descubra o que realmente conecta vocês — e o que pode distanciar, mesmo sem intenção.",
   },
   {
-    icon: <MessageSquareQuote className="w-8 h-8" />,
-    title: "Sentimentos não ditos",
-    description: "Revele o que ficou guardado ou mal-interpretado na relação.",
-  },
-  {
-    icon: <ClipboardCheck className="w-8 h-8" />,
-    title: "Conselhos práticos",
+    icon: <Puzzle className="w-8 h-8" />,
+    title: "Como cada um funciona na relação",
     description:
-      "Receba orientações reais para tomar decisões com mais clareza.",
+      "Entenda o seu estilo emocional e o da outra pessoa. Isso muda tudo.",
+  },
+  {
+    icon: <Map className="w-8 h-8" />,
+    title: "Os caminhos possíveis a partir daqui",
+    description:
+      "Seja seguir, fortalecer ou soltar: veja o que faz sentido agora.",
+  },
+  {
+    icon: <Target className="w-8 h-8" />,
+    title: "O que essa história está tentando te ensinar",
+    description:
+      "A conexão diz mais sobre você do que imagina. A leitura mostra como usar isso a seu favor.",
   },
 ];
 
@@ -67,12 +63,12 @@ const DiagnosticSection = () => {
           }}
         >
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Seu diagnóstico mostra o que está escondido à vista de todos.
+            🔍 Entenda o que existe entre vocês — de verdade.
           </h2>
           <p className="mt-6 text-lg text-slate-600">
-            Nossa análise de IA vai além do superficial, revelando as dinâmicas,
-            os padrões de comportamento e os sentimentos ocultos que definem sua
-            conexão. Tenha clareza para seguir em frente.
+            Cada conexão tem uma lógica emocional única. O diagnóstico revela o
+            padrão invisível da relação — para você agir com clareza e parar de
+            agir no escuro.
           </p>
           <div className="mt-8">
             <Link

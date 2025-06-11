@@ -28,6 +28,11 @@ import {
   Recycle,
   MessageSquareQuote,
   ClipboardCheck,
+  Compass,
+  Scale,
+  ShieldQuestion,
+  Zap,
+  Lightbulb,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
@@ -363,52 +368,67 @@ export default function LandingPage() {
             variants={sectionVariants}
           >
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Você ainda pensa nessa conexão...
+              👉 Você já sentiu que tem algo entre vocês…
               <br />
-              mas não consegue entender o porquê?
+              mas não sabe o que é?
             </h2>
+            <p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto">
+              Às vezes parece intenso demais. Outras, leve demais. Às vezes
+              parece certo — mas algo trava. Seja qual for o momento, entender a
+              verdade dessa conexão pode mudar tudo.
+            </p>
           </motion.div>
           <motion.div
             initial="offscreen"
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggeredGridVariants}
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {[
               {
-                icon: History,
-                color: "bg-yellow-100 text-yellow-700",
-                title: "Revivendo o passado?",
-                text: "Você se pega relendo conversas antigas, buscando respostas que não estão mais lá.",
+                icon: Compass,
+                color: "bg-blue-100 text-blue-700",
+                title: "Quer entender por que essa pessoa mexe tanto com você?",
               },
               {
-                icon: Puzzle,
-                color: "bg-blue-100 text-blue-700",
-                title: "Sentimento mal resolvido?",
-                text: "Algo ainda pulsa e ocupa espaço, mesmo quando a razão diz para seguir em frente.",
+                icon: Scale,
+                color: "bg-violet-100 text-violet-700",
+                title:
+                  "Sente que está vivendo uma relação boa — mas algo ainda confunde?",
               },
               {
                 icon: Repeat,
-                color: "bg-violet-100 text-violet-700",
-                title: "Repetição de padrão?",
-                text: "A mesma dinâmica, os mesmos gatilhos. Parece que a história se repete, talvez com outra pessoa.",
+                color: "bg-yellow-100 text-yellow-700",
+                title:
+                  "Está sempre entre o impulso de se jogar e o medo de se frustrar?",
+              },
+              {
+                icon: ShieldQuestion,
+                color: "bg-red-100 text-red-700",
+                title:
+                  "Tudo parece certo... mas você não sente aquela segurança emocional?",
+              },
+              {
+                icon: Zap,
+                color: "bg-green-100 text-green-700",
+                title:
+                  "A química é real — mas você quer saber se é recíproca, ou projeção?",
               },
             ].map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="text-left p-8 rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                className="text-left p-8 rounded-2xl bg-slate-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col"
               >
                 <div
                   className={`w-12 h-12 rounded-lg flex items-center justify-center ${item.color}`}
                 >
                   <item.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-slate-900 text-xl font-bold mt-6">
+                <h3 className="text-slate-900 text-xl font-bold mt-6 flex-grow">
                   {item.title}
                 </h3>
-                <p className="text-slate-600 mt-2">{item.text}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -615,11 +635,17 @@ export default function LandingPage() {
             variants={sectionVariants}
           >
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Pronto para ter a clareza que você merece?
+              <Lightbulb className="inline-block w-10 h-10 mb-2 text-yellow-300" />
+              <br />
+              Clareza para quem está começando.
+              <br />
+              Lucidez para quem quer continuar.
+              <br />
+              Paz para quem precisa decidir.
             </h2>
             <p className="mt-6 text-lg leading-8 text-violet-200 max-w-2xl mx-auto">
-              Dê o primeiro passo agora e descubra o que ninguém nunca te contou
-              sobre vocês dois.
+              Esse é o diagnóstico emocional da Cora. Um mapa claro sobre o que
+              existe entre vocês — gerado com IA e leitura simbólica profunda.
             </p>
             <div className="mt-10">
               <Link
