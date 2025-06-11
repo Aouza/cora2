@@ -53,7 +53,7 @@ const DiagnosticSection = () => {
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
-        className="mx-auto max-w-7xl px-6 lg:px-8 grid lg:grid-cols-2 gap-x-16 gap-y-12 items-center"
+        className="mx-auto max-w-7xl px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-12 items-center"
       >
         {/* Left Column */}
         <motion.div
@@ -65,7 +65,7 @@ const DiagnosticSection = () => {
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
             🔍 Entenda o que existe entre vocês, de verdade.
           </h2>
-          <p className="mt-6 text-lg text-slate-600">
+          <p className="mt-6 text-base sm:text-lg text-slate-600">
             Cada conexão tem uma lógica emocional única. Nossa análise revela o
             padrão invisível da relação, para você agir com clareza e parar de
             agir no escuro.
@@ -83,7 +83,7 @@ const DiagnosticSection = () => {
 
         {/* Right Column */}
         <motion.div
-          className="grid grid-cols-2 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6"
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 0.2 }}

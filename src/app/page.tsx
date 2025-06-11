@@ -239,7 +239,7 @@ export default function LandingPage() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
-              className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl"
+              className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl"
             >
               Descubra o verdadeiro
               <br />
@@ -297,66 +297,65 @@ export default function LandingPage() {
       </main>
 
       {/* What is Cora Section */}
-      <section className="bg-white py-20 sm:py-28">
-        <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={sectionVariants}
-          className="mx-auto max-w-7xl px-6 lg:px-8 grid lg:grid-cols-2 gap-x-16 gap-y-10 items-center"
-        >
-          {/* Left Column: Text */}
-          <div className="text-center lg:text-left">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-              🧠 O que é o Cora e por que funciona?
-            </h2>
-            <p className="mt-6 text-lg text-slate-600">
-              O Cora é uma análise emocional simbólica, feita sob medida para a
-              sua conexão. Sem papo de signo, sem autoajuda genérica.
-            </p>
-            <p className="mt-4 text-lg text-slate-600">
-              É uma leitura profunda, feita por IA emocional, que traduz
-              padrões, sentimentos e caminhos reais em um mapa direto, simbólico
-              e honesto.
-            </p>
-          </div>
-
-          {/* Right Column: Cards */}
-          <div className="space-y-6">
-            {[
-              {
-                text: "Por que você sente o que sente (e se isso é real ou projeção)",
-              },
-              {
-                text: "Onde as coisas começaram a dar errado (ou a se fortalecer)",
-              },
-              {
-                text: "Qual o ciclo invisível que prende ou distancia vocês",
-              },
-              {
-                text: "E o principal: o que fazer com tudo isso agora",
-                isStrong: true,
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-4 p-5 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:bg-slate-50 transition-colors duration-300"
-              >
-                <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center">
-                  <Check className="w-5 h-5 text-violet-600" />
-                </div>
-                <p
-                  className={`text-slate-700 pt-1 ${
-                    item.isStrong ? "font-semibold text-slate-800" : ""
-                  }`}
-                >
-                  {item.text}
+      <div className="bg-white py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            {/* Left Column: Text */}
+            <div className="lg:pr-4">
+              <div className="relative text-center lg:text-left">
+                <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                  🧠 O que é o Cora e por que funciona?
+                </h2>
+                <p className="mt-6 text-base text-slate-600 sm:text-lg">
+                  O Cora é uma análise emocional simbólica, feita sob medida
+                  para a sua conexão. Sem papo de signo, sem autoajuda genérica.
+                </p>
+                <p className="mt-4 text-base text-slate-600 sm:text-lg">
+                  É uma leitura profunda, feita por IA emocional, que traduz
+                  padrões, sentimentos e caminhos reais em um mapa direto,
+                  simbólico e acionável.
                 </p>
               </div>
-            ))}
+            </div>
+
+            {/* Right Column: Cards */}
+            <div className="space-y-4 lg:pl-4">
+              {[
+                {
+                  text: "Por que você sente o que sente (e se isso é real ou projeção)",
+                },
+                {
+                  text: "Onde as coisas começaram a dar errado (ou a se fortalecer)",
+                },
+                {
+                  text: "Qual o ciclo invisível que prende ou distancia vocês",
+                },
+                {
+                  text: "E o principal: o que fazer com tudo isso agora",
+                  isStrong: true,
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  className="flex items-start gap-4 rounded-xl bg-slate-50 p-4 ring-1 ring-slate-100"
+                >
+                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-violet-100">
+                    <Check className="h-5 w-5 text-violet-600" />
+                  </div>
+                  <p
+                    className={`pt-1 text-slate-700 ${
+                      item.isStrong ? "font-semibold text-slate-800" : ""
+                    }`}
+                  >
+                    {item.text}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      </div>
 
       {/* Pain Point Identification Section */}
       <section id="pain-points" className="py-20 sm:py-28 bg-white">
@@ -367,12 +366,11 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.3 }}
             variants={sectionVariants}
           >
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
               👉 Você já sentiu que tem algo entre vocês…
-              <br />
-              mas não sabe o que é?
+              <br className="hidden sm:inline" /> mas não sabe o que é?
             </h2>
-            <p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto">
+            <p className="mx-auto mt-6 max-w-3xl text-base text-slate-600 sm:text-lg">
               Às vezes parece intenso demais, outras, leve demais. Às vezes
               parece certo, mas algo trava. Seja qual for o momento, entender a
               verdade dessa conexão pode mudar tudo.
@@ -383,7 +381,7 @@ export default function LandingPage() {
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggeredGridVariants}
-            className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+            className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
           >
             {[
               {
@@ -638,19 +636,14 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.5 }}
             variants={sectionVariants}
           >
-            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              <Lightbulb className="inline-block w-10 h-10 mb-2 text-yellow-300" />
-              <br />
-              Clareza para quem está começando.
-              <br />
-              Lucidez para quem quer continuar.
-              <br />
-              Paz para quem precisa decidir.
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <span className="block text-4xl sm:text-5xl font-bold tracking-tight text-white">
+                Chega de incerteza.
+              </span>
+              <span className="mt-2 block text-2xl sm:text-3xl font-medium text-violet-200">
+                Receba a clareza que você precisa para seguir em frente.
+              </span>
             </h2>
-            <p className="mt-6 text-lg leading-8 text-violet-200 max-w-2xl mx-auto">
-              Essa é a análise emocional da Cora. Um mapa claro sobre o que
-              existe entre vocês, gerado com IA e leitura simbólica profunda.
-            </p>
             <div className="mt-10">
               <Link
                 href="/formulario"
@@ -668,20 +661,6 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
-
-      {/* Floating CTA for Mobile */}
-      <div className="md:hidden sticky bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-4 border-t border-slate-200 z-50 shadow-t-2xl">
-        <p className="text-center text-xs text-violet-600 font-semibold mb-2">
-          ✅ 1.200+ já gerados com 92% de satisfação
-        </p>
-        <Link
-          href="/formulario"
-          className="w-full flex items-center justify-center bg-slate-900 text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg hover:bg-slate-800 transition-colors"
-        >
-          <span>Quero minha análise</span>
-          <ChevronRight className="w-5 h-5 ml-1" />
-        </Link>
-      </div>
 
       <footer className="bg-white py-8 border-t border-slate-200">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-slate-500">
