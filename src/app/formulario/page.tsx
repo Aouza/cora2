@@ -1,26 +1,37 @@
 "use client";
 
+import Header from "@/components/Header";
 import RelationshipForm from "@/components/RelationshipForm";
+import { motion } from "framer-motion";
 
-export default function FormPage() {
+export default function FormularioPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-violet-50 to-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-slate-800 mb-4">
-            Seu Relatório Emocional
-          </h1>
-          <p className="text-lg text-slate-600">
-            Preencha os dados abaixo para receber seu diagnóstico personalizado
-          </p>
-        </div>
-        <div className="relative">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.1),transparent_50%)]"></div>
-          <div className="relative">
+    <div className="min-h-screen bg-slate-50">
+      <Header />
+      <main className="pt-24 pb-12">
+        <div className="mx-auto max-w-xl px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+              Peça sua Análise Emocional
+            </h1>
+            <p className="mt-4 text-lg text-slate-600">
+              Preencha os dados abaixo para receber sua análise personalizada.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-8"
+          >
             <RelationshipForm />
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

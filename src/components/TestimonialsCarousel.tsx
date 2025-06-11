@@ -13,9 +13,9 @@ const testimonials = [
   },
   {
     quote:
-      "Recebi o diagnóstico e chorei por 20 minutos. Não de tristeza, mas de alívio. Finalmente entendi tudo.",
-    name: "Marcos P.",
-    handle: "Cliente Verificado",
+      "Recebi a análise e chorei por 20 minutos. Não de tristeza, mas de alívio. Finalmente entendi tudo.",
+    name: "Ana C.",
+    handle: "Cliente Verificada",
   },
   {
     quote:

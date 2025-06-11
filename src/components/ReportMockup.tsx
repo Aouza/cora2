@@ -18,11 +18,9 @@ export function ReportMockup() {
           </div>
 
           {/* Header */}
-          <div className="relative flex items-center gap-2 border-b border-slate-200/80 pb-3">
-            <Sparkles className="w-6 h-6 text-violet-500" />
-            <h3 className="font-bold text-slate-800 text-lg">
-              Diagnóstico de Conexão
-            </h3>
+          <div className="flex items-center justify-center gap-2 text-center font-semibold text-slate-800 bg-white/80 backdrop-blur-sm py-2 rounded-t-lg border-b border-slate-200/80">
+            <Sparkles className="w-5 h-5 text-violet-500" />
+            <span>Análise de Conexão</span>
           </div>
 
           {/* Body Content Placeholder */}

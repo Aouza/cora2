@@ -265,7 +265,7 @@ export default function LandingPage() {
                 href="/formulario"
                 className="inline-flex items-center bg-slate-900 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-slate-800 transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
               >
-                <span>Quero meu diagnóstico</span>
+                <span>Quero minha análise</span>
                 <Sparkles className="w-5 h-5 ml-2 text-yellow-400" />
               </Link>
             </motion.div>
@@ -308,16 +308,16 @@ export default function LandingPage() {
           {/* Left Column: Text */}
           <div className="text-center lg:text-left">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-              🧠 O que é o Cora — e por que funciona?
+              🧠 O que é o Cora e por que funciona?
             </h2>
             <p className="mt-6 text-lg text-slate-600">
-              O Cora é um diagnóstico emocional simbólico, feito sob medida para
-              a sua conexão. Sem papo de signo, sem autoajuda genérica.
+              O Cora é uma análise emocional simbólica, feita sob medida para a
+              sua conexão. Sem papo de signo, sem autoajuda genérica.
             </p>
             <p className="mt-4 text-lg text-slate-600">
-              Só uma análise profunda, feita por IA emocional, que traduz
-              padrões, sentimentos e caminhos reais em um relatório direto,
-              simbólico e honesto.
+              É uma leitura profunda, feita por IA emocional, que traduz
+              padrões, sentimentos e caminhos reais em um mapa direto, simbólico
+              e honesto.
             </p>
           </div>
 
@@ -373,8 +373,8 @@ export default function LandingPage() {
               mas não sabe o que é?
             </h2>
             <p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto">
-              Às vezes parece intenso demais. Outras, leve demais. Às vezes
-              parece certo — mas algo trava. Seja qual for o momento, entender a
+              Às vezes parece intenso demais, outras, leve demais. Às vezes
+              parece certo, mas algo trava. Seja qual for o momento, entender a
               verdade dessa conexão pode mudar tudo.
             </p>
           </motion.div>
@@ -383,52 +383,56 @@ export default function LandingPage() {
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggeredGridVariants}
-            className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
           >
             {[
               {
                 icon: Compass,
-                color: "bg-blue-100 text-blue-700",
                 title: "Quer entender por que essa pessoa mexe tanto com você?",
+                description:
+                  "Uma análise profunda para clarear os sentimentos e as dinâmicas da sua conexão.",
               },
               {
                 icon: Scale,
-                color: "bg-violet-100 text-violet-700",
                 title:
-                  "Sente que está vivendo uma relação boa — mas algo ainda confunde?",
+                  "Sente que está vivendo uma relação boa, mas algo ainda confunde?",
+                description:
+                  "Identifique os pontos de harmonia e as dissonâncias que podem ser a chave para um próximo nível.",
               },
               {
                 icon: Repeat,
-                color: "bg-yellow-100 text-yellow-700",
                 title:
                   "Está sempre entre o impulso de se jogar e o medo de se frustrar?",
+                description:
+                  "Receba uma perspectiva externa para entender o ciclo de aproximação e afastamento.",
               },
               {
                 icon: ShieldQuestion,
-                color: "bg-red-100 text-red-700",
                 title:
-                  "Tudo parece certo... mas você não sente aquela segurança emocional?",
+                  "Tudo parece certo, mas você não sente aquela segurança emocional?",
+                description:
+                  "Descubra as bases da sua conexão e o que é preciso para construir uma confiança mútua.",
               },
               {
                 icon: Zap,
-                color: "bg-green-100 text-green-700",
                 title:
-                  "A química é real — mas você quer saber se é recíproca, ou projeção?",
+                  "A química é real, mas você quer saber se é recíproca ou projeção?",
+                description:
+                  "Diferencie a atração genuína das projeções e expectativas que podem gerar confusão.",
               },
             ].map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="text-left p-8 rounded-2xl bg-slate-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col"
+                className="flex flex-col items-start text-left"
               >
-                <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center ${item.color}`}
-                >
-                  <item.icon className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-violet-100">
+                  <item.icon className="w-6 h-6 text-violet-600" />
                 </div>
-                <h3 className="text-slate-900 text-xl font-bold mt-6 flex-grow">
+                <h3 className="text-lg font-bold text-slate-900 mt-5">
                   {item.title}
                 </h3>
+                <p className="text-slate-600 mt-2">{item.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -474,7 +478,7 @@ export default function LandingPage() {
               {
                 icon: Award,
                 title: "3. Receba a clareza",
-                text: "Seu diagnóstico chega em minutos, pronto para ser lido.",
+                text: "Sua análise chega em minutos, pronta para ser lida.",
               },
             ].map((step, index) => (
               <motion.div
@@ -526,7 +530,7 @@ export default function LandingPage() {
               <span className="h-3 w-3 rounded-full bg-yellow-400"></span>
               <span className="h-3 w-3 rounded-full bg-green-500"></span>
               <p className="ml-4 text-sm text-slate-400">
-                diagnostico-emocional.txt
+                analise-emocional.txt
               </p>
             </div>
             <div className="mt-6 border-t border-slate-700 pt-6">
@@ -543,7 +547,7 @@ export default function LandingPage() {
               />
             </div>
             <p className="mt-6 text-center text-sm text-slate-400 italic">
-              Seu relatório vem ainda mais completo que isso.
+              Sua análise vem ainda mais completa que isso.
             </p>
           </motion.div>
         </div>
@@ -563,15 +567,15 @@ export default function LandingPage() {
             <div className="relative flex-shrink-0 text-4xl">🛡️</div>
             <div className="relative text-center md:text-left">
               <h3 className="text-xl font-bold text-slate-900">
-                ✨ Garantia Emocional: ou você sente valor, ou não paga.
+                ✨ Garantia de Clareza: ou você sente o valor, ou não paga.
               </h3>
               <p className="mt-3 text-slate-600">
-                Se em até 7 dias você sentir que o diagnóstico não fez diferença
-                pra você, a gente devolve o valor. Sem burocracia, sem
+                Se em até 7 dias você sentir que a análise não fez diferença
+                para você, nós devolvemos o valor. Sem burocracia, sem
                 julgamento.
                 <br className="hidden sm:block" />
                 <span className="font-medium text-slate-700">
-                  A intenção aqui é clareza — não dúvida.
+                  A intenção aqui é clareza, não dúvida.
                 </span>
               </p>
             </div>
@@ -644,20 +648,21 @@ export default function LandingPage() {
               Paz para quem precisa decidir.
             </h2>
             <p className="mt-6 text-lg leading-8 text-violet-200 max-w-2xl mx-auto">
-              Esse é o diagnóstico emocional da Cora. Um mapa claro sobre o que
-              existe entre vocês — gerado com IA e leitura simbólica profunda.
+              Essa é a análise emocional da Cora. Um mapa claro sobre o que
+              existe entre vocês, gerado com IA e leitura simbólica profunda.
             </p>
             <div className="mt-10">
               <Link
                 href="/formulario"
                 className="inline-flex items-center bg-white text-slate-900 px-8 py-4 rounded-full text-lg font-bold shadow-2xl shadow-white/20 transition-transform duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
-                <span>Quero meu diagnóstico agora</span>
+                <span>Pedir minha análise agora</span>
                 <ChevronRight className="w-5 h-5 ml-2" />
               </Link>
               <p className="mt-4 text-xs text-violet-300">
-                <span className="opacity-80">🔒</span> Seguro e Anônimo —{" "}
-                <span className="opacity-80">⏱️</span> Entrega em até 3 minutos
+                <span className="opacity-80">🔒</span> Seguro e Anônimo{" "}
+                <span className="opacity-80">| ⏱️</span> Entrega em até 3
+                minutos
               </p>
             </div>
           </motion.div>
@@ -673,7 +678,7 @@ export default function LandingPage() {
           href="/formulario"
           className="w-full flex items-center justify-center bg-slate-900 text-white px-6 py-3 rounded-full text-base font-semibold shadow-lg hover:bg-slate-800 transition-colors"
         >
-          <span>Quero meu diagnóstico</span>
+          <span>Quero minha análise</span>
           <ChevronRight className="w-5 h-5 ml-1" />
         </Link>
       </div>
