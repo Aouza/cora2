@@ -222,9 +222,7 @@ const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
                 <h2 className="text-2xl font-bold text-slate-900 mb-2">
                   Análise Concluída!
                 </h2>
-                <p className="text-slate-600">
-                  Redirecionando para o pagamento...
-                </p>
+                <p className="text-slate-600">Preparando seu relatório...</p>
               </div>
             </div>
           )}
