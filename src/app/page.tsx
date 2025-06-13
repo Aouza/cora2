@@ -262,10 +262,34 @@ export default function LandingPage() {
             >
               <Link
                 href="/formulario"
-                className="inline-flex items-center bg-slate-900 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-slate-800 transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
+                className="
+                  relative inline-flex items-center justify-center gap-2
+                  px-8 py-4 
+                  bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900
+                  text-white font-semibold text-lg
+                  rounded-full 
+                  transition-all duration-300 ease-in-out
+                  transform hover:scale-105
+                  focus:outline-none
+                  backdrop-blur-sm
+                  border border-slate-600/20
+                "
+                style={{
+                  boxShadow:
+                    "0 0 15px rgba(15, 23, 42, 0.3), 0 0 30px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                  filter: "drop-shadow(0 0 8px rgba(15, 23, 42, 0.2))",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "0 0 20px rgba(15, 23, 42, 0.4), 0 0 40px rgba(15, 23, 42, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow =
+                    "0 0 15px rgba(15, 23, 42, 0.3), 0 0 30px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                }}
               >
                 <span>Quero minha análise</span>
-                <Sparkles className="w-5 h-5 ml-2 text-yellow-400" />
+                <Sparkles className="w-5 h-5 text-yellow-400" />
               </Link>
             </motion.div>
             <motion.div

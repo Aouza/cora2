@@ -73,10 +73,34 @@ const DiagnosticSection = () => {
           <div className="mt-8">
             <Link
               href="/formulario"
-              className="inline-flex items-center bg-slate-900 text-white px-6 py-3 rounded-lg text-base font-semibold shadow-md hover:bg-slate-800 transition-all duration-300 hover:scale-105"
+              className="
+                relative inline-flex items-center justify-center gap-2
+                px-6 py-3 
+                bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900
+                text-white font-semibold text-base
+                rounded-lg 
+                transition-all duration-300 ease-in-out
+                transform hover:scale-105
+                focus:outline-none
+                backdrop-blur-sm
+                border border-slate-600/20
+              "
+              style={{
+                boxShadow:
+                  "0 0 12px rgba(15, 23, 42, 0.25), 0 0 25px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                filter: "drop-shadow(0 0 6px rgba(15, 23, 42, 0.15))",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 0 18px rgba(15, 23, 42, 0.35), 0 0 35px rgba(15, 23, 42, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 0 12px rgba(15, 23, 42, 0.25), 0 0 25px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+              }}
             >
               <span>Pedir minha análise</span>
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </motion.div>

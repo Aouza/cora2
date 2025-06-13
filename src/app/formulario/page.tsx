@@ -65,15 +65,30 @@ export default function FormularioPage() {
                 <button
                   onClick={handleTestLoading}
                   className="
-                    inline-flex items-center justify-center
+                    relative inline-flex items-center justify-center gap-2
                     px-4 py-2 
-                    bg-orange-500 text-white font-medium text-sm
+                    bg-gradient-to-r from-orange-500 via-orange-500 to-orange-600
+                    text-white font-medium text-sm
                     rounded-lg 
-                    shadow-md
-                    hover:bg-orange-600
-                    transition-all duration-200
-                    focus:outline-none focus:ring-2 focus:ring-orange-400/50
+                    transition-all duration-300 ease-in-out
+                    transform hover:scale-105
+                    focus:outline-none
+                    backdrop-blur-sm
+                    border border-orange-400/20
                   "
+                  style={{
+                    boxShadow:
+                      "0 0 10px rgba(249, 115, 22, 0.25), 0 0 20px rgba(249, 115, 22, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                    filter: "drop-shadow(0 0 5px rgba(249, 115, 22, 0.15))",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow =
+                      "0 0 15px rgba(249, 115, 22, 0.35), 0 0 30px rgba(249, 115, 22, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow =
+                      "0 0 10px rgba(249, 115, 22, 0.25), 0 0 20px rgba(249, 115, 22, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+                  }}
                 >
                   🧪 Testar Loading
                 </button>

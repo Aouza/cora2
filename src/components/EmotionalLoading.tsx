@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, memo } from "react";
+import { useRouter } from "next/navigation";
 
 interface EmotionalLoadingProps {
   onFinish: () => void;
@@ -79,6 +80,7 @@ const DocumentsAnimation = memo(() => {
 DocumentsAnimation.displayName = "DocumentsAnimation";
 
 const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
+  const router = useRouter();
   const [showButton, setShowButton] = useState(false);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
@@ -219,20 +221,37 @@ const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
             `}
           >
             <button
-              onClick={onFinish}
+              onClick={() => router.push("/pagamento")}
               className="
-                inline-flex items-center justify-center
+                relative inline-flex items-center justify-center gap-2
                 px-8 py-4 
-                bg-violet-600 text-white font-semibold text-lg
+                bg-gradient-to-r from-purple-600 via-violet-600 to-purple-700
+                text-white font-medium text-lg
                 rounded-full 
-                shadow-xl shadow-violet-500/25
-                hover:bg-violet-700 hover:shadow-violet-500/30
                 transition-all duration-300 ease-in-out
-                transform hover:scale-105
-                focus:outline-none focus:ring-4 focus:ring-violet-400/50
+                transform hover:scale-[1.02]
+                focus:outline-none
+                backdrop-blur-sm
+                border border-purple-400/20
               "
+              style={{
+                boxShadow:
+                  "0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                filter: "drop-shadow(0 0 10px rgba(139, 92, 246, 0.25))",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 0 30px rgba(139, 92, 246, 0.5), 0 0 60px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow =
+                  "0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+              }}
             >
               Visualizar meu relatório emocional
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+              </svg>
             </button>
           </div>
         )}

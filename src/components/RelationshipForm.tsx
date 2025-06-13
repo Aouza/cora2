@@ -257,10 +257,42 @@ export default function RelationshipForm({
         </div>
         <button
           type="submit"
-          className="w-full bg-violet-600 text-white py-3 px-6 rounded-2xl font-semibold text-lg shadow-lg hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 transition-all hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
+          className="
+            relative w-full inline-flex items-center justify-center gap-2
+            px-6 py-3 
+            bg-gradient-to-r from-violet-600 via-violet-600 to-violet-700
+            text-white font-semibold text-lg
+            rounded-2xl 
+            transition-all duration-300 ease-in-out
+            transform hover:scale-[1.02]
+            focus:outline-none
+            backdrop-blur-sm
+            border border-violet-400/20
+            disabled:opacity-60 disabled:cursor-not-allowed
+          "
+          style={{
+            boxShadow:
+              "0 0 15px rgba(139, 92, 246, 0.3), 0 0 30px rgba(139, 92, 246, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+            filter: "drop-shadow(0 0 8px rgba(139, 92, 246, 0.2))",
+          }}
+          onMouseEnter={(e) => {
+            if (!loading) {
+              e.currentTarget.style.boxShadow =
+                "0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow =
+              "0 0 15px rgba(139, 92, 246, 0.3), 0 0 30px rgba(139, 92, 246, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
+          }}
           disabled={loading}
         >
           {loading ? "Gerando relatório..." : "Enviar"}
+          {!loading && (
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+            </svg>
+          )}
         </button>
         {error && (
           <div className="mt-4 text-center text-red-500 text-sm font-medium">
