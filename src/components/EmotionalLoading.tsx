@@ -81,7 +81,6 @@ DocumentsAnimation.displayName = "DocumentsAnimation";
 
 const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
   const router = useRouter();
-  const [showButton, setShowButton] = useState(false);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
@@ -104,17 +103,18 @@ const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
 
       return () => clearTimeout(timer);
     } else {
-      // Quando chegar na última frase, finaliza o loading
+      // Quando chegar na última frase, finaliza o loading e redireciona automaticamente
       const timer = setTimeout(() => {
         setIsLoadingComplete(true);
+        // Redireciona automaticamente após 1 segundo
         setTimeout(() => {
-          setShowButton(true);
-        }, 500);
+          router.push("/pagamento");
+        }, 1000);
       }, 2000);
 
       return () => clearTimeout(timer);
     }
-  }, [currentPhraseIndex, phrases.length]);
+  }, [currentPhraseIndex, phrases.length, router]);
 
   return (
     <>
@@ -184,7 +184,7 @@ const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
         }
       `}</style>
 
-      <div className="w-full h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative font-inter flex flex-col items-center justify-center">
+      <div className="w-full h-screen bg-slate-50 relative font-inter flex flex-col items-center justify-center">
         {/* Container principal centralizado */}
         <div className="flex flex-col items-center justify-center space-y-2 max-w-2xl mx-auto px-6">
           {/* Animação dos Documentos */}
@@ -205,56 +205,30 @@ const EmotionalLoading: React.FC<EmotionalLoadingProps> = ({ onFinish }) => {
               </p>
             </div>
           )}
-        </div>
 
-        {/* Botão Final - só aparece quando o loading termina */}
-        {showButton && (
-          <div
-            className={`
-              absolute inset-0 flex items-center justify-center
-              transition-all duration-700 ease-in-out
-              ${
-                showButton
-                  ? "opacity-100 translate-y-0 scale-100"
-                  : "opacity-0 translate-y-4 scale-95"
-              }
-            `}
-          >
-            <button
-              onClick={() => router.push("/pagamento")}
-              className="
-                relative inline-flex items-center justify-center gap-2
-                px-8 py-4 
-                bg-gradient-to-r from-purple-600 via-violet-600 to-purple-700
-                text-white font-medium text-lg
-                rounded-full 
-                transition-all duration-300 ease-in-out
-                transform hover:scale-[1.02]
-                focus:outline-none
-                backdrop-blur-sm
-                border border-purple-400/20
-              "
-              style={{
-                boxShadow:
-                  "0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                filter: "drop-shadow(0 0 10px rgba(139, 92, 246, 0.25))",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow =
-                  "0 0 30px rgba(139, 92, 246, 0.5), 0 0 60px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow =
-                  "0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-              }}
-            >
-              Visualizar meu relatório emocional
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
-              </svg>
-            </button>
-          </div>
-        )}
+          {/* Mensagem de conclusão - aparece brevemente antes do redirecionamento */}
+          {isLoadingComplete && (
+            <div className="text-center animate-fade-in">
+              <div className="mb-4">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    className="w-8 h-8 text-green-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                  Análise Concluída!
+                </h2>
+                <p className="text-slate-600">
+                  Redirecionando para o pagamento...
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
