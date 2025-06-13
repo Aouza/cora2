@@ -226,90 +226,234 @@ export default function PagamentoPage() {
               initial={{ x: 30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 1 }}
-              className="lg:col-span-3 space-y-8"
+              className="lg:col-span-3 space-y-12"
             >
-              {/* O que você vai descobrir */}
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  O que você vai descobrir:
-                </h2>
-                <div className="grid md:grid-cols-2 gap-4">
+              {/* O que você vai descobrir - Design Moderno */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                    O que você vai descobrir
+                  </h2>
+                  <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto"></div>
+                </div>
+
+                <div className="grid gap-6">
                   {[
-                    "Por que você se conecta com essa pessoa",
-                    "Os gatilhos emocionais da sua relação",
-                    "O que a outra pessoa sente por você",
-                    "Estratégias para seu próximo passo",
+                    {
+                      icon: "💭",
+                      title: "Por que você se conecta com essa pessoa",
+                      description:
+                        "Entenda os padrões inconscientes que criam essa atração",
+                    },
+                    {
+                      icon: "⚡",
+                      title: "Os gatilhos emocionais da sua relação",
+                      description:
+                        "Descubra o que desperta as emoções mais profundas entre vocês",
+                    },
+                    {
+                      icon: "💖",
+                      title: "O que a outra pessoa sente por você",
+                      description:
+                        "Insights sobre os sentimentos e intenções do outro lado",
+                    },
+                    {
+                      icon: "🎯",
+                      title: "Estratégias para seu próximo passo",
+                      description:
+                        "Um plano personalizado baseado na sua situação única",
+                    },
                   ].map((item, index) => (
-                    <div
+                    <motion.div
                       key={index}
-                      className="flex items-center gap-3 text-gray-700 bg-white p-4 rounded-lg border border-gray-200"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.2 + index * 0.1 }}
+                      className="group flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300"
                     >
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm font-medium">{item}</span>
-                    </div>
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300">
+                        {item.icon}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900 mb-1 group-hover:text-purple-700 transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Testemunhos melhorados */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  O que nossos clientes dizem:
-                </h3>
-                <div className="space-y-4">
+              {/* Testemunhos Modernos */}
+              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    O que nossos clientes dizem
+                  </h3>
+                  <div className="flex items-center justify-center gap-1 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-5 h-5 text-yellow-400 fill-yellow-400"
+                      />
+                    ))}
+                    <span className="ml-2 text-sm font-medium text-gray-600">
+                      4.9/5 • +1.200 avaliações
+                    </span>
+                  </div>
+                </div>
+
+                <div className="max-w-2xl mx-auto">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentTestimonial}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
                       transition={{ duration: 0.5 }}
-                      className="bg-white border-2 border-purple-200 rounded-xl p-6 shadow-sm"
+                      className="bg-white rounded-2xl p-8 shadow-sm border border-white/50 relative"
                     >
-                      <div className="flex items-center gap-1 mb-3">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className="w-4 h-4 text-yellow-500 fill-yellow-500"
-                          />
-                        ))}
+                      {/* Quote Icon */}
+                      <div className="absolute -top-4 left-8">
+                        <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                          <span className="text-white text-lg font-bold">
+                            "
+                          </span>
+                        </div>
                       </div>
-                      <p className="text-gray-700 italic mb-3 text-base leading-relaxed">
+
+                      <blockquote className="text-lg text-gray-700 leading-relaxed mb-6 italic">
                         "{testimonials[currentTestimonial].text}"
-                      </p>
-                      <p className="text-purple-700 font-bold text-sm">
-                        — {testimonials[currentTestimonial].name}
-                      </p>
+                      </blockquote>
+
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                          {testimonials[currentTestimonial].name.charAt(0)}
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">
+                            {testimonials[currentTestimonial].name}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            Cliente verificado
+                          </p>
+                        </div>
+                        <div className="ml-auto">
+                          <div className="flex items-center gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className="w-4 h-4 text-yellow-400 fill-yellow-400"
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   </AnimatePresence>
+
+                  {/* Indicadores */}
+                  <div className="flex justify-center gap-2 mt-6">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentTestimonial(index)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          index === currentTestimonial
+                            ? "bg-purple-500 w-6"
+                            : "bg-purple-200 hover:bg-purple-300"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* FAQ Compacto */}
-          <div className="mt-12 max-w-2xl mx-auto">
-            <h3 className="text-xl font-bold text-gray-900 text-center mb-6">
-              Dúvidas Frequentes
-            </h3>
-            <div className="grid md:grid-cols-3 gap-4 text-center">
+          {/* FAQ Moderno */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.4 }}
+            className="mt-20 max-w-4xl mx-auto"
+          >
+            <div className="text-center mb-12">
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Dúvidas Frequentes
+              </h3>
+              <p className="text-gray-600">
+                Tudo que você precisa saber antes de começar
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
               {[
-                { q: "É seguro?", a: "100% seguro via SSL" },
-                { q: "Quando recebo?", a: "Acesso imediato" },
-                { q: "E se não gostar?", a: "7 dias de garantia" },
+                {
+                  icon: "🔒",
+                  q: "É seguro?",
+                  a: "100% seguro via SSL",
+                  detail:
+                    "Seus dados são protegidos com criptografia de nível bancário",
+                },
+                {
+                  icon: "⚡",
+                  q: "Quando recebo?",
+                  a: "Acesso imediato",
+                  detail: "Relatório enviado automaticamente após o pagamento",
+                },
+                {
+                  icon: "💯",
+                  q: "E se não gostar?",
+                  a: "7 dias de garantia",
+                  detail:
+                    "Reembolso total sem perguntas se não ficar satisfeito",
+                },
               ].map((faq, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-gray-50 border border-gray-200 rounded-lg p-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6 + index * 0.1 }}
+                  className="group bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-purple-200 transition-all duration-300"
                 >
-                  <h4 className="text-gray-900 font-medium text-sm mb-1">
-                    {faq.q}
-                  </h4>
-                  <p className="text-gray-600 text-xs">{faq.a}</p>
-                </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      {faq.icon}
+                    </div>
+                    <h4 className="font-bold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors">
+                      {faq.q}
+                    </h4>
+                    <p className="font-semibold text-purple-600 mb-2">
+                      {faq.a}
+                    </p>
+                    <p className="text-sm text-gray-500 leading-relaxed">
+                      {faq.detail}
+                    </p>
+                  </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+
+            {/* CTA Final */}
+            <div className="text-center mt-12">
+              <p className="text-gray-600 mb-6">
+                Ainda tem dúvidas? Nossa equipe está aqui para ajudar.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-all duration-300"
+              >
+                <span>💬</span>
+                Falar com suporte
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </main>
     </div>
