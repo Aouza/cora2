@@ -10,7 +10,6 @@ import {
   Sparkles,
   Pencil,
   BrainCircuit,
-  CloudDownload,
   MessageSquareHeart,
   Repeat,
   Target,
@@ -60,7 +59,6 @@ const howItWorksSteps = [
   {
     title: "3. Receba o Diagnóstico",
     description: "Um relatório completo com insights e conselhos práticos.",
-    icon: <CloudDownload className="w-5 h-5 text-blue-500" />,
     bgColor: "bg-blue-50",
     iconBg: "bg-blue-100",
   },

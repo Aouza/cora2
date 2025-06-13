@@ -19,6 +19,12 @@ interface FormData {
     | "complicated";
 }
 
+interface RelationshipFormProps {
+  onSubmitStart: () => void;
+  onReportReady: (report: string) => void;
+  report: string | null;
+}
+
 const schema = yup.object({
   name1: yup.string().required("Seu nome é obrigatório"),
   birthdate1: yup.string().required("Sua data de nascimento é obrigatória"),
@@ -43,7 +49,11 @@ const relationshipStatusOptions = [
   { value: "complicated", label: "É complicado" },
 ];
 
-export default function RelationshipForm() {
+export default function RelationshipForm({
+  onSubmitStart,
+  onReportReady,
+  report,
+}: RelationshipFormProps) {
   const {
     register,
     handleSubmit,
@@ -55,22 +65,32 @@ export default function RelationshipForm() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [report, setReport] = useState<string | null>(null);
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);
     setError(null);
-    setReport(null);
+
+    // Inicia o loading emocional
+    onSubmitStart();
+
     try {
       const res = await fetch("/api/relatorio", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          userName: data.name1,
+          userBirthdate: data.birthdate1,
+          userGender: data.gender1,
+          otherName: data.name2,
+          otherBirthdate: data.birthdate2,
+          relationshipStatus: data.relationshipStatus,
+        }),
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Erro desconhecido");
-      setReport(result.report);
-      // reset(); // Descomente se quiser limpar o form após sucesso
+
+      // Passa o relatório para o componente pai
+      onReportReady(result.analysis);
     } catch (err: any) {
       setError(err.message || "Erro ao gerar relatório.");
     } finally {
