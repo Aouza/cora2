@@ -14,10 +14,21 @@ import {
   Sparkles,
 } from "lucide-react";
 import Header from "@/components/Header";
+import { useCheckout } from "@/hooks/useCheckout";
 
 export default function PagamentoPage() {
   const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutos
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const { isLoading, createCheckoutSession } = useCheckout();
+
+  // ID do preço no Stripe (você precisa criar este produto no dashboard do Stripe)
+  const PRICE_ID =
+    process.env.NEXT_PUBLIC_STRIPE_PRICE_ID || "price_1234567890";
+
+  const handleCheckout = async () => {
+    await createCheckoutSession(PRICE_ID);
+    console.log("response");
+  };
 
   // Countdown timer
   useEffect(() => {
@@ -186,6 +197,8 @@ export default function PagamentoPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={handleCheckout}
+                    disabled={isLoading}
                     className="
                       inline-flex items-center justify-center gap-2
                       px-6 py-3 
@@ -194,6 +207,7 @@ export default function PagamentoPage() {
                       rounded-full 
                       transition-all duration-300
                       border-0
+                      disabled:opacity-50 disabled:cursor-not-allowed
                     "
                     style={{
                       boxShadow:
@@ -201,8 +215,17 @@ export default function PagamentoPage() {
                       filter: "drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))",
                     }}
                   >
-                    <Sparkles className="w-4 h-4" />
-                    <span className="text-xs">DESBLOQUEAR AGORA</span>
+                    {isLoading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span className="text-xs">PROCESSANDO...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4" />
+                        <span className="text-xs">DESBLOQUEAR AGORA</span>
+                      </>
+                    )}
                   </motion.button>
                 </div>
 
