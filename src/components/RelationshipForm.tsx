@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 
 interface FormData {
   name1: string;
+  email1: string;
   birthdate1: string;
   name2: string;
   birthdate2: string;
@@ -27,6 +28,10 @@ interface RelationshipFormProps {
 
 const schema = yup.object({
   name1: yup.string().required("Seu nome é obrigatório"),
+  email1: yup
+    .string()
+    .email("Email inválido")
+    .required("Seu email é obrigatório"),
   birthdate1: yup.string().required("Sua data de nascimento é obrigatória"),
   name2: yup.string().required("O nome da outra pessoa é obrigatório"),
   birthdate2: yup
@@ -74,25 +79,41 @@ export default function RelationshipForm({
     onSubmitStart();
 
     try {
-      const res = await fetch("/api/relatorio", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userName: data.name1,
-          userBirthdate: data.birthdate1,
-          userGender: data.gender1,
-          otherName: data.name2,
-          otherBirthdate: data.birthdate2,
-          relationshipStatus: data.relationshipStatus,
-        }),
-      });
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || "Erro desconhecido");
+      // Preparar dados do usuário para o checkout (SEM gerar relatório ainda)
+      const userData = {
+        userName: data.name1,
+        userEmail: data.email1,
+        userBirthdate: data.birthdate1,
+        userGender: data.gender1,
+        otherName: data.name2,
+        otherBirthdate: data.birthdate2,
+        relationshipStatus: data.relationshipStatus,
+      };
 
-      // Passa o relatório para o componente pai
-      onReportReady(result.analysis);
+      // Armazenar dados do usuário no localStorage para usar no checkout
+      localStorage.setItem("cora_user_data", JSON.stringify(userData));
+
+      // Simular um relatório temporário para mostrar na tela (sem custo)
+      const tempReport = `
+# Análise Emocional - ${data.name1} e ${data.name2}
+
+## Preparando sua análise personalizada...
+
+Seus dados foram processados com sucesso! Após a confirmação do pagamento, nossa IA gerará um relatório completo e personalizado sobre a conexão emocional entre **${data.name1}** e **${data.name2}**.
+
+**O que você receberá:**
+- Análise profunda da dinâmica emocional
+- Insights sobre compatibilidade
+- Estratégias para fortalecer a relação
+- Conselhos personalizados baseados em IA
+
+*Este relatório será gerado e enviado por email após a confirmação do pagamento.*
+      `;
+
+      // Passa o relatório temporário para o componente pai
+      onReportReady(tempReport);
     } catch (err: any) {
-      setError(err.message || "Erro ao gerar relatório.");
+      setError(err.message || "Erro ao processar dados.");
     } finally {
       setLoading(false);
     }
@@ -131,6 +152,32 @@ export default function RelationshipForm({
                 <p className="text-sm text-red-600 mt-1 flex items-center gap-1">
                   <span className="text-red-500">⚠️</span>
                   {errors.name1.message}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-3">
+              <label
+                htmlFor="email1"
+                className="text-left block text-sm font-semibold text-slate-700 mb-2"
+              >
+                Seu Email
+              </label>
+              <input
+                {...register("email1")}
+                type="email"
+                id="email1"
+                className={`w-full px-4 py-3 rounded-xl border-2 bg-slate-50 focus:bg-white focus:border-violet-500 focus:ring-0 transition-all duration-200 text-slate-900 placeholder-slate-400 text-base ${
+                  errors.email1
+                    ? "border-red-400 bg-red-50"
+                    : "border-slate-200"
+                }`}
+                placeholder="Ex: maria@email.com"
+              />
+              {errors.email1 && (
+                <p className="text-sm text-red-600 mt-1 flex items-center gap-1">
+                  <span className="text-red-500">⚠️</span>
+                  {errors.email1.message}
                 </p>
               )}
             </div>

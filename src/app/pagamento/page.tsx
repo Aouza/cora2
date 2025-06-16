@@ -26,8 +26,22 @@ export default function PagamentoPage() {
     process.env.NEXT_PUBLIC_STRIPE_PRICE_ID || "price_1234567890";
 
   const handleCheckout = async () => {
-    await createCheckoutSession(PRICE_ID);
-    console.log("response");
+    try {
+      // Recuperar dados do usuário do localStorage
+      const userData = localStorage.getItem("cora_user_data");
+      const parsedUserData = userData ? JSON.parse(userData) : null;
+
+      if (!parsedUserData) {
+        alert("Por favor, preencha o formulário primeiro.");
+        window.location.href = "/";
+        return;
+      }
+
+      await createCheckoutSession(PRICE_ID, parsedUserData);
+    } catch (error) {
+      console.error("Erro no checkout:", error);
+      alert("Erro ao processar pagamento. Tente novamente.");
+    }
   };
 
   // Countdown timer
@@ -199,6 +213,7 @@ export default function PagamentoPage() {
                     whileTap={{ scale: 0.95 }}
                     onClick={handleCheckout}
                     disabled={isLoading}
+                    type="button"
                     className="
                       inline-flex items-center justify-center gap-2
                       px-6 py-3 
@@ -208,6 +223,7 @@ export default function PagamentoPage() {
                       transition-all duration-300
                       border-0
                       disabled:opacity-50 disabled:cursor-not-allowed
+                      cursor-pointer
                     "
                     style={{
                       boxShadow:

@@ -8,6 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     const {
       userName,
+      userEmail,
       userBirthdate,
       userGender,
       otherName,
@@ -112,7 +113,19 @@ export async function POST(req: NextRequest) {
 
     const analysis = response.choices[0].message.content;
 
-    return NextResponse.json({ analysis });
+    // Armazenar dados na sessão para envio posterior (após pagamento)
+    // O email será enviado apenas quando o pagamento for confirmado via webhook
+
+    return NextResponse.json({
+      analysis,
+      userEmail, // Retorna email para usar no checkout
+      userData: {
+        userName,
+        userEmail,
+        otherName,
+        report: analysis,
+      },
+    });
   } catch (error: any) {
     console.error("Erro na geração do relatório:", error);
     return NextResponse.json(
