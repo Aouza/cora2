@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "../../../../lib/stripe";
+import { processPayment } from "../../../../lib/process-payment";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,111 +12,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Buscar dados da sessão no Stripe
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    // Usar função unificada para processar o pagamento
+    const result = await processPayment(sessionId);
 
-    if (session.payment_status !== "paid") {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Pagamento não foi confirmado",
-          paymentStatus: session.payment_status,
-        },
-        { status: 400 }
-      );
-    }
-
-    const metadata = session.metadata;
-
-    if (!metadata || !metadata.userEmail || !metadata.userName) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Dados do usuário não encontrados na sessão",
-          metadata,
-        },
-        { status: 404 }
-      );
-    }
-
-    // Gerar relatório através da API /api/relatorio
-
-    const reportResponse = await fetch(
-      new URL("/api/relatorio", request.url).toString(),
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userName: metadata.userName,
-          userEmail: metadata.userEmail,
-          userBirthdate: metadata.userBirthdate || "",
-          userGender: metadata.userGender || "",
-          otherName: metadata.otherName,
-          otherBirthdate: metadata.otherBirthdate || "",
-          relationshipStatus: metadata.relationshipStatus || "complicado",
-        }),
-      }
-    );
-
-    if (!reportResponse.ok) {
-      const reportError = await reportResponse.json();
-      console.error("Erro ao gerar relatório:", reportError);
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Erro ao gerar relatório",
-          details: reportError.error,
-        },
-        { status: 500 }
-      );
-    }
-
-    const reportResult = await reportResponse.json();
-    const report = reportResult.analysis;
-
-    if (!report) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Relatório não foi gerado",
-        },
-        { status: 500 }
-      );
-    }
-
-    // Enviar email com o relatório
-    const emailResponse = await fetch(
-      new URL("/api/send-report", request.url).toString(),
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: metadata.userEmail,
-          customerName: metadata.userName,
-          partnerName: metadata.otherName,
-          report: report,
-        }),
-      }
-    );
-
-    const emailResult = await emailResponse.json();
-
-    if (emailResponse.ok) {
+    if (result.success) {
       return NextResponse.json({
         success: true,
-        message: "Relatório enviado com sucesso!",
+        message: result.message || "Relatório reenviado com sucesso!",
         emailSent: true,
-        emailId: emailResult.emailId,
-        recipient: metadata.userEmail,
+        emailId: result.emailId,
+        recipient: result.recipient,
         reportGenerated: true,
       });
     } else {
-      console.error("Erro ao enviar email:", emailResult.error);
+      console.error("Erro no reenvio manual:", result);
       return NextResponse.json(
         {
           success: false,
-          error: "Erro ao enviar email",
-          details: emailResult.error,
+          error: result.error,
+          details: result.details,
         },
         { status: 500 }
       );

@@ -1,13 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "../../../../lib/stripe";
 import { headers } from "next/headers";
-import {
-  getTempUserData,
-  deleteTempUserData,
-} from "../../../../lib/temp-storage";
-import OpenAI from "openai";
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+import { processPayment } from "../../../../lib/process-payment";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
@@ -35,132 +29,45 @@ export async function POST(request: NextRequest) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
 
-      // Recuperar dados do usuário do armazenamento temporário
-      const userData = getTempUserData(session.id);
+      // Verificar se já processamos este evento específico
+      const eventId = event.id;
+      const processedKey = `processed_${eventId}`;
 
-      if (userData) {
-        try {
-          // GERAR RELATÓRIO AQUI (após pagamento confirmado)
-          const promptSystem = `
-          Você é um especialista em conexões emocionais humanas. Sua função é criar análises simbólicas, verdadeiras e transformadoras sobre a dinâmica entre duas pessoas com base em seus nomes e informações fornecidas.
-          
-          Crie uma análise emocional completa sobre a conexão entre ${userData.userName} e ${userData.otherName}.
-          
-          A análise deve ter:
-          - Introdução personalizada
-          - 5-8 blocos temáticos com insights profundos
-          - Linguagem acessível e emocional
-          - Conselhos práticos
-          - Considerações sobre o status do relacionamento: ${userData.relationshipStatus}
-          
-          Use markdown para formatação.
-          `;
-
-          const response = await openai.chat.completions.create({
-            model: "gpt-4-turbo",
-            messages: [
-              {
-                role: "system",
-                content: promptSystem,
-              },
-              {
-                role: "user",
-                content: `Gere uma análise emocional completa sobre ${userData.userName} e ${userData.otherName}. Status do relacionamento: ${userData.relationshipStatus}`,
-              },
-            ],
-          });
-
-          const report = response.choices[0].message.content;
-
-          if (!report) {
-            throw new Error("Falha ao gerar relatório");
-          }
-
-          // Enviar email com o relatório
-          const emailResponse = await fetch(
-            `${process.env.NEXT_PUBLIC_DOMAIN}/api/send-report`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                email: userData.userEmail,
-                customerName: userData.userName,
-                partnerName: userData.otherName,
-                report: report,
-              }),
-            }
-          );
-
-          const emailResult = await emailResponse.json();
-
-          if (emailResponse.ok) {
-            // Limpar dados temporários após sucesso
-            deleteTempUserData(session.id);
-          } else {
-            console.error("Erro ao enviar email:", emailResult.error);
-          }
-        } catch (error) {
-          console.error("Erro ao processar webhook:", error);
-        }
-      } else {
-        // Fallback: tentar usar metadata do Stripe
-        const metadata = session.metadata;
-        if (metadata && metadata.userEmail && metadata.userName) {
-          try {
-            // Gerar relatório usando metadata
-            const promptSystem = `
-            Você é um especialista em conexões emocionais humanas. Sua função é criar análises simbólicas, verdadeiras e transformadoras sobre a dinâmica entre duas pessoas com base em seus nomes.
-            
-            Crie uma análise emocional completa sobre a conexão entre ${metadata.userName} e ${metadata.otherName}.
-            
-            A análise deve ter:
-            - Introdução personalizada
-            - 5-8 blocos temáticos com insights profundos
-            - Linguagem acessível e emocional
-            - Conselhos práticos
-            
-            Use markdown para formatação.
-            `;
-
-            const response = await openai.chat.completions.create({
-              model: "gpt-4-turbo",
-              messages: [
-                {
-                  role: "system",
-                  content: promptSystem,
-                },
-                {
-                  role: "user",
-                  content: `Gere uma análise emocional completa sobre ${metadata.userName} e ${metadata.otherName}.`,
-                },
-              ],
-            });
-
-            const report = response.choices[0].message.content;
-
-            if (report) {
-              // Enviar email
-              const emailResponse = await fetch(
-                `${process.env.NEXT_PUBLIC_DOMAIN}/api/send-report`,
-                {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    email: metadata.userEmail,
-                    customerName: metadata.userName,
-                    partnerName: metadata.otherName,
-                    report: report,
-                  }),
-                }
-              );
-
-              const emailResult = await emailResponse.json();
-            }
-          } catch (error) {
-            console.error("Erro no fallback:", error);
-          }
-        }
+      // Simples verificação em memória (para desenvolvimento)
+      if ((global as any)[processedKey]) {
+        console.log("Evento já processado, ignorando:", eventId);
+        return NextResponse.json({
+          received: true,
+          skipped: "already_processed",
+        });
       }
+
+      // Marcar como processado
+      (global as any)[processedKey] = true;
+
+      // Usar função unificada para processar o pagamento
+      const result = await processPayment(session.id);
+
+      if (result.success) {
+        console.log("Pagamento processado automaticamente:", {
+          sessionId: session.id,
+          recipient: result.recipient,
+          emailId: result.emailId,
+        });
+      } else {
+        console.error("Erro no processamento automático:", {
+          sessionId: session.id,
+          error: result.error,
+          details: result.details,
+        });
+      }
+
+      // Sempre retornar sucesso para o Stripe, mesmo em caso de erro interno
+      return NextResponse.json({
+        received: true,
+        processed: result.success,
+        error: result.success ? undefined : result.error,
+      });
     }
 
     return NextResponse.json({ received: true });

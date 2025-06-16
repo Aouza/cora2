@@ -1,22 +1,28 @@
-import { NextRequest, NextResponse } from "next/server";
-
 import OpenAI from "openai";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-export async function POST(req: NextRequest) {
-  try {
-    const {
-      userName,
-      userEmail,
-      userBirthdate,
-      userGender,
-      otherName,
-      otherBirthdate,
-      relationshipStatus,
-    } = await req.json();
+export interface UserData {
+  userName: string;
+  userEmail: string;
+  userBirthdate?: string;
+  userGender?: string;
+  otherName: string;
+  otherBirthdate?: string;
+  relationshipStatus: string;
+}
 
-    const promptSystem = `
+export async function generateReport(userData: UserData): Promise<string> {
+  const {
+    userName,
+    userBirthdate,
+    userGender,
+    otherName,
+    otherBirthdate,
+    relationshipStatus,
+  } = userData;
+
+  const promptSystem = `
     Você é um especialista em conexões emocionais humanas. Sua função é criar análises simbólicas, verdadeiras e transformadoras sobre a dinâmica entre duas pessoas com base em seus nomes, datas de nascimento, gênero de quem solicita e situação atual da relação.
     
     🧠 Antes de iniciar a análise, escreva uma **introdução personalizada e emocional**, diretamente para quem solicitou. Ela deve contextualizar que o conteúdo é único, pode trazer desconforto, mas também oferece clareza.  
@@ -97,40 +103,25 @@ export async function POST(req: NextRequest) {
     Seu objetivo final é gerar uma leitura emocional, simbólica e verdadeira que ajude quem lê a se enxergar, entender a conexão, e agir com mais consciência. E que dê vontade de ler de novo. E de novo.
     `;
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-4-turbo",
-      messages: [
-        {
-          role: "system",
-          content: promptSystem,
-        },
-        {
-          role: "user",
-          content: `Gere uma análise emocional e simbólica sobre a conexão entre ${userName} e ${otherName}, adaptando o conteúdo à situação informada (${relationshipStatus}), sem citar datas ou signos diretamente.`,
-        },
-      ],
-    });
-
-    const analysis = response.choices[0].message.content;
-
-    // Armazenar dados na sessão para envio posterior (após pagamento)
-    // O email será enviado apenas quando o pagamento for confirmado via webhook
-
-    return NextResponse.json({
-      analysis,
-      userEmail, // Retorna email para usar no checkout
-      userData: {
-        userName,
-        userEmail,
-        otherName,
-        report: analysis,
+  const response = await openai.chat.completions.create({
+    model: "gpt-4-turbo",
+    messages: [
+      {
+        role: "system",
+        content: promptSystem,
       },
-    });
-  } catch (error: any) {
-    console.error("Erro na geração do relatório:", error);
-    return NextResponse.json(
-      { error: "Erro ao gerar relatório." },
-      { status: 500 }
-    );
+      {
+        role: "user",
+        content: `Gere uma análise emocional e simbólica sobre a conexão entre ${userName} e ${otherName}, adaptando o conteúdo à situação informada (${relationshipStatus}), sem citar datas ou signos diretamente.`,
+      },
+    ],
+  });
+
+  const analysis = response.choices[0].message.content;
+
+  if (!analysis) {
+    throw new Error("Falha ao gerar relatório");
   }
+
+  return analysis;
 }
