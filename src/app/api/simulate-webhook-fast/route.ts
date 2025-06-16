@@ -12,8 +12,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("⚡ Simulando webhook RÁPIDO para session:", sessionId);
-
     // Buscar dados da sessão no Stripe
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
@@ -41,14 +39,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("👤 Dados encontrados:", {
-      email: metadata.userEmail,
-      userName: metadata.userName,
-      otherName: metadata.otherName,
-    });
-
     // Gerar relatório através da API /api/relatorio
-    console.log("🔄 Gerando relatório através da API /api/relatorio...");
 
     const reportResponse = await fetch(
       new URL("/api/relatorio", request.url).toString(),
@@ -69,7 +60,7 @@ export async function POST(request: NextRequest) {
 
     if (!reportResponse.ok) {
       const reportError = await reportResponse.json();
-      console.error("❌ Erro ao gerar relatório:", reportError);
+      console.error("Erro ao gerar relatório:", reportError);
       return NextResponse.json(
         {
           success: false,
@@ -84,7 +75,6 @@ export async function POST(request: NextRequest) {
     const report = reportResult.analysis;
 
     if (!report) {
-      console.error("❌ Relatório não foi gerado");
       return NextResponse.json(
         {
           success: false,
@@ -93,8 +83,6 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
-    console.log("✅ Relatório gerado com sucesso via API /api/relatorio");
 
     // Enviar email com o relatório
     const emailResponse = await fetch(
@@ -114,20 +102,16 @@ export async function POST(request: NextRequest) {
     const emailResult = await emailResponse.json();
 
     if (emailResponse.ok) {
-      console.log("✅ Email enviado com sucesso para:", metadata.userEmail);
-      console.log("📬 Email ID:", emailResult.emailId);
-
       return NextResponse.json({
         success: true,
-        message: "Email de teste enviado com sucesso!",
+        message: "Relatório enviado com sucesso!",
         emailSent: true,
         emailId: emailResult.emailId,
         recipient: metadata.userEmail,
         reportGenerated: true,
-        testMode: true,
       });
     } else {
-      console.error("❌ Erro ao enviar email:", emailResult.error);
+      console.error("Erro ao enviar email:", emailResult.error);
       return NextResponse.json(
         {
           success: false,
@@ -138,7 +122,7 @@ export async function POST(request: NextRequest) {
       );
     }
   } catch (error: any) {
-    console.error("❌ Erro na simulação do webhook rápido:", error);
+    console.error("Erro na simulação do webhook:", error);
     return NextResponse.json(
       { error: "Erro na simulação do webhook", details: error.message },
       { status: 500 }

@@ -9,20 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const { email, customerName, partnerName, report } = await request.json();
 
-    console.log("📧 API send-report chamada com dados:", {
-      email,
-      customerName,
-      partnerName,
-      reportLength: report?.length || 0,
-    });
-
     if (!email || !customerName || !partnerName || !report) {
-      console.error("❌ Dados obrigatórios faltando:", {
-        email: !!email,
-        customerName: !!customerName,
-        partnerName: !!partnerName,
-        report: !!report,
-      });
       return NextResponse.json(
         { error: "Dados obrigatórios faltando" },
         { status: 400 }
@@ -39,17 +26,12 @@ export async function POST(request: NextRequest) {
     });
 
     if (error) {
-      console.error("❌ Erro ao enviar email:", error);
+      console.error("Erro ao enviar email:", error);
       return NextResponse.json(
         { error: "Erro ao enviar email", details: error },
         { status: 500 }
       );
     }
-
-    console.log("✅ Email enviado com sucesso!", {
-      emailId: data?.id,
-      recipient: email,
-    });
 
     return NextResponse.json({
       success: true,

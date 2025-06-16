@@ -35,19 +35,11 @@ export async function POST(request: NextRequest) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
 
-      console.log("💰 Pagamento confirmado:", session.id);
-      console.log("👤 Dados do cliente:", {
-        email: session.customer_details?.email,
-        name: session.customer_details?.name,
-      });
-
       // Recuperar dados do usuário do armazenamento temporário
       const userData = getTempUserData(session.id);
 
       if (userData) {
         try {
-          console.log("🔄 Gerando relatório para:", userData.userEmail);
-
           // GERAR RELATÓRIO AQUI (após pagamento confirmado)
           const promptSystem = `
           Você é um especialista em conexões emocionais humanas. Sua função é criar análises simbólicas, verdadeiras e transformadoras sobre a dinâmica entre duas pessoas com base em seus nomes e informações fornecidas.
@@ -84,8 +76,6 @@ export async function POST(request: NextRequest) {
             throw new Error("Falha ao gerar relatório");
           }
 
-          console.log("✅ Relatório gerado, enviando email...");
-
           // Enviar email com o relatório
           const emailResponse = await fetch(
             `${process.env.NEXT_PUBLIC_DOMAIN}/api/send-report`,
@@ -104,31 +94,18 @@ export async function POST(request: NextRequest) {
           const emailResult = await emailResponse.json();
 
           if (emailResponse.ok) {
-            console.log(
-              "✅ Email enviado com sucesso para:",
-              userData.userEmail
-            );
-            console.log("📬 Email ID:", emailResult.emailId);
-
             // Limpar dados temporários após sucesso
             deleteTempUserData(session.id);
           } else {
-            console.error("❌ Erro ao enviar email:", emailResult.error);
+            console.error("Erro ao enviar email:", emailResult.error);
           }
         } catch (error) {
-          console.error("❌ Erro ao processar webhook:", error);
+          console.error("Erro ao processar webhook:", error);
         }
       } else {
-        console.log(
-          "⚠️ Dados do usuário não encontrados no armazenamento temporário"
-        );
-        console.log("📋 Session ID:", session.id);
-
         // Fallback: tentar usar metadata do Stripe
         const metadata = session.metadata;
         if (metadata && metadata.userEmail && metadata.userName) {
-          console.log("🔄 Usando dados do metadata do Stripe...");
-
           try {
             // Gerar relatório usando metadata
             const promptSystem = `
@@ -178,15 +155,9 @@ export async function POST(request: NextRequest) {
               );
 
               const emailResult = await emailResponse.json();
-              if (emailResponse.ok) {
-                console.log(
-                  "✅ Email enviado via fallback para:",
-                  metadata.userEmail
-                );
-              }
             }
           } catch (error) {
-            console.error("❌ Erro no fallback:", error);
+            console.error("Erro no fallback:", error);
           }
         }
       }
@@ -194,7 +165,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error("❌ Webhook error:", error);
+    console.error("Webhook error:", error);
     return NextResponse.json(
       { error: "Webhook handler failed" },
       { status: 500 }

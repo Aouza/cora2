@@ -32,7 +32,6 @@ export default function PagamentoPage() {
       const parsedUserData = userData ? JSON.parse(userData) : null;
 
       if (!parsedUserData) {
-        alert("Por favor, preencha o formulário primeiro.");
         window.location.href = "/";
         return;
       }
@@ -40,7 +39,6 @@ export default function PagamentoPage() {
       await createCheckoutSession(PRICE_ID, parsedUserData);
     } catch (error) {
       console.error("Erro no checkout:", error);
-      alert("Erro ao processar pagamento. Tente novamente.");
     }
   };
 

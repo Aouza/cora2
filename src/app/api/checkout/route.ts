@@ -6,11 +6,6 @@ export async function POST(request: NextRequest) {
   try {
     const { priceId, userData } = await request.json();
 
-    console.log("🔍 API Checkout - Dados recebidos:");
-    console.log("📦 Price ID:", priceId);
-    console.log("👤 User Data:", userData);
-    console.log("🌐 Domain:", process.env.NEXT_PUBLIC_DOMAIN);
-
     // Verificar se variáveis essenciais estão configuradas
     if (!process.env.STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY não configurada");
@@ -21,8 +16,6 @@ export async function POST(request: NextRequest) {
     if (!priceId) {
       throw new Error("Price ID não fornecido");
     }
-
-    console.log("🔑 Criando sessão do Stripe...");
 
     // Criar sessão de checkout
     const session = await stripe.checkout.sessions.create({
@@ -51,8 +44,6 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    console.log("✅ Sessão do Stripe criada!");
-
     // Armazenar dados do usuário temporariamente usando o session ID (SEM o relatório)
     if (userData && session.id) {
       storeTempUserData(session.id, {
@@ -65,28 +56,16 @@ export async function POST(request: NextRequest) {
         relationshipStatus: userData.relationshipStatus,
         // report: não incluir - será gerado após pagamento
       });
-      console.log(
-        "💾 Dados armazenados temporariamente para session:",
-        session.id
-      );
     }
-
-    console.log("✅ Sessão criada com sucesso!");
-    console.log("🔗 URL da sessão:", session.url);
-    console.log("🆔 Session ID:", session.id);
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    console.error("❌ Erro ao criar sessão de checkout:", error);
-    console.error("❌ Erro específico:", error?.message);
-    console.error("❌ Stack trace:", error?.stack);
+    console.error("Erro ao criar sessão de checkout:", error?.message);
 
-    // Retornar erro mais específico
     return NextResponse.json(
       {
         error: "Erro ao criar sessão de checkout",
         details: error?.message || "Erro desconhecido",
-        type: error?.type || "unknown_error",
       },
       { status: 500 }
     );
