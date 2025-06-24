@@ -42,6 +42,7 @@ import {
   Flame,
   ArrowRight,
   Heart,
+  MessageCircle,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
@@ -51,44 +52,38 @@ import DiagnosticSection from "@/components/DiagnosticSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// Dores principais - Copy emocional AGRESSIVA com ícones clean
+// Pain points AGRESSIVOS com ícones clean
 const painPoints = [
   {
-    icon: <Clock className="w-5 h-5" />,
-    pain: "Você perde o sono pensando nessa pessoa",
+    icon: <Heart className="w-5 h-5" />,
+    pain: "Será que eu tô me iludindo com essa pessoa?",
     details:
-      "3h da manhã e você ainda está rolando na cama, criando cenários na cabeça",
-    solution: "Descubra se vale a pena tanto sofrimento",
+      "Fico criando filme na cabeça e não sei se é real ou fantasia minha",
+    solution: "Descubra se é interesse real ou você está fantasiando",
+  },
+  {
+    icon: <MessageCircle className="w-5 h-5" />,
+    pain: "Por que toda vez que parece que vai dar certo… dá ruim de novo?",
+    details: "Sempre a mesma história: começa bem e termina em decepção",
+    solution: "Entenda o padrão e quebre esse ciclo de uma vez",
+  },
+  {
+    icon: <Clock className="w-5 h-5" />,
+    pain: "Sigo insistindo ou é melhor largar de vez?",
+    details: "Já perdi tanto tempo, será que vale a pena continuar tentando?",
+    solution: "Tenha clareza se deve investir ou partir pra próxima",
   },
   {
     icon: <Users className="w-5 h-5" />,
-    pain: "Seus amigos já cansaram de ouvir a mesma história",
-    details: "Todo mundo dá opinião diferente e você fica mais confuso ainda",
-    solution: "Tenha uma resposta definitiva baseada em dados",
-  },
-  {
-    icon: <Eye className="w-5 h-5" />,
-    pain: "Você não sabe se é paixão ou só carência",
-    details: "Será que é amor de verdade ou você só está projetando?",
-    solution: "Entenda seus padrões emocionais de uma vez por todas",
-  },
-  {
-    icon: <TrendingUp className="w-5 h-5" />,
-    pain: "Você desperdiça energia numa relação que não vai dar certo",
-    details: "Enquanto isso, outras oportunidades passam batido",
-    solution: "Pare de perder tempo e foque no que realmente importa",
+    pain: "Essa história tem futuro… ou só tá me machucando?",
+    details: "Não sei se é amor de verdade ou só estou me iludindo",
+    solution: "Saiba as chances reais antes de se desgastar mais",
   },
   {
     icon: <Repeat className="w-5 h-5" />,
-    pain: "Você sempre escolhe as pessoas erradas",
-    details: "É sempre a mesma história: começa bem e termina em decepção",
-    solution: "Quebre esse ciclo destrutivo para sempre",
-  },
-  {
-    icon: <Scale className="w-5 h-5" />,
-    pain: "Você vive no vai-e-vem emocional",
-    details: "Uma hora parece que rola, outra hora você quer distância",
-    solution: "Entenda o que realmente está acontecendo",
+    pain: "Será que ele(a) sente o mesmo… ou só me procura quando convém?",
+    details: "Aparece quando quer, some quando não precisa mais de mim",
+    solution: "Descubra se você é prioridade ou apenas uma opção",
   },
 ];
 
@@ -186,27 +181,31 @@ const impactStats = [
 const transformationalBenefits = [
   {
     icon: <Target className="w-6 h-6" />,
-    title: "PARE de ficar na dúvida",
-    description: "Chega de perder noites pensando 'será que rola?'",
-    result: "Você vai saber EXATAMENTE o que fazer",
+    title: "Você para de ficar na dúvida",
+    description:
+      "Chega de passar madrugadas pensando 'será que rola?' - você vai saber a resposta",
+    result: "Clareza total sobre onde você está pisando",
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
-    title: "NUNCA mais caia numa furada",
-    description: "Identifique red flags que você nem sabia que existiam",
-    result: "Economize anos da sua vida",
+    title: "Nunca mais cai em cilada emocional",
+    description:
+      "Aprende a identificar quando alguém está só te enrolando ou realmente tem interesse",
+    result: "Proteção contra pessoas que só querem te usar",
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: "QUEBRE o ciclo de relacionamentos tóxicos",
-    description: "Entenda por que você sempre atrai o mesmo tipo de pessoa",
-    result: "Mude seu padrão e atraia o amor verdadeiro",
+    title: "Para de repetir os mesmos erros",
+    description:
+      "Entende por que sempre acaba se envolvendo com o mesmo tipo de pessoa problemática",
+    result: "Quebra o ciclo e atrai relacionamentos saudáveis",
   },
   {
     icon: <Lightbulb className="w-6 h-6" />,
-    title: "DESCUBRA verdades sobre você mesmo",
-    description: "Pare de se autoenganar e veja sua realidade emocional",
-    result: "Torne-se irresistível para pessoas de qualidade",
+    title: "Conhece seus pontos cegos emocionais",
+    description:
+      "Descobre o que você faz (sem perceber) que afasta ou atrai as pessoas erradas",
+    result: "Autoconhecimento que muda sua vida amorosa para sempre",
   },
 ];
 
@@ -282,58 +281,35 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             {/* Badge URGENTE */}
-            <div className="inline-flex items-center gap-2 bg-violet-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulse">
-              <AlertTriangle className="w-4 h-4" />
-              CHEGA DE SOFRER NO ESCURO
+            <div className="inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-sm font-medium text-orange-800 mb-8">
+              <span className="mr-2">🔥</span>
+              Oferta especial ativa só hoje: R$ 9,90
             </div>
 
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-6">
-              <span className="text-violet-600 font-black">PARE</span> de
-              desperdiçar sua vida
+            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-8">
+              Você tá{" "}
+              <span className="text-red-600">perdido numa história</span>
               <br />
-              <span className="text-slate-600 font-light">
-                numa relação que talvez nem exista.
-              </span>
+              que nem sabe se é <span className="text-violet-600">real</span>?
             </h1>
 
-            <p className="mt-6 text-xl leading-8 text-slate-600 max-w-3xl mx-auto">
-              Você vai{" "}
-              <strong className="text-red-600">continuar sofrendo</strong> ou
-              vai descobrir a verdade de uma vez por todas?
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+              <strong>Pare de perder tempo, sono e saúde mental.</strong>
               <br />
-              <strong className="text-slate-800">
-                Nossa IA revela em 5 minutos o que você não consegue ver há
-                meses.
-              </strong>
+              Em 5 minutos, nossa IA te entrega a verdade que ninguém tá te
+              contando sobre essa conexão.
             </p>
 
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex flex-col items-center gap-4">
               <Link
                 href="/formulario"
-                className="relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white font-bold text-lg rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none shadow-xl"
-                style={{
-                  boxShadow: "0 0 20px rgba(139, 92, 246, 0.4)",
-                }}
+                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-10 py-5 text-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
-                <Flame className="w-5 h-5" />
-                <span>QUERO PARAR DE SOFRER AGORA</span>
-                <ArrowRight className="w-5 h-5" />
+                👉 Quero Meu Diagnóstico Agora
               </Link>
-            </div>
-
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-3">
-              <div className="flex items-center gap-x-2 text-sm text-slate-600">
-                <Lock className="w-4 h-4 text-green-600" />
-                <span>100% Anônimo (ninguém vai saber)</span>
-              </div>
-              <div className="flex items-center gap-x-2 text-sm text-slate-600">
-                <Zap className="w-4 h-4 text-yellow-600" />
-                <span>5 minutos para clareza total</span>
-              </div>
-              <div className="flex items-center gap-x-2 text-sm text-slate-600">
-                <DollarSign className="w-4 h-4 text-green-600" />
-                <span>Apenas R$ 9,90 (menos que um Uber)</span>
-              </div>
+              <p className="text-slate-500 text-sm">
+                ⚡ Resultado em 5 minutos | 💰 Apenas R$ 9,90 | 🔒 100% seguro
+              </p>
             </div>
           </motion.div>
         </div>
@@ -364,14 +340,12 @@ export default function Home() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold tracking-tight text-slate-900 mb-6">
-              <span className="text-red-600">CHEGA</span> dessas situações na
-              sua vida
+            <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-6">
+              Se alguma dessas frases parece sua…{" "}
+              <span className="text-red-600">
+                é porque tá na hora de encarar.
+              </span>
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Se você se identifica com pelo menos uma dessas, precisa ler isso
-              até o final
-            </p>
           </div>
 
           <motion.div
@@ -481,12 +455,12 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              O que você vai <span className="text-violet-600">CONQUISTAR</span>{" "}
-              de uma vez por todas
+              O que você vai <span className="text-violet-600">conseguir</span>{" "}
+              depois do Cora
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Não é só um relatório. É uma <strong>mudança definitiva</strong>{" "}
-              na sua vida amorosa.
+              Não é só um relatório. É uma <strong>virada de chave</strong> na
+              sua vida amorosa.
             </p>
           </div>
 
@@ -534,17 +508,17 @@ export default function Home() {
           <div className="text-center">
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 max-w-lg mx-auto">
               <h3 className="text-xl font-bold text-slate-900 mb-3">
-                Pronto para essa transformação?
+                Bora descobrir a verdade?
               </h3>
               <p className="text-slate-600 mb-4 text-sm">
-                Milhares já conquistaram clareza. Sua vez chegou.
+                Mais de 47.000 pessoas já pararam de sofrer. Sua vez chegou.
               </p>
               <Link
                 href="/formulario"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <Sparkles className="w-4 h-4" />
-                Começar minha análise
+                Quero meu diagnóstico agora
               </Link>
               <p className="text-slate-500 text-xs mt-2">
                 🚀 Resultado instantâneo | 🔒 100% privado e seguro
@@ -565,11 +539,11 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              Como nossa IA analisa sua conexão
+              Como o Cora funciona?
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Um processo sofisticado que vai além da superfície, revelando a
-              verdadeira dinâmica emocional
+              É bem simples: você preenche, nossa IA analisa e você recebe a
+              verdade sobre sua situação
             </p>
           </div>
 
@@ -581,11 +555,11 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-900 mb-2">
-                    Análise de Padrões
+                    Você preenche um formulário rápido
                   </h3>
                   <p className="text-slate-600">
-                    Nossa IA identifica a estrutura emocional única entre vocês,
-                    baseada em dados comportamentais e psicológicos.
+                    Nome dos dois, datas de nascimento e situação atual da
+                    relação. Leva menos de 2 minutos para responder.
                   </p>
                 </div>
               </div>
@@ -596,11 +570,11 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-900 mb-2">
-                    Mapeamento Emocional
+                    Nossa IA analisa a conexão de vocês
                   </h3>
                   <p className="text-slate-600">
-                    Revelamos os ciclos de aproximação e afastamento,
-                    identificando os gatilhos que movem a dinâmica.
+                    O sistema processa os dados e identifica padrões emocionais,
+                    pontos de bloqueio e o potencial real da relação.
                   </p>
                 </div>
               </div>
@@ -611,11 +585,11 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-900 mb-2">
-                    Insights Personalizados
+                    Você recebe seu diagnóstico emocional
                   </h3>
                   <p className="text-slate-600">
-                    Geramos recomendações específicas para sua situação, com
-                    caminhos claros para tomar decisões.
+                    Um relatório direto, sem enrolação, que te diz exatamente o
+                    que está acontecendo e o que você deve fazer.
                   </p>
                 </div>
               </div>
@@ -813,66 +787,194 @@ export default function Home() {
       {/* Como Funciona - Seção Clean */}
       <DiagnosticSection />
 
-      {/* 💰 Garantia - Bloco Clean */}
-      <motion.section
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={sectionVariants}
-        className="py-20 bg-slate-50"
-      >
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="bg-gray-50 rounded-3xl p-8 shadow-lg text-center border border-slate-200">
+      {/* 💰 Garantia */}
+      <div className="py-24 bg-white">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
+          <div className="bg-gray-50 rounded-3xl p-12">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Shield className="w-8 h-8 text-green-600" />
+              <svg
+                className="w-8 h-8 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">
-              Garantia de Satisfação
-            </h3>
-            <p className="text-lg text-slate-700 max-w-2xl mx-auto leading-7">
-              Se não sentir clareza, devolvemos seu dinheiro em até 7 dias.
-              <br />
-              <strong className="text-slate-900">Simples assim.</strong>
+
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Sem riscos. Se você sentir que não te trouxe clareza...{" "}
+              <span className="text-green-600">devolvemos seu dinheiro.</span>
+            </h2>
+
+            <p className="text-xl text-slate-600 mb-8">
+              <strong>7 dias de garantia.</strong> Simples assim.
             </p>
+
+            <div className="bg-white rounded-2xl p-6 shadow-lg inline-block">
+              <p className="text-slate-700 font-medium">
+                🛡️ Garantia de satisfação | 💰 Reembolso integral | ⚡ Sem
+                burocracia
+              </p>
+            </div>
           </div>
         </div>
-      </motion.section>
+      </div>
 
-      {/* 📞 CTA Final - Grande e Centralizado */}
-      <motion.section
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={sectionVariants}
-        className="py-24 bg-slate-900"
-      >
+      {/* CTA Final */}
+      <div className="py-24 bg-slate-900">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-8">
-            Pare de adivinhar. Comece a entender.
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Pare de sofrer por algo que{" "}
+            <span className="text-violet-400">talvez nem seja real.</span>
           </h2>
+
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Descubra agora se essa pessoa vale seu investimento emocional ou se
+            é hora de seguir em frente.
+          </p>
 
           <Link
             href="/formulario"
-            className="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-10 py-5 rounded-full text-xl font-bold shadow-2xl transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white gap-3"
+            className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-12 py-6 text-2xl font-bold text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 mb-6"
           >
-            <span>Quero Receber Meu Diagnóstico Agora</span>
-            <ChevronRight className="w-6 h-6" />
+            👉 Quero meu diagnóstico agora
           </Link>
 
-          <p className="mt-6 text-slate-300 text-sm leading-6">
-            <span className="opacity-80">🔒</span> 100% Seguro e Anônimo{" "}
-            <span className="opacity-80">| ⏱️</span> Entrega em 5 minutos{" "}
-            <span className="opacity-80">| 💰</span> Apenas R$ 9,90
+          <p className="text-slate-400 text-sm">
+            ⚡ Resultado em 5 minutos | 💰 Apenas R$ 9,90 | 🔒 7 dias de
+            garantia
           </p>
         </div>
-      </motion.section>
+      </div>
 
-      <footer className="bg-white py-8 border-t border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-slate-500">
-          <p>
-            &copy; {new Date().getFullYear()} Cora. Todos os direitos
-            reservados.
-          </p>
+      <footer className="bg-slate-50 py-16 border-t border-slate-200">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Logo e Descrição */}
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-br from-violet-600 to-purple-600 rounded-2xl flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900">
+                  Cora<span className="text-violet-600">.Deep</span>
+                </h3>
+              </div>
+              <p className="text-slate-600 mb-4 max-w-md">
+                Análise emocional por IA que revela a verdade sobre suas
+                conexões amorosas. Pare de sofrer, comece a entender.
+              </p>
+              <div className="flex items-center gap-4 text-sm text-slate-500">
+                <span>⚡ Resultado em 5 minutos</span>
+                <span>💰 Apenas R$ 9,90</span>
+                <span>🔒 100% Seguro</span>
+              </div>
+            </div>
+
+            {/* Links Úteis */}
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-4">Links Úteis</h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>
+                  <a
+                    href="/formulario"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Fazer Análise
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#como-funciona"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Como Funciona
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#depoimentos"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Depoimentos
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#garantia"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Garantia
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Suporte */}
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-4">Suporte</h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Central de Ajuda
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Política de Privacidade
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Termos de Uso
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="hover:text-violet-600 transition-colors"
+                  >
+                    Contato
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-slate-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-slate-500">
+              &copy; {new Date().getFullYear()} Cora.Deep. Todos os direitos
+              reservados.
+            </p>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">
+              <span className="text-sm text-slate-500">
+                Pagamento 100% seguro
+              </span>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-6 bg-blue-600 rounded flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">💳</span>
+                </div>
+                <div className="w-8 h-6 bg-orange-500 rounded flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">🔒</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
