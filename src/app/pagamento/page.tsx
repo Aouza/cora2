@@ -12,16 +12,24 @@ import {
   AlertTriangle,
   Lock,
   Sparkles,
+  ArrowRight,
+  Timer,
+  Flame,
+  CreditCard,
+  Globe,
+  Heart,
+  TrendingUp,
+  Award,
+  DollarSign,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { useCheckout } from "@/hooks/useCheckout";
 
 export default function PagamentoPage() {
   const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutos
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const { isLoading, createCheckoutSession } = useCheckout();
 
-  // ID do preço no Stripe (você precisa criar este produto no dashboard do Stripe)
+  // ID do preço no Stripe
   const PRICE_ID =
     process.env.NEXT_PUBLIC_STRIPE_PRICE_ID || "price_1234567890";
 
@@ -50,14 +58,6 @@ export default function PagamentoPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Testimonial rotation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -66,219 +66,359 @@ export default function PagamentoPage() {
       .padStart(2, "0")}`;
   };
 
-  const testimonials = [
+  const benefits = [
     {
-      text: "Descobri coisas sobre mim que nem eu sabia. Valeu cada centavo!",
-      name: "Marina, 28 anos",
+      icon: <TrendingUp className="w-5 h-5 text-green-500" />,
+      text: "Pare de perder tempo em relacionamentos sem futuro",
     },
     {
-      text: "Não esperava que fosse tão certeiro. Me ajudou a entender o que eu mesmo não conseguia explicar.",
-      name: "Lucas, 30 anos",
+      icon: <Heart className="w-5 h-5 text-red-500" />,
+      text: "Entenda se vale a pena investir energia nessa pessoa",
     },
     {
-      text: "Finalmente entendi por que sempre escolho os caras errados.",
-      name: "Carla, 34 anos",
+      icon: <Award className="w-5 h-5 text-purple-500" />,
+      text: "Quebre padrões destrutivos de uma vez por todas",
+    },
+    {
+      icon: <Sparkles className="w-5 h-5 text-blue-500" />,
+      text: "Transforme ansiedade em clareza e paz mental",
+    },
+  ];
+
+  const urgencyReasons = [
+    "Sua análise foi gerada com base nos seus dados únicos",
+    "Cada momento de dúvida é energia desperdiçada",
+    "A promoção de R$ 9,90 pode terminar a qualquer momento",
+    "Você merece viver sem essa ansiedade emocional",
+  ];
+
+  const guarantees = [
+    {
+      icon: <Shield className="w-5 h-5 text-green-500" />,
+      title: "Garantia de 7 Dias",
+      desc: "Se não trouxer clareza, devolvemos seu dinheiro",
+    },
+    {
+      icon: <Lock className="w-5 h-5 text-blue-500" />,
+      title: "100% Privado",
+      desc: "Seus dados são protegidos e anônimos",
+    },
+    {
+      icon: <Zap className="w-5 h-5 text-yellow-500" />,
+      title: "Acesso Imediato",
+      desc: "Receba sua análise em até 5 minutos",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50">
       <Header />
 
       <main className="pt-20 pb-12">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Hero com Copy Emocional */}
-          <div className="text-center mb-16">
-            {/* Copy Emocional Otimizada */}
-            <motion.h1
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl md:text-4xl font-bold text-gray-800 mt-8 leading-tight"
-            >
-              O que você sente tem explicação.
-            </motion.h1>
+        <div className="max-w-4xl mx-auto px-6">
+          {/* HERO - DOR E URGÊNCIA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            {/* Badge de urgência */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulse">
+              <Timer className="w-4 h-4" />
+              TEMPO LIMITADO: {formatTime(timeLeft)}
+            </div>
 
-            <motion.h2
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-2xl md:text-4xl font-bold mb-6 text-gray-800 leading-tight"
-            >
-              E já está aqui. 🔓
-            </motion.h2>
+            <h1 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight mb-4">
+              Sua Análise Está{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                Pronta
+              </span>
+              .
+            </h1>
 
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="max-w-3xl mx-auto leading-snug"
-            >
-              Seu mapa emocional foi gerado com base nos dados que você
-              preencheu.
-            </motion.p>
+            <p className="text-xl md:text-2xl text-slate-700 font-semibold mb-4">
+              Não deixe a resposta que você precisa escapar.
+            </p>
 
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="max-w-3xl mx-auto leading-snug"
-            >
-              Agora só falta um passo para desbloquear o que isso revela sobre
-              vocês dois.
-            </motion.p>
-          </div>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Sua análise emocional personalizada foi gerada com base nos dados
+              que você forneceu.
+              <br />
+              <strong className="text-slate-800">
+                Falta apenas um passo para acessar sua clareza.
+              </strong>
+            </p>
+          </motion.div>
 
-          {/* Grid Principal - Layout Otimizado */}
-          <div className="lg:grid-cols-5 gap-8 mb-12 items-start">
-            {/* Preview do Relatório - Tamanho Reduzido */}
+          {/* SEÇÃO PRINCIPAL - LAYOUT FOCADO */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-12">
+            {/* COLUNA ESQUERDA - BENEFÍCIOS */}
             <motion.div
-              initial={{ x: -30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="lg:col-span-2 relative"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="lg:col-span-2"
             >
-              {/* Card com tamanho reduzido */}
-              <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-5 relative overflow-hidden shadow-2xl max-w-sm mx-auto">
-                {/* Badges de garantia no topo */}
-                <div className="flex gap-2 mb-3">
-                  <div className="flex items-center gap-1 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    <Shield className="w-2 h-2" />
-                    <span className="text-xs">Garantia 7 dias</span>
-                  </div>
-                  <div className="flex items-center gap-1 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    <Zap className="w-2 h-2" />
-                    <span className="text-xs">Acesso imediato</span>
-                  </div>
-                </div>
-
-                {/* Título visível */}
-                <h2 className="text-center text-white mb-32">
-                  Relatório de Análise Emocional Completo
+              <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 mb-8">
+                <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                  <CheckCircle className="w-6 h-6 text-green-500" />O Que Você
+                  Vai Descobrir Hoje:
                 </h2>
 
-                {/* Conteúdo em blur atrás */}
-                <div className="filter blur-md opacity-40 mb-6">
-                  <div className="space-y-2">
-                    <div className="h-2 bg-white/30 rounded w-full"></div>
-                    <div className="h-2 bg-white/30 rounded w-4/5"></div>
-                    <div className="h-2 bg-white/30 rounded w-3/4"></div>
-                    <div className="h-2 bg-white/30 rounded w-5/6"></div>
-                  </div>
+                <div className="space-y-4">
+                  {benefits.map((benefit, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                      className="flex items-start gap-3 p-4 bg-gradient-to-r from-slate-50 to-blue-50 rounded-xl border border-slate-100"
+                    >
+                      {benefit.icon}
+                      <p className="text-slate-700 font-medium">
+                        {benefit.text}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
 
-                  <div className="grid grid-cols-2 gap-2 my-4">
-                    <div className="h-12 bg-white/20 rounded-lg"></div>
-                    <div className="h-12 bg-white/20 rounded-lg"></div>
-                  </div>
+              {/* SEÇÃO DE URGÊNCIA */}
+              <div className="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl border-2 border-red-200">
+                <h3 className="text-lg font-bold text-red-800 mb-4 flex items-center gap-2">
+                  <AlertTriangle className="w-5 h-5" />
+                  Por Que Não Esperar Mais:
+                </h3>
+                <div className="space-y-3">
+                  {urgencyReasons.map((reason, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-slate-700 text-sm">{reason}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
 
-                  <div className="space-y-2">
-                    <div className="h-2 bg-white/30 rounded w-full"></div>
-                    <div className="h-2 bg-white/30 rounded w-2/3"></div>
-                    <div className="h-2 bg-white/30 rounded w-4/5"></div>
+            {/* COLUNA DIREITA - CTA E PREÇO */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="lg:col-span-1"
+            >
+              <div className="bg-white p-8 rounded-3xl shadow-2xl border-2 border-blue-200 sticky top-8">
+                {/* PREÇO PRINCIPAL */}
+                <div className="text-center mb-6">
+                  <div className="bg-gradient-to-r from-red-100 to-orange-100 p-4 rounded-2xl mb-4">
+                    <div className="flex items-center justify-center gap-2 text-red-600 font-bold text-sm mb-2">
+                      <Flame className="w-4 h-4" />
+                      OFERTA ESPECIAL ATIVA
+                    </div>
+                    <div className="text-slate-500 line-through text-lg mb-1">
+                      De R$ 47,00
+                    </div>
+                    <div className="text-4xl font-black text-slate-900 mb-1">
+                      R$ 9,90
+                    </div>
+                    <div className="text-sm text-slate-600">
+                      Pagamento único • Sem mensalidades
+                    </div>
                   </div>
                 </div>
 
-                {/* Ícone de cadeado centralizado na frente */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm mb-3">
-                    <Lock className="w-6 h-6 text-white" />
-                  </div>
+                {/* BOTÃO PRINCIPAL */}
+                <button
+                  onClick={handleCheckout}
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2 mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Processando...
+                    </>
+                  ) : (
+                    <>
+                      <CreditCard className="w-5 h-5" />
+                      DESBLOQUEAR MINHA ANÁLISE
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
 
-                  {/* Gatilho de preço otimizado */}
-                  <div className="text-center mb-4">
-                    <p className="text-orange-400 font-bold text-xs mb-1">
-                      🔥 OFERTA ESPECIAL ATIVA
-                    </p>
-                    <p className="text-gray-400 line-through text-sm mb-1">
-                      De R$ 47,00
-                    </p>
-                    <div className="flex items-center justify-center gap-2 mb-6">
-                      <span className="text-2xl font-black text-white">
-                        R$ 9,90
-                      </span>
-                      <div className="text-left">
-                        <p className="text-orange-400 font-bold text-xs">
-                          APENAS HOJE
-                        </p>
-                        <p className="text-gray-300 text-xs">90% OFF</p>
+                {/* MÉTODOS DE PAGAMENTO */}
+                <div className="text-center mb-6">
+                  <div className="flex items-center justify-center gap-2 text-sm text-slate-500 mb-2">
+                    <Globe className="w-4 h-4" />
+                    Pagamento 100% seguro via Stripe
+                  </div>
+                  <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
+                    <span>💳 Cartão</span>
+                    <span>🏦 PIX</span>
+                    <span>📱 Apple Pay</span>
+                    <span>🔐 Google Pay</span>
+                  </div>
+                </div>
+
+                {/* GARANTIAS */}
+                <div className="space-y-3">
+                  {guarantees.map((guarantee, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-3 text-sm"
+                    >
+                      {guarantee.icon}
+                      <div>
+                        <div className="font-semibold text-slate-800">
+                          {guarantee.title}
+                        </div>
+                        <div className="text-slate-600 text-xs">
+                          {guarantee.desc}
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Botão otimizado */}
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleCheckout}
-                    disabled={isLoading}
-                    type="button"
-                    className="
-                      inline-flex items-center justify-center gap-2
-                      px-6 py-3 
-                      bg-gradient-to-r from-purple-600 to-purple-700
-                      text-white font-semibold text-sm
-                      rounded-full 
-                      transition-all duration-300
-                      border-0
-                      disabled:opacity-50 disabled:cursor-not-allowed
-                      cursor-pointer
-                    "
-                    style={{
-                      boxShadow:
-                        "0 0 30px rgba(147, 51, 234, 0.6), 0 0 60px rgba(147, 51, 234, 0.3)",
-                      filter: "drop-shadow(0 0 20px rgba(147, 51, 234, 0.4))",
-                    }}
-                  >
-                    {isLoading ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        <span className="text-xs">PROCESSANDO...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-4 h-4" />
-                        <span className="text-xs">DESBLOQUEAR AGORA</span>
-                      </>
-                    )}
-                  </motion.button>
-                </div>
-
-                {/* Social proof no timestamp */}
-                <div className="absolute bottom-3 left-4 right-4">
-                  <div className="flex items-center justify-between text-gray-400 text-xs">
-                    <div className="flex items-center gap-1">
-                      <Users className="w-2 h-2" />
-                      <span className="text-xs">
-                        +368 pessoas compraram hoje
-                      </span>
-                    </div>
-                    <span>•••</span>
-                  </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* FAQ Moderno */}
+          {/* SEÇÃO DE COMPARAÇÃO RÁPIDA */}
           <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.4 }}
-            className="mt-20 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="bg-slate-900 text-white p-8 rounded-3xl mb-12"
           >
-            {/* CTA Final */}
-            <div className="text-center mt-12">
-              <p className="text-gray-600 mb-6">
-                Ainda tem dúvidas? Nossa equipe está aqui para ajudar.
+            <h2 className="text-2xl font-bold text-center mb-8">
+              Compare: R$ 9,90 vs Outras Opções
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center p-4 bg-slate-800 rounded-xl border border-red-500">
+                <div className="text-red-400 font-bold mb-2">❌ Terapia</div>
+                <div className="text-2xl font-bold text-red-400 mb-2">
+                  R$ 300+
+                </div>
+                <div className="text-sm text-slate-400">
+                  Por sessão + tempo de espera
+                </div>
+              </div>
+
+              <div className="text-center p-4 bg-slate-800 rounded-xl border border-red-500">
+                <div className="text-red-400 font-bold mb-2">❌ Coach</div>
+                <div className="text-2xl font-bold text-red-400 mb-2">
+                  R$ 200+
+                </div>
+                <div className="text-sm text-slate-400">
+                  Por hora + agenda lotada
+                </div>
+              </div>
+
+              <div className="text-center p-4 bg-gradient-to-br from-green-700 to-blue-700 rounded-xl border-2 border-green-400">
+                <div className="text-green-300 font-bold mb-2">✅ Cora IA</div>
+                <div className="text-3xl font-bold text-white mb-2">
+                  R$ 9,90
+                </div>
+                <div className="text-sm text-green-300">
+                  Resultado em 5 minutos
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* DEPOIMENTOS RÁPIDOS */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="bg-white p-8 rounded-3xl shadow-xl"
+          >
+            <h2 className="text-2xl font-bold text-center text-slate-900 mb-8">
+              O Que Outros Descobriram:
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-2xl">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    M
+                  </div>
+                  <div>
+                    <div className="font-semibold text-slate-800">Marina</div>
+                    <div className="text-xs text-slate-600">
+                      ✅ Cliente Verificada
+                    </div>
+                  </div>
+                </div>
+                <p className="text-slate-700 text-sm italic">
+                  "Economizei meses de terapia. A análise foi certeira e me deu
+                  a paz que eu precisava para tomar uma decisão."
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 p-6 rounded-2xl">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    C
+                  </div>
+                  <div>
+                    <div className="font-semibold text-slate-800">Carlos</div>
+                    <div className="text-xs text-slate-600">
+                      ✅ Cliente Verificado
+                    </div>
+                  </div>
+                </div>
+                <p className="text-slate-700 text-sm italic">
+                  "Finalmente entendi por que eu sempre escolho os mesmos tipos
+                  de pessoa. Isso mudou tudo para mim."
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* CTA FINAL */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+            className="text-center mt-12"
+          >
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-3xl border-2 border-purple-200">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+                Sua Clareza Está a Um Clique de Distância
+              </h2>
+              <p className="text-lg text-slate-600 mb-6">
+                Não deixe mais um dia passar em dúvida.
+                <br />
+                <strong>Sua paz mental vale R$ 9,90.</strong>
               </p>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-all duration-300"
+
+              <button
+                onClick={handleCheckout}
+                disabled={isLoading}
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-xl font-bold text-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <span>💬</span>
-                Falar com suporte
-              </motion.button>
+                {isLoading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+                    Processando...
+                  </>
+                ) : (
+                  <>
+                    <Sparkles className="w-6 h-6" />
+                    QUERO MINHA ANÁLISE AGORA
+                    <ArrowRight className="w-6 h-6" />
+                  </>
+                )}
+              </button>
+
+              <div className="mt-4 text-sm text-slate-500">
+                ⏰ Tempo restante: {formatTime(timeLeft)} • 🔒 Pagamento 100%
+                seguro
+              </div>
             </div>
           </motion.div>
         </div>

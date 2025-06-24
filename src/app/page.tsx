@@ -32,6 +32,16 @@ import {
   ShieldQuestion,
   Zap,
   Lightbulb,
+  Clock,
+  TrendingUp,
+  AlertTriangle,
+  X,
+  DollarSign,
+  Shield,
+  Timer,
+  Flame,
+  ArrowRight,
+  Heart,
 } from "lucide-react";
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
@@ -41,103 +51,103 @@ import DiagnosticSection from "@/components/DiagnosticSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const howItWorksSteps = [
+// Problemas que o cliente enfrenta
+const painPoints = [
   {
-    title: "1. Preencha os Dados",
-    description: "Forneça os nomes e datas de nascimento. Simples e rápido.",
-    icon: <Pencil className="w-5 h-5 text-red-500" />,
-    bgColor: "bg-red-50",
-    iconBg: "bg-red-100",
+    icon: <AlertTriangle className="w-6 h-6 text-red-500" />,
+    problem: "Não consegue parar de pensar nessa pessoa",
+    solution: "Descubra o padrão emocional que te mantém preso",
   },
   {
-    title: "2. Análise por IA",
-    description: "Nossa IA cruza os dados para revelar a dinâmica da conexão.",
-    icon: <Sparkles className="w-5 h-5 text-green-500" />,
-    bgColor: "bg-green-50",
-    iconBg: "bg-green-100",
+    icon: <Clock className="w-6 h-6 text-orange-500" />,
+    problem: "Perdendo tempo numa relação sem futuro",
+    solution: "Veja se vale a pena investir energia nisso",
   },
   {
-    title: "3. Receba o Diagnóstico",
-    description: "Um relatório completo com insights e conselhos práticos.",
-    bgColor: "bg-blue-50",
-    iconBg: "bg-blue-100",
-  },
-];
-
-function DocumentIcon({ className }: { className?: string }) {
-  return (
-    <div
-      className={`bg-white/60 backdrop-blur-md rounded-lg shadow-lg border border-slate-100 p-4 ${className} flex flex-col`}
-    >
-      <div className="h-2 w-1/3 bg-slate-200/80 rounded-sm mb-4"></div>
-      <div className="space-y-2 flex-grow">
-        <div className="h-1.5 w-full bg-slate-200/80 rounded-sm"></div>
-        <div className="h-1.5 w-[90%] bg-slate-200/80 rounded-sm"></div>
-        <div className="h-1.5 w-full bg-slate-200/80 rounded-sm"></div>
-        <div className="h-1.5 w-5/6 bg-slate-200/80 rounded-sm"></div>
-      </div>
-      <div className="mt-5 flex justify-between items-center">
-        <div className="flex items-center gap-0.5">
-          <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-          <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-          <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-          <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
-          <Star className="h-4 w-4 text-yellow-400/50 fill-yellow-400/50" />
-        </div>
-        <HeartPulse className="h-5 w-5 text-pink-500/70" />
-      </div>
-    </div>
-  );
-}
-
-const features = [
-  {
-    title: "Análise da Dinâmica",
-    description:
-      "Revelamos a estrutura da sua conexão, mostrando os padrões de atração e conflito.",
-    icon: "🧩",
+    icon: <Repeat className="w-6 h-6 text-blue-500" />,
+    problem: "Sempre escolhe os relacionamentos errados",
+    solution: "Entenda seu padrão e quebre o ciclo",
   },
   {
-    title: "Pontos de Bloqueio",
-    description:
-      "Identificamos os principais obstáculos que impedem a evolução.",
-    icon: "🚫",
-  },
-  {
-    title: "Potencial de Resolução",
-    description: "Avaliamos os caminhos possíveis para um desfecho mais claro.",
-    icon: "🗺️",
-  },
-  {
-    title: "Conselhos Práticos",
-    description:
-      "Oferecemos insights para você tomar decisões com mais segurança.",
-    icon: "💡",
+    icon: <Drama className="w-6 h-6 text-purple-500" />,
+    problem: "Amigos dão conselhos contraditórios",
+    solution: "Tenha uma análise objetiva baseada em dados",
   },
 ];
 
-const testimonials = [
+// Comparação com alternativas
+const alternatives = [
   {
-    quote:
-      "Nunca vi nossa história com tanta clareza. Doeu, mas me deu uma paz que eu não sentia há anos. Foi libertador.",
-    name: "Ana C.",
-    company: "Relatório de Reconciliação",
-    avatar: "/avatars/avatar-1.png",
+    option: "Terapia Individual",
+    price: "R$ 200-400",
+    time: "Semanas/Meses",
+    privacy: "Expor vida pessoal",
+    result: "Processo longo",
+    icon: <X className="w-5 h-5 text-red-500" />,
   },
   {
-    quote:
-      "Achava que era só mais uma dessas coisas da internet. Mas foi como conversar com alguém que me entendia de verdade.",
-    name: "Marcos V.",
-    company: "Relatório de Fortalecimento",
-    avatar: "/avatars/avatar-2.png",
+    option: "Coach Relacionamento",
+    price: "R$ 300-600",
+    time: "Várias sessões",
+    privacy: "Agenda lotada",
+    result: "Genérico",
+    icon: <X className="w-5 h-5 text-red-500" />,
   },
   {
-    quote:
-      "Finalmente entendi por que eu não conseguia seguir em frente. Foi o ponto final que eu precisava pra começar de novo.",
-    name: "Juliana P.",
-    company: "Relatório de Atração",
-    avatar: "/avatars/avatar-3.png",
+    option: "Conselhos de Amigos",
+    price: "Grátis",
+    time: "Disponibilidade",
+    privacy: "Fofoca garantida",
+    result: "Baseado em opinião",
+    icon: <X className="w-5 h-5 text-red-500" />,
   },
+];
+
+// Nossa solução
+const ourSolution = {
+  option: "Análise IA Cora",
+  price: "R$ 9,90",
+  time: "5 minutos",
+  privacy: "100% Privado",
+  result: "Insights precisos",
+  icon: <Check className="w-5 h-5 text-green-500" />,
+};
+
+// Benefícios transformacionais
+const transformationalBenefits = [
+  {
+    icon: <Target className="w-8 h-8 text-blue-600" />,
+    title: "Clareza Emocional Imediata",
+    description: "Entenda de uma vez por todas o que você realmente sente",
+    result: "Fim da ansiedade e confusão mental",
+  },
+  {
+    icon: <Shield className="w-8 h-8 text-green-600" />,
+    title: "Proteção Contra Decisões Erradas",
+    description: "Pare de desperdiçar tempo em relacionamentos tóxicos",
+    result: "Economize meses ou anos da sua vida",
+  },
+  {
+    icon: <TrendingUp className="w-8 h-8 text-purple-600" />,
+    title: "Evolução no Amor",
+    description:
+      "Quebre padrões destrutivos e atraia relacionamentos saudáveis",
+    result: "Transforme sua vida amorosa para sempre",
+  },
+  {
+    icon: <Lightbulb className="w-8 h-8 text-yellow-600" />,
+    title: "Autoconhecimento Profundo",
+    description: "Descubra verdades sobre você que nem imaginava",
+    result: "Torne-se magnético para o amor verdadeiro",
+  },
+];
+
+// Estatísticas de impacto
+const impactStats = [
+  { number: "47.382", label: "Análises realizadas", icon: "📊" },
+  { number: "94%", label: "Relatam maior clareza", icon: "💡" },
+  { number: "87%", label: "Tomaram decisões assertivas", icon: "🎯" },
+  { number: "4.9/5", label: "Avaliação média", icon: "⭐" },
 ];
 
 const sectionVariants = {
@@ -169,19 +179,6 @@ const staggeredListVariants = {
   },
 };
 
-const staggeredGridVariants = {
-  offscreen: {
-    opacity: 0,
-  },
-  onscreen: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
 const itemVariants = {
   offscreen: {
     opacity: 0,
@@ -198,503 +195,456 @@ const itemVariants = {
   },
 };
 
-export default function LandingPage() {
+export default function Home() {
   return (
-    <div className={`bg-white text-slate-800 ${inter.className}`}>
+    <div className={`${inter.className} min-h-screen bg-white`}>
       <Header />
 
-      {/* Hero Section */}
-      <main className="relative isolate overflow-hidden pt-32 sm:pt-40 pb-24">
-        <div
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#eab308] to-[#a855f7] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          />
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 grid lg:grid-cols-2 gap-x-12 items-center">
-          <div className="text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
-            >
-              <span className="inline-flex items-center justify-center gap-x-2 rounded-full bg-violet-100/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-violet-700 ring-1 ring-inset ring-violet-200">
-                🔍 IA Emocional + Análise Profunda
-              </span>
-              <span className="inline-flex items-center justify-center gap-x-2 rounded-full bg-violet-100/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-violet-700 ring-1 ring-inset ring-violet-200">
-                ✅ 1.200+ Relatórios Gerados
-              </span>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-5xl"
-            >
-              Descubra o mapa emocional da sua relação
-              <br />
-              <span className="text-violet-600">
-                gerado com IA, feito pra você
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-6 text-lg leading-8 text-slate-600"
-            >
-              Entenda os padrões emocionais e descubra insights transformadores
-              sobre seu relacionamento
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="mt-10 flex items-center justify-center lg:justify-start gap-x-6"
-            >
-              <Link
-                href="/formulario"
-                className="
-                  relative inline-flex items-center justify-center gap-2
-                  px-8 py-4 
-                  bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900
-                  text-white font-semibold text-lg
-                  rounded-full 
-                  transition-all duration-300 ease-in-out
-                  transform hover:scale-105
-                  focus:outline-none
-                  backdrop-blur-sm
-                  border border-slate-600/20
-                "
-                style={{
-                  boxShadow:
-                    "0 0 15px rgba(15, 23, 42, 0.3), 0 0 30px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
-                  filter: "drop-shadow(0 0 8px rgba(15, 23, 42, 0.2))",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "0 0 20px rgba(15, 23, 42, 0.4), 0 0 40px rgba(15, 23, 42, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow =
-                    "0 0 15px rgba(15, 23, 42, 0.3), 0 0 30px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)";
-                }}
-              >
-                <span>Quero minha análise</span>
-                <Sparkles className="w-5 h-5 text-yellow-400" />
-              </Link>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-6 gap-y-3"
-            >
-              <div className="flex items-center gap-x-2 text-sm text-slate-600">
-                <Lock className="w-4 h-4 text-violet-600" />
-                <span>100% Anônimo</span>
-              </div>
-              <div className="flex items-center gap-x-2 text-sm text-slate-600">
-                <BrainCircuit className="w-4 h-4 text-violet-600" />
-                <span>Geração única com IA</span>
-              </div>
-              <div className="flex items-center gap-x-2 text-sm text-slate-600">
-                <ChevronRight className="w-4 h-4 text-violet-600" />
-                <span>Entrega em 3 minutos</span>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="hidden lg:flex justify-center items-center mt-16 lg:mt-0">
-            <ReportMockup />
-          </div>
-        </div>
-      </main>
-
-      {/* What is Cora Section */}
-      <div className="bg-white py-24 sm:py-32">
+      {/* HERO - DOR PRINCIPAL */}
+      <section className="relative pt-20 pb-16 bg-gradient-to-br from-slate-50 via-white to-gray-50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-            {/* Left Column: Text */}
-            <div className="lg:pr-4">
-              <div className="relative text-center lg:text-left">
-                <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                  🧠 O que é o Cora e por que funciona?
-                </h2>
-                <p className="mt-6 text-base text-slate-600 sm:text-lg">
-                  O Cora é uma análise emocional simbólica, feita sob medida
-                  para a sua conexão. Sem papo de signo, sem autoajuda genérica.
-                </p>
-                <p className="mt-4 text-base text-slate-600 sm:text-lg">
-                  É uma leitura profunda, feita por IA emocional, que traduz
-                  padrões, sentimentos e caminhos reais em um mapa direto,
-                  simbólico e acionável.
-                </p>
+          <div className="mx-auto max-w-4xl text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mb-8"
+            >
+              {/* Badge de urgência */}
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulse">
+                <Flame className="w-4 h-4" />
+                PARE DE SOFRER NO ESCURO
               </div>
-            </div>
 
-            {/* Right Column: Cards */}
-            <div className="space-y-4 lg:pl-4">
-              {[
-                {
-                  text: "Por que você sente o que sente (e se isso é real ou projeção)",
-                },
-                {
-                  text: "Onde as coisas começaram a dar errado (ou a se fortalecer)",
-                },
-                {
-                  text: "Qual o ciclo invisível que prende ou distancia vocês",
-                },
-                {
-                  text: "E o principal: o que fazer com tudo isso agora",
-                  isStrong: true,
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="flex items-start gap-4 rounded-xl bg-slate-50 p-4 ring-1 ring-slate-100"
+              <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight mb-6">
+                Você já perdeu{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-pink-600">
+                  noites pensando
+                </span>{" "}
+                se vale a pena?
+              </h1>
+
+              <div className="text-2xl md:text-3xl text-slate-700 font-semibold mb-4">
+                <TypeAnimation
+                  sequence={[
+                    "Essa pessoa te faz bem ou mal?",
+                    2000,
+                    "Por que não consegue esquecê-la?",
+                    2000,
+                    "Vale a pena insistir nessa relação?",
+                    2000,
+                    "Por que sempre escolhe errado?",
+                    2000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
+              </div>
+
+              <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
+                <strong className="text-slate-800">
+                  Nossa IA especializada
+                </strong>{" "}
+                analisa seu padrão emocional em{" "}
+                <strong className="text-blue-600">5 minutos</strong> e te dá as
+                respostas que você precisa para{" "}
+                <strong className="text-green-600">parar de sofrer</strong>.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  href="/formulario"
+                  className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
                 >
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-violet-100">
-                    <Check className="h-5 w-5 text-violet-600" />
-                  </div>
-                  <p
-                    className={`pt-1 text-slate-700 ${
-                      item.isStrong ? "font-semibold text-slate-800" : ""
-                    }`}
-                  >
-                    {item.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+                  <Sparkles className="w-5 h-5" />
+                  DESCOBRIR AGORA
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <div className="text-sm text-slate-500">
+                  ✅ Resultado em 5 min • ✅ 100% privado • ✅ R$ 9,90
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
-
-      {/* Pain Point Identification Section */}
-      <section id="pain-points" className="py-20 sm:py-28 bg-white">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-          >
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              👉 Você já sentiu que tem algo entre vocês…
-              <br className="hidden sm:inline" /> mas não sabe o que é?
-            </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-base text-slate-600 sm:text-lg">
-              Às vezes parece intenso demais, outras, leve demais. Às vezes
-              parece certo, mas algo trava. Seja qual for o momento, entender a
-              verdade dessa conexão pode mudar tudo.
-            </p>
-          </motion.div>
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggeredGridVariants}
-            className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
-          >
-            {[
-              {
-                icon: Compass,
-                title: "Quer entender por que essa pessoa mexe tanto com você?",
-                description:
-                  "Uma análise profunda para clarear os sentimentos e as dinâmicas da sua conexão.",
-              },
-              {
-                icon: Scale,
-                title:
-                  "Sente que está vivendo uma relação boa, mas algo ainda confunde?",
-                description:
-                  "Identifique os pontos de harmonia e as dissonâncias que podem ser a chave para um próximo nível.",
-              },
-              {
-                icon: Repeat,
-                title:
-                  "Está sempre entre o impulso de se jogar e o medo de se frustrar?",
-                description:
-                  "Receba uma perspectiva externa para entender o ciclo de aproximação e afastamento.",
-              },
-              {
-                icon: ShieldQuestion,
-                title:
-                  "Tudo parece certo, mas você não sente aquela segurança emocional?",
-                description:
-                  "Descubra as bases da sua conexão e o que é preciso para construir uma confiança mútua.",
-              },
-              {
-                icon: Zap,
-                title:
-                  "A química é real, mas você quer saber se é recíproca ou projeção?",
-                description:
-                  "Diferencie a atração genuína das projeções e expectativas que podem gerar confusão.",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="flex flex-col items-start text-left"
-              >
-                <div className="w-12 h-12 rounded-full flex items-center justify-center bg-violet-100">
-                  <item.icon className="w-6 h-6 text-violet-600" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mt-5">
-                  {item.title}
-                </h3>
-                <p className="text-slate-600 mt-2">{item.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
       </section>
 
-      {/* How it Works Section */}
-      <section id="how-it-works" className="py-20 sm:py-28 bg-slate-50">
-        <div className="mx-auto max-w-5xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-          >
-            <h2 className="text-base font-semibold leading-7 text-violet-600">
-              Você só precisa de 3 passos
-            </h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Nada de longos testes, só o que importa.
-            </p>
-          </motion.div>
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={staggeredGridVariants}
-            className="relative mt-16 grid grid-cols-1 md:grid-cols-3 items-start gap-x-8 gap-y-12"
-          >
-            <div className="absolute top-1/2 left-0 w-full h-px border-t-2 border-dashed border-slate-300 -translate-y-1/2 hidden md:block"></div>
-
-            {[
-              {
-                icon: FilePen,
-                title: "1. Preencha os dados",
-                text: "Você fornece nomes, datas e o contexto da relação.",
-              },
-              {
-                icon: Bot,
-                title: "2. A IA analisa",
-                text: "Nossa IA processa os padrões e a dinâmica da sua conexão.",
-              },
-              {
-                icon: Award,
-                title: "3. Receba a clareza",
-                text: "Sua análise chega em minutos, pronta para ser lida.",
-              },
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="relative flex flex-col items-center text-center bg-slate-50 z-10 p-6"
-              >
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-violet-100 ring-8 ring-slate-50">
-                  <step.icon className="w-7 h-7 text-violet-600" />
-                </div>
-                <h3 className="mt-3 text-lg font-semibold text-slate-900 sm:mt-5">
-                  {step.title}
-                </h3>
-                <p className="mt-1 text-sm text-slate-600 sm:mt-2">
-                  {step.text}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <DiagnosticSection />
-
-      {/* Report Preview Section */}
-      <section id="preview" className="bg-white py-20 sm:py-28">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-            className="text-center"
-          >
-            <p className="font-semibold text-violet-600">
-              👀 Veja um trecho real do relatório gerado
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              Um gostinho do que você vai descobrir
-            </h2>
-          </motion.div>
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-            className="mt-12 p-8 rounded-2xl bg-slate-900 text-slate-300 font-mono text-base shadow-2xl shadow-violet-500/10 ring-1 ring-slate-800"
-          >
-            <div className="flex items-center gap-2">
-              <span className="h-3 w-3 rounded-full bg-red-500"></span>
-              <span className="h-3 w-3 rounded-full bg-yellow-400"></span>
-              <span className="h-3 w-3 rounded-full bg-green-500"></span>
-              <p className="ml-4 text-sm text-slate-400">
-                analise-emocional.txt
-              </p>
-            </div>
-            <div className="mt-6 border-t border-slate-700 pt-6">
-              <TypeAnimation
-                sequence={[
-                  'Análise de Conexão: [Pessoa A] e [Pessoa B]\n\n# Fase 1: A Dinâmica Central\nA interação é marcada por uma dualidade: a busca por um porto seguro emocional (sentimento de familiaridade, conforto) e uma tensão constante gerada pela necessidade de transformação pessoal de ambos. É um cabo de guerra entre o desejo de ficar junto como antes e a necessidade de evoluir para algo novo.\n\n# Fase 2: Padrão de Comunicação\nObserva-se um padrão de "comunicação implícita". Muito é dito no silêncio, nas ações e nas entrelinhas. Isso gera um campo fértil para mal-entendidos, onde as expectativas de um não são verbalizadas e, portanto, não são atendidas pelo outro...\n\n# Fase 3: Pontos de Bloqueio\nO principal bloqueio é o medo. Medo de que, ao mudar, a conexão se perca. Medo de que a vulnerabilidade necessária para o próximo passo seja recebida com rejeição. Este medo alimenta um ciclo de afastamento e reaproximação...',
-                  2000,
-                ]}
-                wrapper="span"
-                speed={60}
-                cursor={true}
-                repeat={0}
-                style={{ whiteSpace: "pre-wrap", display: "block" }}
-              />
-            </div>
-            <p className="mt-6 text-center text-sm text-slate-400 italic">
-              Sua análise vem ainda mais completa que isso.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Guarantee Section */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={sectionVariants}
-            className="relative overflow-hidden flex flex-col md:flex-row items-center gap-6 md:gap-8 rounded-2xl bg-slate-50 p-8 border border-slate-200"
-          >
-            <Sparkles className="absolute -top-4 -right-4 w-24 h-24 text-violet-200/70 opacity-50" />
-            <div className="relative flex-shrink-0 text-4xl">🛡️</div>
-            <div className="relative text-center md:text-left">
-              <h3 className="text-xl font-bold text-slate-900">
-                ✨ Garantia de Clareza: ou você sente o valor, ou não paga.
-              </h3>
-              <p className="mt-3 text-slate-600">
-                Se em até 7 dias você sentir que a análise não fez diferença
-                para você, nós devolvemos o valor. Sem burocracia, sem
-                julgamento.
-                <br className="hidden sm:block" />
-                <span className="font-medium text-slate-700">
-                  A intenção aqui é clareza, não dúvida.
-                </span>
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section
-        id="testimonials"
-        className="relative isolate overflow-hidden bg-slate-50 py-20 sm:py-28"
+      {/* ESTATÍSTICAS DE IMPACTO */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-16 bg-slate-900 text-white"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-            className="mx-auto max-w-2xl lg:text-center"
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-              O que dizem sobre a Cora
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">
+              Transformando Vidas Através da Clareza Emocional
             </h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
-              Relatos de quem parou de adivinhar e começou a entender de
-              verdade.
-            </p>
-          </motion.div>
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={sectionVariants}
-            className="mx-auto mt-16 flow-root"
-          >
-            <TestimonialsCarousel />
-          </motion.div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {impactStats.map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="text-center"
+              >
+                <div className="text-4xl mb-2">{stat.icon}</div>
+                <div className="text-3xl md:text-4xl font-black text-blue-400 mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-slate-300 text-sm">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Final CTA Section */}
-      <section className="relative isolate overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-slate-950" />
-        <div
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-          aria-hidden="true"
-        >
-          <div
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#a855f7] to-[#eab308] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          />
-        </div>
-        <div className="mx-auto max-w-4xl py-24 px-6 text-center sm:py-32 lg:px-8">
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={sectionVariants}
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              <span className="block text-4xl sm:text-5xl font-bold tracking-tight text-white">
-                Chega de incerteza.
-              </span>
-              <span className="mt-2 block text-2xl sm:text-3xl font-medium text-violet-200">
-                Receba a clareza que você precisa para seguir em frente.
-              </span>
+      {/* SEÇÃO DE DORES */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-20 bg-white"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              Cansado Dessas Situações?
             </h2>
-            <div className="mt-10">
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Se você se identifica com pelo menos uma dessas situações, nossa
+              análise é para você:
+            </p>
+          </div>
+
+          <motion.div
+            variants={staggeredListVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          >
+            {painPoints.map((pain, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group bg-gradient-to-br from-red-50 to-orange-50 hover:from-red-100 hover:to-orange-100 p-6 rounded-2xl border border-red-100 hover:border-red-200 transition-all duration-300 hover:shadow-lg"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 p-2 bg-white rounded-lg shadow-sm">
+                    {pain.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-2">
+                      😰 {pain.problem}
+                    </h3>
+                    <p className="text-slate-600 text-sm">
+                      <strong className="text-green-700">✅ Solução:</strong>{" "}
+                      {pain.solution}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/formulario"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <Target className="w-5 h-5" />
+              RESOLVER MEUS PROBLEMAS AGORA
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* COMPARAÇÃO COM ALTERNATIVAS */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-20 bg-slate-50"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              Por Que Perder Tempo e Dinheiro?
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Compare nossa solução com as alternativas tradicionais:
+            </p>
+          </div>
+
+          <div className="bg-white rounded-3xl p-8 shadow-xl max-w-5xl mx-auto">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b-2 border-slate-200">
+                    <th className="text-left py-4 px-4 font-bold text-slate-900">
+                      Opção
+                    </th>
+                    <th className="text-center py-4 px-4 font-bold text-slate-900">
+                      Preço
+                    </th>
+                    <th className="text-center py-4 px-4 font-bold text-slate-900">
+                      Tempo
+                    </th>
+                    <th className="text-center py-4 px-4 font-bold text-slate-900">
+                      Privacidade
+                    </th>
+                    <th className="text-center py-4 px-4 font-bold text-slate-900">
+                      Resultado
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {alternatives.map((alt, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-slate-100 hover:bg-red-50"
+                    >
+                      <td className="py-4 px-4 flex items-center gap-2">
+                        {alt.icon}
+                        <span className="font-medium text-slate-700">
+                          {alt.option}
+                        </span>
+                      </td>
+                      <td className="text-center py-4 px-4 text-slate-600">
+                        {alt.price}
+                      </td>
+                      <td className="text-center py-4 px-4 text-slate-600">
+                        {alt.time}
+                      </td>
+                      <td className="text-center py-4 px-4 text-slate-600">
+                        {alt.privacy}
+                      </td>
+                      <td className="text-center py-4 px-4 text-slate-600">
+                        {alt.result}
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-200">
+                    <td className="py-4 px-4 flex items-center gap-2">
+                      {ourSolution.icon}
+                      <span className="font-bold text-green-800">
+                        {ourSolution.option}
+                      </span>
+                    </td>
+                    <td className="text-center py-4 px-4 font-bold text-green-800">
+                      {ourSolution.price}
+                    </td>
+                    <td className="text-center py-4 px-4 font-bold text-green-800">
+                      {ourSolution.time}
+                    </td>
+                    <td className="text-center py-4 px-4 font-bold text-green-800">
+                      {ourSolution.privacy}
+                    </td>
+                    <td className="text-center py-4 px-4 font-bold text-green-800">
+                      {ourSolution.result}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/formulario"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <DollarSign className="w-5 h-5" />
+              ECONOMIZAR TEMPO E DINHEIRO
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* BENEFÍCIOS TRANSFORMACIONAIS */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-20 bg-white"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              O Que Você Vai Ganhar
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Mais do que um relatório: uma transformação completa na sua vida
+              amorosa
+            </p>
+          </div>
+
+          <motion.div
+            variants={staggeredListVariants}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          >
+            {transformationalBenefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group bg-gradient-to-br from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 p-8 rounded-2xl border border-blue-100 hover:border-blue-200 transition-all duration-300 hover:shadow-xl"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 p-3 bg-white rounded-xl shadow-sm group-hover:shadow-md transition-shadow">
+                    {benefit.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-xl text-slate-900 mb-2">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-slate-600 mb-3">{benefit.description}</p>
+                    <div className="bg-white/60 p-3 rounded-lg border border-blue-200">
+                      <p className="text-sm font-semibold text-blue-800">
+                        🎯 <strong>Resultado:</strong> {benefit.result}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/formulario"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <Sparkles className="w-5 h-5" />
+              COMEÇAR MINHA TRANSFORMAÇÃO
+            </Link>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* SEÇÃO DE DEPOIMENTOS MELHORADA */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-20 bg-slate-900 text-white"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Vidas Transformadas
+            </h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Veja o que nossos clientes falam sobre a transformação que
+              viveram:
+            </p>
+          </div>
+          <TestimonialsCarousel />
+        </div>
+      </motion.section>
+
+      {/* URGÊNCIA E ESCASSEZ */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-20 bg-gradient-to-br from-red-50 to-orange-50"
+      >
+        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
+          <div className="bg-white p-8 rounded-3xl shadow-xl border-2 border-red-200">
+            <div className="flex items-center justify-center gap-2 text-red-600 font-bold text-lg mb-4">
+              <Timer className="w-6 h-6 animate-pulse" />
+              ATENÇÃO: OFERTA LIMITADA
+            </div>
+
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Não Deixe Passar Esta Oportunidade
+            </h2>
+
+            <p className="text-lg text-slate-600 mb-6">
+              Mais um dia perdendo o sono pensando se vale a pena?
+              <br />
+              <strong>Sua paz mental vale R$ 9,90.</strong>
+            </p>
+
+            <div className="bg-gradient-to-r from-red-100 to-orange-100 p-6 rounded-2xl mb-8">
+              <div className="text-2xl font-black text-red-700 mb-2">
+                🔥 DE R$ 47,00 POR APENAS R$ 9,90
+              </div>
+              <div className="text-sm text-slate-600">
+                Promoção válida por tempo limitado
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 href="/formulario"
-                className="inline-flex items-center bg-white text-slate-900 px-8 py-4 rounded-full text-lg font-bold shadow-2xl shadow-white/20 transition-transform duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                className="group bg-gradient-to-r from-red-600 to-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
               >
-                <span>Pedir minha análise agora</span>
-                <ChevronRight className="w-5 h-5 ml-2" />
+                <Flame className="w-5 h-5" />
+                QUERO MINHA ANÁLISE AGORA
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <p className="mt-4 text-xs text-violet-300">
-                <span className="opacity-80">🔒</span> Seguro e Anônimo{" "}
-                <span className="opacity-80">| ⏱️</span> Entrega em até 3
-                minutos
-              </p>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      <footer className="bg-white py-8 border-t border-slate-200">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center text-sm text-slate-500">
-          <p>
-            &copy; {new Date().getFullYear()} Cora. Todos os direitos
-            reservados.
-          </p>
+            <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-500">
+              <div className="flex items-center gap-1">
+                <Shield className="w-4 h-4 text-green-500" />
+                Garantia 7 dias
+              </div>
+              <div className="flex items-center gap-1">
+                <Lock className="w-4 h-4 text-blue-500" />
+                100% Seguro
+              </div>
+              <div className="flex items-center gap-1">
+                <Zap className="w-4 h-4 text-yellow-500" />
+                Resultado Imediato
+              </div>
+            </div>
+          </div>
         </div>
-      </footer>
+      </motion.section>
+
+      {/* SEÇÃO COMO FUNCIONA - SIMPLIFICADA */}
+      <DiagnosticSection />
+
+      {/* FOOTER CTA FINAL */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+        className="py-20 bg-slate-900 text-white"
+      >
+        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Pare de Sofrer. Comece a Viver.
+          </h2>
+          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+            Você merece clareza. Você merece paz. Você merece amor verdadeiro.
+            <br />
+            <strong className="text-white">Tudo começa com uma decisão.</strong>
+          </p>
+
+          <Link
+            href="/formulario"
+            className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-5 rounded-xl font-bold text-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3"
+          >
+            <Sparkles className="w-6 h-6" />
+            DESCOBRIR A VERDADE AGORA
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+          </Link>
+
+          <div className="mt-6 text-slate-400">
+            ✅ 5 minutos para clareza • ✅ R$ 9,90 • ✅ Garantia total
+          </div>
+        </div>
+      </motion.section>
     </div>
   );
 }
