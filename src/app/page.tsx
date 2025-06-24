@@ -344,7 +344,7 @@ export default function Home() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.6 }}
-        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-6"
+        className="bg-gradient-to-r from-violet-500 via-purple-500 to-violet-600 text-white py-3 px-6"
       >
         <div className="mx-auto max-w-4xl text-center">
           <p className="font-semibold text-sm">
@@ -360,7 +360,7 @@ export default function Home() {
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
-        className="py-24 bg-slate-50"
+        className="py-32 bg-slate-50"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-20">
@@ -382,7 +382,7 @@ export default function Home() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-lg hover:border-red-200 transition-all duration-300"
+                className="group bg-gray-50 p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-md hover:border-red-200 transition-all duration-300"
               >
                 {/* Ícone clean */}
                 <div className="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors">
@@ -461,9 +461,9 @@ export default function Home() {
                 <div className="text-4xl font-black text-white mb-4">
                   {stat.number}
                 </div>
-                <div className="text-slate-300 text-sm font-medium leading-relaxed">
+                <p className="text-slate-300 text-sm font-medium">
                   {stat.label}
-                </div>
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -515,13 +515,13 @@ export default function Home() {
                 </div>
 
                 {/* Conteúdo organizado */}
-                <div className="space-y-3">
-                  <p className="text-slate-600 leading-relaxed">
+                <div className="space-y-4">
+                  <p className="text-slate-600 leading-7">
                     {benefit.description}
                   </p>
 
-                  <div className="bg-violet-50 border-l-4 border-violet-400 rounded-r-lg p-3">
-                    <p className="text-sm font-medium text-violet-800">
+                  <div className="bg-violet-50 border-l-4 border-violet-400 rounded-r-lg p-4">
+                    <p className="text-sm font-medium text-violet-800 leading-6">
                       <strong>Resultado:</strong> {benefit.result}
                     </p>
                   </div>
@@ -723,19 +723,19 @@ export default function Home() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b-2 border-slate-100">
-                    <th className="text-left py-4 px-4 font-semibold text-slate-900">
+                    <th className="text-left py-5 px-6 font-semibold text-slate-900 leading-6">
                       Opção
                     </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900">
+                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
                       Preço
                     </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900">
+                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
                       Tempo
                     </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900">
+                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
                       Privacidade
                     </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900">
+                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
                       Resultado
                     </th>
                   </tr>
@@ -743,37 +743,37 @@ export default function Home() {
                 <tbody>
                   {alternatives.map((alt, index) => (
                     <tr key={index} className="border-b border-slate-50">
-                      <td className="py-4 px-4 text-slate-700 font-medium">
+                      <td className="py-5 px-6 text-slate-700 font-medium leading-6">
                         {alt.option}
                       </td>
-                      <td className="text-center py-4 px-4 text-slate-600">
+                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
                         {alt.price}
                       </td>
-                      <td className="text-center py-4 px-4 text-slate-600">
+                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
                         {alt.time}
                       </td>
-                      <td className="text-center py-4 px-4 text-slate-600">
+                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
                         {alt.privacy}
                       </td>
-                      <td className="text-center py-4 px-4 text-slate-600">
+                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
                         {alt.result}
                       </td>
                     </tr>
                   ))}
                   <tr className="bg-violet-50 border-2 border-violet-200">
-                    <td className="py-4 px-4 font-bold text-violet-900">
+                    <td className="py-5 px-6 font-bold text-violet-900 leading-6">
                       {ourSolution.option}
                     </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900">
+                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
                       {ourSolution.price}
                     </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900">
+                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
                       {ourSolution.time}
                     </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900">
+                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
                       {ourSolution.privacy}
                     </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900">
+                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
                       {ourSolution.result}
                     </td>
                   </tr>
@@ -812,17 +812,17 @@ export default function Home() {
         className="py-20 bg-slate-50"
       >
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="bg-white rounded-3xl p-8 shadow-lg text-center border border-slate-200">
+          <div className="bg-gray-50 rounded-3xl p-8 shadow-lg text-center border border-slate-200">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Shield className="w-8 h-8 text-green-600" />
             </div>
             <h3 className="text-2xl font-bold text-slate-900 mb-4">
               Garantia de Satisfação
             </h3>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-700 max-w-2xl mx-auto leading-7">
               Se não sentir clareza, devolvemos seu dinheiro em até 7 dias.
               <br />
-              <strong className="text-slate-800">Simples assim.</strong>
+              <strong className="text-slate-900">Simples assim.</strong>
             </p>
           </div>
         </div>
@@ -834,7 +834,7 @@ export default function Home() {
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
-        className="py-20 bg-slate-900"
+        className="py-24 bg-slate-900"
       >
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-8">
@@ -849,7 +849,7 @@ export default function Home() {
             <ChevronRight className="w-6 h-6" />
           </Link>
 
-          <p className="mt-6 text-violet-300 text-sm">
+          <p className="mt-6 text-slate-300 text-sm leading-6">
             <span className="opacity-80">🔒</span> 100% Seguro e Anônimo{" "}
             <span className="opacity-80">| ⏱️</span> Entrega em 5 minutos{" "}
             <span className="opacity-80">| 💰</span> Apenas R$ 9,90
