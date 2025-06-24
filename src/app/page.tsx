@@ -709,33 +709,43 @@ export default function Home() {
               Veja por que nossa análise é a escolha mais inteligente
             </p>
             {/* Reforço de Valor */}
-            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-4 max-w-2xl mx-auto">
-              <p className="text-sm font-semibold text-violet-800">
-                ✅ <strong>+47.382 análises geradas</strong> | ⭐{" "}
-                <strong>Satisfação de 94%</strong> nos últimos 6 meses | 🏆{" "}
-                <strong>4.9/5 estrelas</strong> de avaliação
+            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-4 max-w-3xl mx-auto">
+              <p className="text-sm font-semibold text-violet-800 leading-6 text-center">
+                <span className="inline-block mr-4">
+                  ✅ <strong className="text-violet-900">+47.382</strong>{" "}
+                  análises geradas
+                </span>
+                <span className="inline-block mr-4">
+                  ⭐{" "}
+                  <strong className="text-violet-900">Satisfação de 94%</strong>{" "}
+                  nos últimos 6 meses
+                </span>
+                <span className="inline-block">
+                  🏆 <strong className="text-violet-900">4.9/5 estrelas</strong>{" "}
+                  de avaliação
+                </span>
               </p>
             </div>
           </div>
 
           <div className="bg-white rounded-3xl p-8 shadow-lg">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-max">
                 <thead>
                   <tr className="border-b-2 border-slate-100">
-                    <th className="text-left py-5 px-6 font-semibold text-slate-900 leading-6">
+                    <th className="text-left py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
                       Opção
                     </th>
-                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
+                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
                       Preço
                     </th>
-                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
+                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
                       Tempo
                     </th>
-                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
+                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
                       Privacidade
                     </th>
-                    <th className="text-center py-5 px-6 font-semibold text-slate-900 leading-6">
+                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
                       Resultado
                     </th>
                   </tr>
@@ -743,37 +753,37 @@ export default function Home() {
                 <tbody>
                   {alternatives.map((alt, index) => (
                     <tr key={index} className="border-b border-slate-50">
-                      <td className="py-5 px-6 text-slate-700 font-medium leading-6">
+                      <td className="py-4 px-4 text-slate-700 font-medium text-sm whitespace-nowrap">
                         {alt.option}
                       </td>
-                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
+                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
                         {alt.price}
                       </td>
-                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
+                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
                         {alt.time}
                       </td>
-                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
+                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
                         {alt.privacy}
                       </td>
-                      <td className="text-center py-5 px-6 text-slate-600 leading-6">
+                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
                         {alt.result}
                       </td>
                     </tr>
                   ))}
                   <tr className="bg-violet-50 border-2 border-violet-200">
-                    <td className="py-5 px-6 font-bold text-violet-900 leading-6">
+                    <td className="py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
                       {ourSolution.option}
                     </td>
-                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
+                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
                       {ourSolution.price}
                     </td>
-                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
+                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
                       {ourSolution.time}
                     </td>
-                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
+                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
                       {ourSolution.privacy}
                     </td>
-                    <td className="text-center py-5 px-6 font-bold text-violet-900 leading-6">
+                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
                       {ourSolution.result}
                     </td>
                   </tr>
