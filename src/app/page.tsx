@@ -47,8 +47,9 @@ import {
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
-import { ReportMockup } from "@/components/ReportMockup";
+
 import DiagnosticSection from "@/components/DiagnosticSection";
+import HowItWorksSection from "@/components/HowItWorksSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -281,9 +282,9 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             {/* Badge URGENTE */}
-            <div className="inline-flex items-center rounded-full bg-orange-100 px-4 py-2 text-sm font-medium text-orange-800 mb-8">
-              <span className="mr-2">🔥</span>
-              Oferta especial ativa só hoje: R$ 9,90
+            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 py-3 text-sm font-bold text-white mb-8 shadow-lg animate-pulse">
+              <span className="mr-2">🕒</span>
+              OFERTA ESPECIAL - ÚLTIMAS HORAS: R$ 9,90
             </div>
 
             <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-8">
@@ -529,78 +530,8 @@ export default function Home() {
       </motion.section>
 
       {/* 🧠 Como Funciona - Detalhado */}
-      <motion.section
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={sectionVariants}
-        className="py-20 bg-white"
-      >
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              Como o Cora funciona?
-            </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              É bem simples: você preenche, nossa IA analisa e você recebe a
-              verdade sobre sua situação
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-violet-600 font-bold">1</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 mb-2">
-                    Você preenche um formulário rápido
-                  </h3>
-                  <p className="text-slate-600">
-                    Nome dos dois, datas de nascimento e situação atual da
-                    relação. Leva menos de 2 minutos para responder.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-violet-600 font-bold">2</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 mb-2">
-                    Nossa IA analisa a conexão de vocês
-                  </h3>
-                  <p className="text-slate-600">
-                    O sistema processa os dados e identifica padrões emocionais,
-                    pontos de bloqueio e o potencial real da relação.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-violet-100 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-violet-600 font-bold">3</span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 mb-2">
-                    Você recebe seu diagnóstico emocional
-                  </h3>
-                  <p className="text-slate-600">
-                    Um relatório direto, sem enrolação, que te diz exatamente o
-                    que está acontecendo e o que você deve fazer.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <ReportMockup />
-            </div>
-          </div>
-        </div>
-      </motion.section>
+      {/* 📋 Como Funciona - Novo Componente */}
+      <HowItWorksSection />
 
       {/* 🎯 Seção de Benefícios - Clean */}
       <motion.section
@@ -786,6 +717,95 @@ export default function Home() {
 
       {/* Como Funciona - Seção Clean */}
       <DiagnosticSection />
+
+      {/* Mini FAQ */}
+      <div className="py-20 bg-white">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Dúvidas Frequentes
+            </h2>
+            <p className="text-slate-600">
+              As perguntas mais comuns antes de fazer sua análise
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-slate-50 rounded-2xl p-6 text-center">
+              <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-6 h-6 text-violet-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-bold text-slate-900 mb-2">
+                Em quanto tempo recebo?
+              </h3>
+              <p className="text-slate-600 text-sm">
+                Seu relatório chega no e-mail em até <strong>5 minutos</strong>{" "}
+                após o pagamento aprovado.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 rounded-2xl p-6 text-center">
+              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-6 h-6 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-bold text-slate-900 mb-2">É seguro?</h3>
+              <p className="text-slate-600 text-sm">
+                <strong>100% seguro.</strong> Pagamento via Stripe, dados
+                criptografados e análise totalmente anônima.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 rounded-2xl p-6 text-center">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg
+                  className="w-6 h-6 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="font-bold text-slate-900 mb-2">
+                Como chega o relatório?
+              </h3>
+              <p className="text-slate-600 text-sm">
+                Enviamos um <strong>PDF completo</strong> no seu e-mail com a
+                análise detalhada da sua situação.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* 💰 Garantia */}
       <div className="py-24 bg-white">

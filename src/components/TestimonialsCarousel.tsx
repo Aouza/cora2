@@ -10,36 +10,54 @@ const testimonials = [
       "Economizei 6 meses de terapia em 5 minutos. Finalmente entendi por que eu não conseguia seguir em frente.",
     name: "Ana C.",
     result: "Tomou a decisão definitiva",
+    avatar:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face&auto=format",
+    age: "29 anos",
   },
   {
     quote:
       "Descobri que estava numa relação tóxica há 2 anos sem perceber. Terminei no dia seguinte e hoje me sinto livre.",
     name: "Marina R.",
     result: "Saiu do relacionamento tóxico",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face&auto=format",
+    age: "34 anos",
   },
   {
     quote:
       "Descobri por que sempre escolho os mesmos tipos de pessoa. Agora estou num relacionamento saudável pela primeira vez.",
     name: "Carlos S.",
     result: "Quebrou padrões destrutivos",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face&auto=format",
+    age: "31 anos",
   },
   {
     quote:
       "A análise me mostrou que o problema não era com as pessoas, mas comigo mesmo. Mudou minha vida completamente.",
     name: "Fernando L.",
     result: "Transformou sua vida amorosa",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face&auto=format",
+    age: "28 anos",
   },
   {
     quote:
       "R$ 9,90 que salvaram meu casamento. A análise mostrou como resolver nossos conflitos.",
     name: "Juliana P.",
     result: "Salvou seu casamento",
+    avatar:
+      "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=40&h=40&fit=crop&crop=face&auto=format",
+    age: "26 anos",
   },
   {
     quote:
       "Parei de perder o sono pensando 'e se'. A análise me deu a paz mental que eu precisava.",
     name: "Camila M.",
     result: "Conquistou paz mental",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=40&h=40&fit=crop&crop=face&auto=format",
+    age: "32 anos",
   },
 ];
 
@@ -81,21 +99,29 @@ export function TestimonialsCarousel() {
               </blockquote>
 
               <div className="border-t border-slate-100 pt-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="font-semibold text-slate-900">
-                      {testimonial.name}
+                <div className="flex items-center gap-3">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-violet-100"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-semibold text-slate-900 text-sm">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-xs text-slate-500">
+                          {testimonial.age}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-amber-400 text-sm">⭐⭐⭐⭐⭐</div>
+                        <div className="text-xs text-green-600 font-medium">
+                          ✓ {testimonial.result}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-xs text-slate-500 flex items-center gap-1">
-                      <span className="text-green-500">✓</span>
-                      Cliente Verificado
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-xs text-violet-600 font-medium">
-                      {testimonial.result}
-                    </div>
-                    <div className="text-amber-400 text-sm">⭐⭐⭐⭐⭐</div>
                   </div>
                 </div>
               </div>

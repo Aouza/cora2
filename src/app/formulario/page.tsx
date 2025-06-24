@@ -48,10 +48,39 @@ export default function FormularioPage() {
             className="pt-24 pb-12"
           >
             <div className="mx-auto max-w-xl px-6 lg:px-8 text-center">
+              {/* Progresso Fake */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
+                className="mb-8"
+              >
+                <div className="bg-white rounded-2xl p-6 shadow-lg border border-violet-100">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-sm font-medium text-slate-700">
+                      Passo 2 de 3
+                    </span>
+                    <span className="text-sm text-violet-600 font-bold">
+                      67% concluído
+                    </span>
+                  </div>
+                  <div className="w-full bg-slate-200 rounded-full h-2 mb-3">
+                    <div
+                      className="bg-gradient-to-r from-violet-600 to-purple-600 h-2 rounded-full transition-all duration-1000"
+                      style={{ width: "67%" }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-slate-600">
+                    🎯 Você está a <strong>poucos minutos</strong> de receber
+                    sua análise emocional
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
                   Peça sua Análise Emocional
