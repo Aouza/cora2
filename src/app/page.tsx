@@ -110,6 +110,11 @@ const benefits = [
     description: "Resposta objetiva e prática para sua vida",
   },
   {
+    icon: <Clock className="w-6 h-6 text-violet-600" />,
+    title: "Evite meses de indecisão",
+    description: "Um diagnóstico direto em vez de ficar ruminando",
+  },
+  {
     icon: <Lightbulb className="w-6 h-6 text-violet-600" />,
     title: "Tome decisões com segurança",
     description: "Pare de desperdiçar tempo com incertezas",
@@ -414,6 +419,10 @@ export default function Home() {
               <Target className="w-5 h-5" />
               RESOLVER TODOS ESSES PROBLEMAS AGORA
             </Link>
+            <p className="text-slate-500 text-sm mt-2">
+              ⚡ Diagnóstico entregue em 5 minutos | 💰 Acesso imediato por
+              apenas R$ 9,90
+            </p>
           </div>
         </div>
       </motion.section>
@@ -537,6 +546,9 @@ export default function Home() {
                 <Sparkles className="w-4 h-4" />
                 Começar minha análise
               </Link>
+              <p className="text-slate-500 text-xs mt-2">
+                🚀 Resultado instantâneo | 🔒 100% privado e seguro
+              </p>
             </div>
           </div>
         </div>
@@ -636,20 +648,20 @@ export default function Home() {
 
           <motion.div
             variants={staggeredListVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
           >
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="text-center p-6 bg-white rounded-2xl shadow-sm border border-slate-100"
+                className="text-center p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
               >
                 <div className="flex justify-center mb-4">
-                  <div className="w-14 h-14 rounded-full bg-violet-100 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center">
                     {benefit.icon}
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">
+                <h3 className="text-base font-semibold text-slate-900 mb-2">
                   {benefit.title}
                 </h3>
                 <p className="text-sm text-slate-600">{benefit.description}</p>
