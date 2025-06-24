@@ -334,6 +334,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 🚨 Faixa de Urgência - Logo após Hero */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-6"
+      >
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="font-semibold text-sm">
+            🔥 <strong>OFERTA POR TEMPO LIMITADO:</strong> Apenas R$ 9,90 (valor
+            normal R$ 49,90) - Últimas 24 horas!
+          </p>
+        </div>
+      </motion.div>
+
       {/* 😨 Seção de Dor AGRESSIVA - Cards Ultra Clean */}
       <motion.section
         initial="offscreen"
@@ -394,7 +409,7 @@ export default function Home() {
           <div className="text-center">
             <Link
               href="/formulario"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-violet-600 to-purple-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-orange-600 hover:to-red-600"
             >
               <Target className="w-5 h-5" />
               RESOLVER TODOS ESSES PROBLEMAS AGORA
@@ -517,7 +532,7 @@ export default function Home() {
               </p>
               <Link
                 href="/formulario"
-                className="inline-flex items-center gap-2 bg-violet-600 hover:bg-violet-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors duration-300"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 <Sparkles className="w-4 h-4" />
                 Começar minha análise
@@ -678,9 +693,17 @@ export default function Home() {
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
               Compare suas opções
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-lg text-slate-600 mb-4">
               Veja por que nossa análise é a escolha mais inteligente
             </p>
+            {/* Reforço de Valor */}
+            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-4 max-w-2xl mx-auto">
+              <p className="text-sm font-semibold text-violet-800">
+                ✅ <strong>+47.382 análises geradas</strong> | ⭐{" "}
+                <strong>Satisfação de 94%</strong> nos últimos 6 meses | 🏆{" "}
+                <strong>4.9/5 estrelas</strong> de avaliação
+              </p>
+            </div>
           </div>
 
           <div className="bg-white rounded-3xl p-8 shadow-lg">
@@ -808,7 +831,7 @@ export default function Home() {
 
           <Link
             href="/formulario"
-            className="inline-flex items-center bg-white text-slate-900 px-10 py-5 rounded-full text-xl font-bold shadow-2xl shadow-white/20 transition-transform duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white gap-3"
+            className="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-10 py-5 rounded-full text-xl font-bold shadow-2xl transition-all duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white gap-3"
           >
             <span>Quero Receber Meu Diagnóstico Agora</span>
             <ChevronRight className="w-6 h-6" />
