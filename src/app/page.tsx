@@ -48,7 +48,6 @@ import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 
-import DiagnosticSection from "@/components/DiagnosticSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -341,12 +340,16 @@ export default function Home() {
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-6">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
               Se alguma dessas frases parece sua…{" "}
               <span className="text-red-600">
                 é porque tá na hora de encarar.
               </span>
             </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Pare de sofrer por situações que você{" "}
+              <strong>pode resolver agora</strong> com clareza total.
+            </p>
           </div>
 
           <motion.div
@@ -399,49 +402,6 @@ export default function Home() {
               apenas R$ 9,90
             </p>
           </div>
-        </div>
-      </motion.section>
-
-      {/* 📊 Estatísticas IMPACTANTES - Ultra Clean */}
-      <motion.section
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={sectionVariants}
-        className="py-24 bg-slate-900"
-      >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold text-white mb-6">
-              RESULTADOS que falam por si só
-            </h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Pessoas que pararam de enrolar e tomaram uma atitude
-            </p>
-          </div>
-
-          <motion.div
-            variants={staggeredListVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {impactStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 hover:bg-white/10 transition-all duration-300"
-              >
-                <div className="w-16 h-16 bg-violet-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <div className="text-violet-400">{stat.icon}</div>
-                </div>
-                <div className="text-4xl font-black text-white mb-4">
-                  {stat.number}
-                </div>
-                <p className="text-slate-300 text-sm font-medium">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </motion.section>
 
@@ -695,6 +655,22 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
+
+            {/* CTA após tabela comparativa */}
+            <div className="text-center mt-8 pt-6 border-t border-slate-100">
+              <p className="text-slate-600 mb-4 text-sm">
+                A decisão mais inteligente é óbvia. Pare de desperdiçar tempo!
+              </p>
+              <Link
+                href="/formulario"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                ✅ Escolher a melhor opção agora
+              </Link>
+              <p className="text-slate-500 text-xs mt-3">
+                💰 Apenas R$ 9,90 | ⚡ 5 minutos | 🔒 100% seguro
+              </p>
+            </div>
           </div>
         </div>
       </motion.section>
@@ -714,9 +690,6 @@ export default function Home() {
           </p>
         </div>
       </motion.section>
-
-      {/* Como Funciona - Seção Clean */}
-      <DiagnosticSection />
 
       {/* Mini FAQ */}
       <div className="py-20 bg-white">
@@ -836,10 +809,26 @@ export default function Home() {
               <strong>7 dias de garantia.</strong> Simples assim.
             </p>
 
-            <div className="bg-white rounded-2xl p-6 shadow-lg inline-block">
+            <div className="bg-white rounded-2xl p-6 shadow-lg inline-block mb-8">
               <p className="text-slate-700 font-medium">
                 🛡️ Garantia de satisfação | 💰 Reembolso integral | ⚡ Sem
                 burocracia
+              </p>
+            </div>
+
+            {/* CTA após garantia */}
+            <div className="pt-6">
+              <p className="text-slate-600 mb-4 text-sm">
+                Agora você não tem mais desculpas. É 100% sem risco!
+              </p>
+              <Link
+                href="/formulario"
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                🛡️ Garantido! Quero começar agora
+              </Link>
+              <p className="text-slate-500 text-xs mt-3">
+                💰 R$ 9,90 | ⚡ 5 minutos | 🔒 7 dias para testar sem risco
               </p>
             </div>
           </div>

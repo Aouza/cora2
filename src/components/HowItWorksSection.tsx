@@ -190,7 +190,7 @@ export default function HowItWorksSection() {
 
         {/* CTA final */}
         <div className="text-center mt-16">
-          <div className="inline-flex items-center gap-3 bg-white rounded-2xl px-8 py-4 shadow-lg">
+          <div className="inline-flex items-center gap-3 bg-white rounded-2xl px-8 py-4 shadow-lg mb-8">
             <div className="w-8 h-8 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">R$</span>
             </div>
@@ -202,6 +202,19 @@ export default function HowItWorksSection() {
                 Pagamento único • Sem mensalidades
               </div>
             </div>
+          </div>
+
+          {/* CTA Button */}
+          <div>
+            <a
+              href="/formulario"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              🚀 Quero minha análise agora
+            </a>
+            <p className="text-slate-500 text-sm mt-3">
+              ⚡ Resultado em 5 minutos | 🔒 100% seguro e privado
+            </p>
           </div>
         </div>
       </div>
