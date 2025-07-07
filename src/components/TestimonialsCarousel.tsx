@@ -7,54 +7,54 @@ import { motion } from "framer-motion";
 const testimonials = [
   {
     quote:
-      "Economizei 6 meses de terapia em 5 minutos. Finalmente entendi por que eu não conseguia seguir em frente.",
+      "Eu achava que só sentia saudade, mas descobri que era um medo profundo de ser esquecida. O relatório me fez chorar, mas de um jeito que eu precisava.",
     name: "Ana C.",
-    result: "Tomou a decisão definitiva",
+    result: "Encontrou a verdade por trás da dor",
     avatar:
       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face&auto=format",
     age: "29 anos",
   },
   {
     quote:
-      "Descobri que estava numa relação tóxica há 2 anos sem perceber. Terminei no dia seguinte e hoje me sinto livre.",
+      "Foi como se alguém tivesse escrito exatamente o que eu tava sentindo, mas eu nunca consegui explicar.",
     name: "Marina R.",
-    result: "Saiu do relacionamento tóxico",
+    result: "Finalmente se entendeu",
     avatar:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face&auto=format",
     age: "34 anos",
   },
   {
     quote:
-      "Descobri por que sempre escolho os mesmos tipos de pessoa. Agora estou num relacionamento saudável pela primeira vez.",
+      "Descobri que eu não tava chorando por ele, mas por uma versão de mim que eu achava que tinha perdido. Mudou tudo.",
     name: "Carlos S.",
-    result: "Quebrou padrões destrutivos",
+    result: "Redescobriu sua identidade",
     avatar:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face&auto=format",
     age: "31 anos",
   },
   {
     quote:
-      "A análise me mostrou que o problema não era com as pessoas, mas comigo mesmo. Mudou minha vida completamente.",
-    name: "Fernando L.",
-    result: "Transformou sua vida amorosa",
+      "A análise me mostrou que eu tava presa num luto que não era só pelo término, mas por tudo que eu nunca vivi.",
+    name: "Fernanda L.",
+    result: "Compreendeu seu luto profundo",
     avatar:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face&auto=format",
     age: "28 anos",
   },
   {
     quote:
-      "R$ 9,90 que salvaram meu casamento. A análise mostrou como resolver nossos conflitos.",
+      "Pensei que ia ser mais uma análise genérica, mas foi como se tivessem lido minha alma. Finalmente entendi por que doía tanto.",
     name: "Juliana P.",
-    result: "Salvou seu casamento",
+    result: "Encontrou o significado da dor",
     avatar:
       "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=40&h=40&fit=crop&crop=face&auto=format",
     age: "26 anos",
   },
   {
     quote:
-      "Parei de perder o sono pensando 'e se'. A análise me deu a paz mental que eu precisava.",
+      "Parei de esperar que ele voltasse quando entendi que o que eu realmente queria era voltar pra mim mesma.",
     name: "Camila M.",
-    result: "Conquistou paz mental",
+    result: "Reconectou consigo mesma",
     avatar:
       "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=40&h=40&fit=crop&crop=face&auto=format",
     age: "32 anos",

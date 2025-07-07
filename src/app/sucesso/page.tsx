@@ -2,7 +2,15 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, Send, Clock, Mail, Shield, Zap } from "lucide-react";
+import {
+  CheckCircle,
+  Send,
+  Clock,
+  Mail,
+  Shield,
+  Zap,
+  RefreshCw,
+} from "lucide-react";
 import Header from "@/components/Header";
 import { useSearchParams } from "next/navigation";
 
@@ -11,13 +19,11 @@ function SucessoContent() {
   const [sessionVerified, setSessionVerified] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
   const [message, setMessage] = useState("");
-  const [resendAttempts, setResendAttempts] = useState(0);
   const [canResend, setCanResend] = useState(true);
   const [cooldownTime, setCooldownTime] = useState(0);
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
 
-  const MAX_RESEND_ATTEMPTS = 2;
   const COOLDOWN_SECONDS = 60; // 1 minuto
 
   useEffect(() => {
@@ -50,7 +56,7 @@ function SucessoContent() {
   }, [cooldownTime]);
 
   const handleResendEmail = () => {
-    if (!sessionId || !canResend || resendAttempts >= MAX_RESEND_ATTEMPTS) {
+    if (!sessionId || !canResend) {
       return;
     }
 
@@ -84,7 +90,6 @@ function SucessoContent() {
       })
       .finally(() => {
         setEmailSending(false);
-        setResendAttempts((prev) => prev + 1);
         setCooldownTime(COOLDOWN_SECONDS);
       });
   };
@@ -256,7 +261,7 @@ function SucessoContent() {
           </motion.div>
 
           {/* Botão de Reenvio */}
-          {sessionId && resendAttempts < MAX_RESEND_ATTEMPTS && (
+          {sessionId && (
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -268,11 +273,6 @@ function SucessoContent() {
               </h3>
               <p className="text-yellow-700 mb-4">
                 Use o botão abaixo para reenviar o relatório
-                {resendAttempts > 0 && (
-                  <span className="block text-sm mt-1">
-                    Tentativas restantes: {MAX_RESEND_ATTEMPTS - resendAttempts}
-                  </span>
-                )}
               </p>
 
               <button
@@ -293,7 +293,7 @@ function SucessoContent() {
                   </>
                 ) : (
                   <>
-                    <Send className="w-4 h-4" />
+                    <RefreshCw className="w-4 h-4" />
                     Reenviar Relatório
                   </>
                 )}
@@ -304,27 +304,6 @@ function SucessoContent() {
                   <p className="text-sm">{message}</p>
                 </div>
               )}
-            </motion.div>
-          )}
-
-          {/* Máximo de tentativas atingido */}
-          {resendAttempts >= MAX_RESEND_ATTEMPTS && (
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="bg-red-50 border border-red-200 rounded-xl p-6 text-center"
-            >
-              <h3 className="text-lg font-semibold text-red-800 mb-2">
-                ⚠️ Limite de Tentativas Atingido
-              </h3>
-              <p className="text-red-700 mb-4">
-                Você já solicitou o reenvio 2 vezes. Se ainda não recebeu o
-                email, entre em contato conosco pelo suporte.
-              </p>
-              <p className="text-red-600 text-sm">
-                Verifique sua caixa de spam e pasta de promoções
-              </p>
             </motion.div>
           )}
 

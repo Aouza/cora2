@@ -88,7 +88,7 @@ export default function PagamentoPage() {
   const urgencyReasons = [
     "Sua análise foi gerada com base nos seus dados únicos",
     "Cada momento de dúvida é energia desperdiçada",
-    "A promoção de R$ 9,90 pode terminar a qualquer momento",
+    "A promoção de R$ 29,90 pode terminar a qualquer momento",
     "Você merece viver sem essa ansiedade emocional",
   ];
 
@@ -220,7 +220,7 @@ export default function PagamentoPage() {
                       De R$ 47,00
                     </div>
                     <div className="text-4xl font-black text-slate-900 mb-1">
-                      R$ 9,90
+                      R$ 29,90
                     </div>
                     <div className="text-sm text-slate-600">
                       Pagamento único • Sem mensalidades
@@ -293,7 +293,7 @@ export default function PagamentoPage() {
             className="bg-slate-900 text-white p-8 rounded-3xl mb-12"
           >
             <h2 className="text-2xl font-bold text-center mb-8">
-              Compare: R$ 9,90 vs Outras Opções
+              Compare: R$ 29,90 vs Outras Opções
             </h2>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -320,7 +320,7 @@ export default function PagamentoPage() {
               <div className="text-center p-4 bg-gradient-to-br from-green-700 to-blue-700 rounded-xl border-2 border-green-400">
                 <div className="text-green-300 font-bold mb-2">✅ Cora IA</div>
                 <div className="text-3xl font-bold text-white mb-2">
-                  R$ 9,90
+                  R$ 29,90
                 </div>
                 <div className="text-sm text-green-300">
                   Resultado em 5 minutos
@@ -393,7 +393,7 @@ export default function PagamentoPage() {
               <p className="text-lg text-slate-600 mb-6">
                 Não deixe mais um dia passar em dúvida.
                 <br />
-                <strong>Sua paz mental vale R$ 9,90.</strong>
+                <strong>Sua paz mental vale R$ 29,90.</strong>
               </p>
 
               <button
@@ -416,8 +416,8 @@ export default function PagamentoPage() {
               </button>
 
               <div className="mt-4 text-sm text-slate-500">
-                ⏰ Tempo restante: {formatTime(timeLeft)} • 🔒 Pagamento 100%
-                seguro
+                ⏰ Tempo restante: {formatTime(timeLeft)} • 💰 R$ 29,90 • 🔒
+                Pagamento 100% seguro
               </div>
             </div>
           </motion.div>

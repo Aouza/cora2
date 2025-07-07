@@ -47,72 +47,74 @@ import {
 import Header from "@/components/Header";
 import { TypeAnimation } from "react-type-animation";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
+import EmotionalNetworkVisualization from "@/components/EmotionalNetworkVisualization";
 
 import HowItWorksSection from "@/components/HowItWorksSection";
+import ReportMockup from "@/components/ReportMockup";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// Pain points AGRESSIVOS com ícones clean
+// Pain points ÍNTIMOS e SIMBÓLICOS - FOCO EM TÉRMINOS
 const painPoints = [
   {
     icon: <Heart className="w-5 h-5" />,
-    pain: "Será que eu tô me iludindo com essa pessoa?",
+    pain: "Sinto que ainda tô esperando uma mensagem que nunca vai chegar",
     details:
-      "Fico criando filme na cabeça e não sei se é real ou fantasia minha",
-    solution: "Descubra se é interesse real ou você está fantasiando",
+      "Mesmo sabendo que acabou, uma parte de mim ainda fica na expectativa",
+    solution: "Entenda o que essa espera significa e como se libertar dela",
   },
   {
     icon: <MessageCircle className="w-5 h-5" />,
-    pain: "Por que toda vez que parece que vai dar certo… dá ruim de novo?",
-    details: "Sempre a mesma história: começa bem e termina em decepção",
-    solution: "Entenda o padrão e quebre esse ciclo de uma vez",
+    pain: "Fico pensando: será que eu interpretei tudo errado?",
+    details: "Me questiono se o que senti era real ou se criei uma ilusão",
+    solution: "Descubra a verdade sobre o que vocês viveram juntos",
   },
   {
     icon: <Clock className="w-5 h-5" />,
-    pain: "Sigo insistindo ou é melhor largar de vez?",
-    details: "Já perdi tanto tempo, será que vale a pena continuar tentando?",
-    solution: "Tenha clareza se deve investir ou partir pra próxima",
+    pain: "Acordo de madrugada com o peito apertado, pensando nele(a)",
+    details: "Parece que meu corpo ainda não entendeu que acabou",
+    solution: "Compreenda por que seu sistema emocional ainda está preso",
   },
   {
     icon: <Users className="w-5 h-5" />,
-    pain: "Essa história tem futuro… ou só tá me machucando?",
-    details: "Não sei se é amor de verdade ou só estou me iludindo",
-    solution: "Saiba as chances reais antes de se desgastar mais",
+    pain: "Me sinto como se tivesse perdido uma parte de mim",
+    details: "Não sei mais quem eu sou sem essa pessoa na minha vida",
+    solution: "Redescubra sua identidade além desse relacionamento",
   },
   {
     icon: <Repeat className="w-5 h-5" />,
-    pain: "Será que ele(a) sente o mesmo… ou só me procura quando convém?",
-    details: "Aparece quando quer, some quando não precisa mais de mim",
-    solution: "Descubra se você é prioridade ou apenas uma opção",
+    pain: "Tenho medo de que isso sempre aconteça comigo",
+    details: "Sinto que carrego algo que faz as pessoas me abandonarem",
+    solution: "Identifique e transforme os padrões que te sabotam",
   },
 ];
 
-// Benefícios clean
+// Benefícios clean - FOCO EM RECONSTRUÇÃO PÓS-TÉRMINO
 const benefits = [
   {
     icon: <Zap className="w-6 h-6 text-violet-600" />,
-    title: "Clareza emocional em minutos",
-    description: "Entenda de uma vez por todas o que realmente acontece",
+    title: "Clareza sobre o término em minutos",
+    description: "Entenda por que dói tanto e o que essa dor significa",
   },
   {
     icon: <Target className="w-6 h-6 text-violet-600" />,
-    title: "Análise com base nos seus dados",
-    description: "Personalizada para sua situação específica",
+    title: "Análise simbólica personalizada",
+    description: "Baseada na sua história específica de término",
   },
   {
     icon: <ShieldCheck className="w-6 h-6 text-violet-600" />,
-    title: "Sem julgamento, sem enrolação",
-    description: "Resposta objetiva e prática para sua vida",
+    title: "Sem julgamento, só transformação",
+    description: "Foco na cura e reconstrução emocional",
   },
   {
     icon: <Clock className="w-6 h-6 text-violet-600" />,
-    title: "Evite meses de indecisão",
-    description: "Um diagnóstico direto em vez de ficar ruminando",
+    title: "Acelere sua recuperação",
+    description: "Evite meses de sofrimento desnecessário",
   },
   {
     icon: <Lightbulb className="w-6 h-6 text-violet-600" />,
-    title: "Tome decisões com segurança",
-    description: "Pare de desperdiçar tempo com incertezas",
+    title: "Transforme dor em sabedoria",
+    description: "Use essa experiência para se fortalecer",
   },
 ];
 
@@ -145,67 +147,67 @@ const alternatives = [
 ];
 
 const ourSolution = {
-  option: "Análise IA Cora",
-  price: "R$ 9,90",
+  option: "Cora.Deep - Análise de Término",
+  price: "R$ 29,90",
   time: "5 minutos",
   privacy: "100% Privado",
-  result: "Insights precisos",
+  result: "Clareza transformadora",
   status: "optimal",
 };
 
-// Estatísticas IMPACTANTES
+// Estatísticas IMPACTANTES - FOCO EM RECONSTRUÇÃO
 const impactStats = [
   {
     number: "47.382",
-    label: "Pessoas que pararam de sofrer",
+    label: "Pessoas que transformaram dor em clareza",
     icon: <Users className="w-6 h-6" />,
   },
   {
     number: "94%",
-    label: "Disseram 'Nossa, agora entendi tudo!'",
+    label: "Disseram 'Agora entendi por que doía tanto!'",
     icon: <Lightbulb className="w-6 h-6" />,
   },
   {
     number: "87%",
-    label: "Tomaram a decisão certa na primeira",
+    label: "Conseguiram seguir em frente com paz",
     icon: <Target className="w-6 h-6" />,
   },
   {
     number: "4.9/5",
-    label: "Classificaram como 'Vida mudou'",
+    label: "Classificaram como 'Transformador'",
     icon: <Star className="w-6 h-6" />,
   },
 ];
 
-// Benefícios transformacionais AGRESSIVOS com ícones clean
+// O que você vai conseguir depois do Cora - SIMBÓLICO E EMOCIONAL
 const transformationalBenefits = [
   {
     icon: <Target className="w-6 h-6" />,
-    title: "Você para de ficar na dúvida",
+    title: "🌘 Entender por que esse fim ainda te machuca tanto",
     description:
-      "Chega de passar madrugadas pensando 'será que rola?' - você vai saber a resposta",
-    result: "Clareza total sobre onde você está pisando",
+      "Vai além da saudade superficial e descobre as camadas profundas da sua dor",
+    result: "Clareza sobre o que realmente perdeu e por que dói tanto",
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
-    title: "Nunca mais cai em cilada emocional",
+    title: "🌱 Dar nome ao que você sentiu e não conseguiu explicar",
     description:
-      "Aprende a identificar quando alguém está só te enrolando ou realmente tem interesse",
-    result: "Proteção contra pessoas que só querem te usar",
+      "Finalmente entende aqueles sentimentos confusos que ninguém parecia compreender",
+    result: "Vocabulário emocional para processar sua experiência",
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: "Para de repetir os mesmos erros",
+    title: "🕯️ Começar um processo de cura emocional guiado",
     description:
-      "Entende por que sempre acaba se envolvendo com o mesmo tipo de pessoa problemática",
-    result: "Quebra o ciclo e atrai relacionamentos saudáveis",
+      "Recebe um mapa simbólico para navegar suas próximas fases de reconstrução",
+    result: "Direção clara para sua jornada de cura",
   },
   {
     icon: <Lightbulb className="w-6 h-6" />,
-    title: "Conhece seus pontos cegos emocionais",
+    title: "🔓 Deixar ir o que te prende e abrir espaço pra recomeçar",
     description:
-      "Descobre o que você faz (sem perceber) que afasta ou atrai as pessoas erradas",
-    result: "Autoconhecimento que muda sua vida amorosa para sempre",
+      "Identifica as amarras invisíveis e aprende como se libertar delas com gentileza",
+    result: "Liberdade emocional para escrever um novo capítulo",
   },
 ];
 
@@ -260,7 +262,7 @@ export default function Home() {
       <Header />
 
       {/* 💥 HERO - Copy AGRESSIVA */}
-      <section className="relative pt-32 pb-24 bg-white">
+      <section className="relative pt-32 pb-24 bg-white overflow-hidden">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -274,265 +276,411 @@ export default function Home() {
           />
         </div>
 
-        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Badge URGENTE */}
-            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-red-500 to-orange-500 px-6 py-3 text-sm font-bold text-white mb-8 shadow-lg animate-pulse">
-              <span className="mr-2">🕒</span>
-              OFERTA ESPECIAL - ÚLTIMAS HORAS: R$ 9,90
-            </div>
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center lg:text-left"
+            >
+              <h1 className="text-3xl lg:text-5xl font-bold tracking-tight text-slate-900 mb-6 leading-tight">
+                Saia da dor do término com{" "}
+                <span className="text-violet-600">clareza e profundidade</span>
+                <br />— sem autoajuda superficial.
+              </h1>
 
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl mb-8">
-              Você tá{" "}
-              <span className="text-red-600">perdido numa história</span>
-              <br />
-              que nem sabe se é <span className="text-violet-600">real</span>?
-            </h1>
+              <div className="space-y-6 mb-8">
+                <p className="text-lg font-medium text-slate-700 leading-relaxed">
+                  Um lugar seguro e simbólico onde tudo o que você sente começa
+                  a fazer sentido.
+                </p>
+              </div>
 
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8 leading-relaxed">
-              <strong>Pare de perder tempo, sono e saúde mental.</strong>
-              <br />
-              Em 5 minutos, nossa IA te entrega a verdade que ninguém tá te
-              contando sobre essa conexão.
-            </p>
+              <div className="space-y-4">
+                <Link
+                  href="/formulario"
+                  className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 px-8 py-4 text-lg font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                >
+                  Comece Agora • Acesso a partir de R$ 29
+                </Link>
 
-            <div className="mt-10 flex flex-col items-center gap-4">
-              <Link
-                href="/formulario"
-                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-10 py-5 text-xl font-bold text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                👉 Quero Meu Diagnóstico Agora
-              </Link>
-              <p className="text-slate-500 text-sm">
-                ⚡ Resultado em 5 minutos | 💰 Apenas R$ 9,90 | 🔒 100% seguro
-              </p>
-            </div>
-          </motion.div>
+                <p className="text-sm text-slate-500">
+                  🔒 Ambiente seguro e anônimo
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Right Side - Emotional Network Visualization */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative h-[600px] hidden lg:block"
+            >
+              <EmotionalNetworkVisualization />
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* 🚨 Faixa de Urgência - Logo após Hero */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
-        className="bg-gradient-to-r from-violet-500 via-purple-500 to-violet-600 text-white py-3 px-6"
-      >
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="font-semibold text-sm">
-            🔥 <strong>OFERTA POR TEMPO LIMITADO:</strong> Apenas R$ 9,90 (valor
-            normal R$ 49,90) - Últimas 24 horas!
-          </p>
-        </div>
-      </motion.div>
-
-      {/* 😨 Seção de Dor AGRESSIVA - Cards Ultra Clean */}
+      {/* 🎯 Identificação: "Isso é para você?" */}
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
-        className="py-32 bg-slate-50"
+        className="py-24 bg-slate-50"
       >
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              Se alguma dessas frases parece sua…{" "}
-              <span className="text-red-600">
-                é porque tá na hora de encarar.
-              </span>
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-6">
+              Isso é para você?
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Pare de sofrer por situações que você{" "}
-              <strong>pode resolver agora</strong> com clareza total.
-            </p>
+            <div className="space-y-4 text-lg text-slate-700 leading-relaxed">
+              <p>
+                Se você <strong>terminou recentemente</strong>, sente um nó no
+                peito e não sabe por onde começar...
+              </p>
+              <p>
+                Se os <strong>conselhos parecem vazios</strong> e os vídeos não
+                ajudam...
+              </p>
+              <p className="text-violet-700 font-semibold">
+                O Cora.Deep foi feito exatamente para esse momento.
+              </p>
+            </div>
           </div>
 
-          <motion.div
-            variants={staggeredListVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-          >
-            {painPoints.map((pain, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group bg-gray-50 p-8 rounded-3xl shadow-sm border border-slate-200 hover:shadow-md hover:border-red-200 transition-all duration-300"
-              >
-                {/* Ícone clean */}
-                <div className="w-12 h-12 bg-red-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors">
-                  <div className="text-red-600">{pain.icon}</div>
-                </div>
+          <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+            <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">
+              O que é o Cora.Deep?
+            </h3>
+            <div className="space-y-4 text-base text-slate-700 leading-relaxed">
+              <p>
+                Um <strong>hub emocional pós-término</strong>. Um espaço
+                simbólico e guiado para organizar a dor, entender sua ligação e
+                virar a chave emocional — com profundidade e verdade.
+              </p>
 
-                {/* Conteúdo organizado */}
-                <div className="space-y-4">
-                  <h3 className="text-lg font-bold text-slate-900 leading-tight">
-                    {pain.pain}
-                  </h3>
-
-                  <p className="text-slate-600 text-sm leading-relaxed italic">
-                    "{pain.details}"
-                  </p>
-
-                  <div className="pt-2">
-                    <div className="bg-green-50 border border-green-100 rounded-xl p-4">
-                      <p className="text-sm font-semibold text-green-700">
-                        ✓ {pain.solution}
-                      </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
+                      <span className="text-violet-600 font-semibold text-sm">
+                        🧠
+                      </span>
                     </div>
+                    <span className="font-semibold text-slate-900">
+                      Curadoria terapêutica
+                    </span>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
 
-          <div className="text-center">
-            <Link
-              href="/formulario"
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 hover:from-orange-600 hover:to-red-600"
-            >
-              <Target className="w-5 h-5" />
-              RESOLVER TODOS ESSES PROBLEMAS AGORA
-            </Link>
-            <p className="text-slate-500 text-sm mt-2">
-              ⚡ Diagnóstico entregue em 5 minutos | 💰 Acesso imediato por
-              apenas R$ 9,90
-            </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
+                      <span className="text-violet-600 font-semibold text-sm">
+                        🔒
+                      </span>
+                    </div>
+                    <span className="font-semibold text-slate-900">
+                      Espaço anônimo de expressão
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
+                      <span className="text-violet-600 font-semibold text-sm">
+                        📊
+                      </span>
+                    </div>
+                    <span className="font-semibold text-slate-900">
+                      Relatório simbólico de leitura emocional
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
+                      <span className="text-violet-600 font-semibold text-sm">
+                        🔧
+                      </span>
+                    </div>
+                    <span className="font-semibold text-slate-900">
+                      Ferramentas de reconstrução
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </motion.section>
 
-      {/* ✨ Benefícios TRANSFORMACIONAIS - Modern Clean */}
+      {/* 🎯 Por que isso funciona? */}
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
-        className="py-20 bg-white"
+        className="py-24 bg-white"
       >
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              O que você vai <span className="text-violet-600">conseguir</span>{" "}
-              depois do Cora
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-8">
+              Por que isso funciona?
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Não é só um relatório. É uma <strong>virada de chave</strong> na
-              sua vida amorosa.
-            </p>
-          </div>
-
-          {/* Grid moderno e equilibrado */}
-          <motion.div
-            variants={staggeredListVariants}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"
-          >
-            {transformationalBenefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group bg-slate-50 hover:bg-white p-6 rounded-2xl border border-slate-100 hover:border-violet-200 hover:shadow-md transition-all duration-300"
-              >
-                {/* Header compacto */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center text-white font-semibold text-sm">
-                    {index + 1}
-                  </div>
-                  <div className="w-10 h-10 bg-violet-50 rounded-xl flex items-center justify-center group-hover:bg-violet-100 transition-colors">
-                    <div className="text-violet-600">{benefit.icon}</div>
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 flex-1">
-                    {benefit.title}
-                  </h3>
-                </div>
-
-                {/* Conteúdo organizado */}
-                <div className="space-y-4">
-                  <p className="text-slate-600 leading-7">
-                    {benefit.description}
-                  </p>
-
-                  <div className="bg-violet-50 border-l-4 border-violet-400 rounded-r-lg p-4">
-                    <p className="text-sm font-medium text-violet-800 leading-6">
-                      <strong>Resultado:</strong> {benefit.result}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* CTA simples e direto */}
-          <div className="text-center">
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 max-w-lg mx-auto">
-              <h3 className="text-xl font-bold text-slate-900 mb-3">
-                Bora descobrir a verdade?
-              </h3>
-              <p className="text-slate-600 mb-4 text-sm">
-                Mais de 47.000 pessoas já pararam de sofrer. Sua vez chegou.
+            <div className="space-y-6 text-lg text-slate-700 leading-relaxed">
+              <p>
+                Porque o Cora <strong>não tenta te distrair</strong> — ele te
+                ajuda a entender.
               </p>
-              <Link
-                href="/formulario"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                <Sparkles className="w-4 h-4" />
-                Quero meu diagnóstico agora
-              </Link>
-              <p className="text-slate-500 text-xs mt-2">
-                🚀 Resultado instantâneo | 🔒 100% privado e seguro
+              <p>
+                Porque não entrega <strong>frases prontas</strong> — mostra o
+                que está por trás do que você sente.
+              </p>
+              <p>
+                Porque <strong>respeita sua dor</strong>, e oferece direção
+                simbólica e prática.
               </p>
             </div>
           </div>
         </div>
       </motion.section>
 
-      {/* 🧠 Como Funciona - Detalhado */}
-      {/* 📋 Como Funciona - Novo Componente */}
-      <HowItWorksSection />
+      {/* 📄 O que você encontra dentro do Cora */}
+      <motion.section
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+        className="py-24 bg-slate-50"
+      >
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-6">
+              O que você encontra dentro do Cora
+            </h2>
+          </div>
 
-      {/* 🎯 Seção de Benefícios - Clean */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Cora.Guia */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">📚</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Cora.Guia
+                  </h3>
+                  <p className="text-sm text-slate-600">
+                    Curadoria para Clareza
+                  </p>
+                </div>
+              </div>
+              <p className="text-slate-700 leading-relaxed">
+                Artigos, vídeos, leituras simbólicas e ferramentas indicadas
+                especificamente para o seu momento.
+              </p>
+            </div>
+
+            {/* Mural Vivo */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">🧱</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Mural Vivo
+                  </h3>
+                  <p className="text-sm text-slate-600">Espaço de Expressão</p>
+                </div>
+              </div>
+              <p className="text-slate-700 leading-relaxed">
+                Desabafos anônimos. Escrita terapêutica e escuta simbólica em um
+                ambiente seguro.
+              </p>
+            </div>
+
+            {/* Eco Emocional */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">💬</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Eco Emocional
+                  </h3>
+                  <p className="text-sm text-slate-600">Conexão sem fala</p>
+                </div>
+              </div>
+              <p className="text-slate-700 leading-relaxed">
+                Reações simbólicas como 🌱 "Você vai florescer" para momentos de
+                apoio mútuo.
+              </p>
+            </div>
+
+            {/* Leitura Emocional */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">🧾</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Leitura Emocional
+                  </h3>
+                  <p className="text-sm text-slate-600">Seu Mapa Interno</p>
+                </div>
+              </div>
+              <p className="text-slate-700 leading-relaxed">
+                Relatório criado por IA para revelar o que ainda está em jogo
+                emocionalmente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* 💰 Planos e Preços */}
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
-        className="py-20 bg-slate-50"
+        className="py-24 bg-white"
       >
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              Por que escolher nossa análise
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-6">
+              Escolha seu caminho
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Vantagens únicas que fazem toda a diferença
+              Diferentes profundidades para diferentes momentos
             </p>
           </div>
 
-          <motion.div
-            variants={staggeredListVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
-          >
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="text-center p-6 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center">
-                    {benefit.icon}
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Cora.Light */}
+            <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🕯</span>
                 </div>
-                <h3 className="text-base font-semibold text-slate-900 mb-2">
-                  {benefit.title}
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  Cora.Light
                 </h3>
-                <p className="text-sm text-slate-600">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+                <div className="text-3xl font-bold text-slate-900 mb-2">
+                  R$ 29
+                </div>
+                <p className="text-slate-600">
+                  Acesso ao Hub + relatório básico
+                </p>
+              </div>
+              <ul className="space-y-3 text-sm text-slate-700">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Acesso ao Hub Cora
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Relatório básico
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Mural Vivo
+                </li>
+              </ul>
+            </div>
+
+            {/* Cora.Deep */}
+            <div className="bg-violet-50 rounded-2xl p-8 border-2 border-violet-200 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-violet-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                  Mais Popular
+                </span>
+              </div>
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🌑</span>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  Cora.Deep
+                </h3>
+                <div className="text-3xl font-bold text-slate-900 mb-2">
+                  R$ 59
+                </div>
+                <p className="text-slate-600">
+                  Hub completo + relatório profundo
+                </p>
+              </div>
+              <ul className="space-y-3 text-sm text-slate-700">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Tudo do Light
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Relatório profundo
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Carta de cura
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Análise emocional
+                </li>
+              </ul>
+            </div>
+
+            {/* Cora.Renascimento */}
+            <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🔥</span>
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  Cora.Renascimento
+                </h3>
+                <div className="text-3xl font-bold text-slate-900 mb-2">
+                  R$ 99
+                </div>
+                <p className="text-slate-600">Transformação completa</p>
+              </div>
+              <ul className="space-y-3 text-sm text-slate-700">
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Tudo do Deep
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Carta de despedida simbólica
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-green-600">✓</span>
+                  Plano de reconstrução 21 dias
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/formulario"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-violet-600 to-purple-600 px-8 py-4 rounded-full font-bold text-lg text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              Escolher Meu Caminho
+            </Link>
+          </div>
         </div>
       </motion.section>
 
@@ -547,146 +695,45 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              Transformações reais
+              Vozes de quem atravessou a dor
             </h2>
             <p className="text-lg text-slate-600">
-              Veja o que nossos clientes falam sobre a clareza que encontraram
+              Pessoas reais que encontraram clareza onde antes só havia confusão
             </p>
           </div>
           <TestimonialsCarousel />
         </div>
       </motion.section>
 
-      {/* 🔍 Comparativo - Tabela Clean */}
+      {/* 🌟 Fechamento Emocional */}
       <motion.section
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
-        className="py-20 bg-slate-50"
-      >
-        <div className="mx-auto max-w-5xl px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 mb-4">
-              Compare suas opções
-            </h2>
-            <p className="text-lg text-slate-600 mb-4">
-              Veja por que nossa análise é a escolha mais inteligente
-            </p>
-            {/* Reforço de Valor */}
-            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-4 max-w-3xl mx-auto">
-              <p className="text-sm font-semibold text-violet-800 leading-6 text-center">
-                <span className="inline-block mr-4">
-                  ✅ <strong className="text-violet-900">+47.382</strong>{" "}
-                  análises geradas
-                </span>
-                <span className="inline-block mr-4">
-                  ⭐{" "}
-                  <strong className="text-violet-900">Satisfação de 94%</strong>{" "}
-                  nos últimos 6 meses
-                </span>
-                <span className="inline-block">
-                  🏆 <strong className="text-violet-900">4.9/5 estrelas</strong>{" "}
-                  de avaliação
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-3xl p-8 shadow-lg">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-max">
-                <thead>
-                  <tr className="border-b-2 border-slate-100">
-                    <th className="text-left py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
-                      Opção
-                    </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
-                      Preço
-                    </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
-                      Tempo
-                    </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
-                      Privacidade
-                    </th>
-                    <th className="text-center py-4 px-4 font-semibold text-slate-900 text-sm whitespace-nowrap">
-                      Resultado
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {alternatives.map((alt, index) => (
-                    <tr key={index} className="border-b border-slate-50">
-                      <td className="py-4 px-4 text-slate-700 font-medium text-sm whitespace-nowrap">
-                        {alt.option}
-                      </td>
-                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
-                        {alt.price}
-                      </td>
-                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
-                        {alt.time}
-                      </td>
-                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
-                        {alt.privacy}
-                      </td>
-                      <td className="text-center py-4 px-4 text-slate-600 text-sm whitespace-nowrap">
-                        {alt.result}
-                      </td>
-                    </tr>
-                  ))}
-                  <tr className="bg-violet-50 border-2 border-violet-200">
-                    <td className="py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
-                      {ourSolution.option}
-                    </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
-                      {ourSolution.price}
-                    </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
-                      {ourSolution.time}
-                    </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
-                      {ourSolution.privacy}
-                    </td>
-                    <td className="text-center py-4 px-4 font-bold text-violet-900 text-sm whitespace-nowrap">
-                      {ourSolution.result}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* CTA após tabela comparativa */}
-            <div className="text-center mt-8 pt-6 border-t border-slate-100">
-              <p className="text-slate-600 mb-4 text-sm">
-                A decisão mais inteligente é óbvia. Pare de desperdiçar tempo!
-              </p>
-              <Link
-                href="/formulario"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                ✅ Escolher a melhor opção agora
-              </Link>
-              <p className="text-slate-500 text-xs mt-3">
-                💰 Apenas R$ 9,90 | ⚡ 5 minutos | 🔒 100% seguro
-              </p>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* ⏰ Seção de Urgência - Faixa Discreta */}
-      <motion.section
-        initial="offscreen"
-        whileInView="onscreen"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={sectionVariants}
-        className="py-6 bg-gradient-to-r from-violet-600 to-purple-600"
+        className="py-24 bg-gradient-to-br from-violet-50 to-purple-50"
       >
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-          <p className="text-white font-medium">
-            <span className="font-bold">Oferta especial ativa:</span>{" "}
-            desbloqueie sua análise por apenas R$ 9,90. Por tempo limitado.
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">
+            Você não precisa entender tudo agora.
+          </h2>
+          <p className="text-lg text-slate-700 mb-8 leading-relaxed">
+            Só precisa de um lugar onde o que você sente possa finalmente fazer
+            sentido.
+            <br />
+            <strong>E esse lugar é o Cora.</strong>
+          </p>
+
+          <Link
+            href="/formulario"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-violet-600 to-purple-600 px-8 py-4 rounded-full font-bold text-lg text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 mb-4"
+          >
+            Quero Começar Agora
+          </Link>
+
+          <p className="text-sm text-slate-500">
+            🔒 Ambiente seguro e anônimo • ⚡ Acesso imediato • 💰 A partir de
+            R$ 29
           </p>
         </div>
       </motion.section>
@@ -828,7 +875,7 @@ export default function Home() {
                 🛡️ Garantido! Quero começar agora
               </Link>
               <p className="text-slate-500 text-xs mt-3">
-                💰 R$ 9,90 | ⚡ 5 minutos | 🔒 7 dias para testar sem risco
+                💰 R$ 29,90 | ⚡ 5 minutos | 🔒 7 dias para testar sem risco
               </p>
             </div>
           </div>
@@ -839,24 +886,27 @@ export default function Home() {
       <div className="py-24 bg-slate-900">
         <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
-            Pare de sofrer por algo que{" "}
-            <span className="text-violet-400">talvez nem seja real.</span>
+            O fim de um relacionamento pode ser{" "}
+            <span className="text-violet-400">
+              o começo da sua reconstrução.
+            </span>
           </h2>
 
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Descubra agora se essa pessoa vale seu investimento emocional ou se
-            é hora de seguir em frente.
+            Se você sentiu que ninguém entende o que está passando, talvez o
+            Cora esteja aqui pra te mostrar que dá pra atravessar isso com
+            verdade.
           </p>
 
           <Link
             href="/formulario"
             className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500 px-12 py-6 text-2xl font-bold text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 mb-6"
           >
-            👉 Quero meu diagnóstico agora
+            🔥 Quero minha transformação agora
           </Link>
 
           <p className="text-slate-400 text-sm">
-            ⚡ Resultado em 5 minutos | 💰 Apenas R$ 9,90 | 🔒 7 dias de
+            ⚡ Resultado em 5 minutos | 💰 Apenas R$ 29,90 | 🔒 7 dias de
             garantia
           </p>
         </div>
@@ -881,7 +931,7 @@ export default function Home() {
               </p>
               <div className="flex items-center gap-4 text-sm text-slate-500">
                 <span>⚡ Resultado em 5 minutos</span>
-                <span>💰 Apenas R$ 9,90</span>
+                <span>💰 Apenas R$ 29,90</span>
                 <span>🔒 100% Seguro</span>
               </div>
             </div>

@@ -18,9 +18,9 @@ export async function POST(request: NextRequest) {
 
     // Enviar email com o relatório
     const { data, error } = await resend.emails.send({
-      from: "Cora Deep <onboarding@resend.dev>", // Você precisa configurar seu domínio no Resend
+      from: "Cora Deep <noreply@coradeep.com.br>",
       to: [email], // Usar o email que vem da requisição
-      subject: `✨ Seu Relatório de Análise Emocional está pronto, ${customerName}!`,
+      subject: `✨ Sua Análise Simbólica de Término está pronta, ${customerName}!`,
       html: createReportEmailHTML(customerName, partnerName, report),
       text: createReportEmailText(customerName, partnerName, report),
     });

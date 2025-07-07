@@ -139,7 +139,7 @@ export default function EmotionalAnalysisReport({
           <div className="flex items-center gap-2 mb-3">
             <Target className="w-5 h-5 text-violet-600" />
             <h4 className="font-bold text-slate-900 text-lg">
-              1. Diagnóstico da Situação
+              💭 Diagnóstico Emocional do Término
             </h4>
           </div>
           <p className="text-slate-700 leading-relaxed mb-3">
@@ -163,7 +163,7 @@ export default function EmotionalAnalysisReport({
           <div className="flex items-center gap-2 mb-3">
             <AlertTriangle className="w-5 h-5 text-orange-600" />
             <h4 className="font-bold text-slate-900 text-lg">
-              2. Padrões Emocionais Detectados
+              🔍 Padrões Emocionais da Relação
             </h4>
           </div>
           <div className="space-y-3">
@@ -191,7 +191,7 @@ export default function EmotionalAnalysisReport({
           <div className="flex items-center gap-2 mb-3">
             <TrendingUp className="w-5 h-5 text-green-600" />
             <h4 className="font-bold text-slate-900 text-lg">
-              3. Recomendações Práticas
+              🎯 Recomendações para Reconstrução
             </h4>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -217,7 +217,7 @@ export default function EmotionalAnalysisReport({
         {/* Prognóstico */}
         <div className="bg-slate-100 rounded-2xl p-6">
           <h4 className="font-bold text-slate-900 mb-3 text-lg">
-            🔮 Prognóstico da Relação
+            🌅 Prognóstico Emocional
           </h4>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
@@ -225,21 +225,21 @@ export default function EmotionalAnalysisReport({
                 {data.prognosis.evolutionChance}%
               </div>
               <div className="text-xs text-slate-600">
-                Chance de evolução positiva
+                Chance de cura emocional
               </div>
             </div>
             <div>
               <div className="text-2xl font-bold text-blue-600">
                 {data.prognosis.timeFrame}
               </div>
-              <div className="text-xs text-slate-600">Para definição</div>
+              <div className="text-xs text-slate-600">Para reconstrução</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-violet-600">
                 {data.prognosis.longTermCompatibility}
               </div>
               <div className="text-xs text-slate-600">
-                Compatibilidade a longo prazo
+                Potencial de transformação
               </div>
             </div>
           </div>

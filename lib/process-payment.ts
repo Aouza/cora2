@@ -66,6 +66,8 @@ export async function processPayment(
 
     const report = await generateReport(userDataForReport);
 
+    console.log("report", { report });
+
     // Enviar email com o relatório
     const emailResponse = await fetch(
       `${process.env.NEXT_PUBLIC_DOMAIN}/api/send-report`,
@@ -82,6 +84,8 @@ export async function processPayment(
     );
 
     const emailResult = await emailResponse.json();
+
+    console.log("emailResult", { emailResult });
 
     if (!emailResponse.ok) {
       return {

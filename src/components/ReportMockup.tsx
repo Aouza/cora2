@@ -11,56 +11,58 @@ import {
 } from "lucide-react";
 import EmotionalAnalysisReport, { ReportData } from "./EmotionalAnalysisReport";
 
-// Dados mockados para preview
+// Dados mockados para preview - FOCADO EM TÉRMINO
 const mockReportData: ReportData = {
   reportNumber: "47.382",
   profileName: "Maria Silva",
   profileAge: 28,
   profileCity: "São Paulo",
-  connectionDuration: "8 meses",
-  relationshipType: "Relacionamento intermitente",
-  compatibilityScore: 72,
-  compatibilityLevel: "Alta compatibilidade",
+  connectionDuration: "1 ano e 4 meses",
+  relationshipType: "Relacionamento sério que terminou",
+  compatibilityScore: 78,
+  compatibilityLevel: "Conexão emocional intensa",
 
   diagnosis: {
     mainInsight:
-      "Com base nos padrões identificados, sua conexão apresenta sinais de",
-    highlightedText: "interesse genuíno mas com bloqueios emocionais",
+      "O término foi tão doloroso porque vocês criaram uma conexão que ia além do",
+    highlightedText: "amor romântico - era uma fusão de identidades",
     secondaryInsight:
-      "A frequência de contato irregular (3-4 dias de intervalo) sugere",
-    warningText: "medo de vulnerabilidade emocional, não desinteresse",
+      "Você não está chorando apenas pelo fim do relacionamento, mas pela",
+    warningText: "perda de uma versão de si mesma que só existia com ele",
   },
 
   patterns: {
     mainPattern: {
-      title: "Padrão Principal",
+      title: "Padrão de Dependência Emocional",
       description:
-        "Você tende a interpretar silêncios como rejeição, quando na verdade podem ser sinais de processamento emocional.",
+        "Você construiu sua identidade em torno da relação, perdendo o senso de quem é independentemente dele.",
     },
     sabotagePattern: {
-      title: "Comportamento Sabotador",
+      title: "Idealização e Negação",
       description:
-        "Cobrança excessiva por respostas rápidas pode estar criando pressão desnecessária.",
+        "Você está idealizando os momentos bons e negando os problemas reais que levaram ao fim.",
     },
   },
 
   recommendations: {
     doList: [
-      "Dar espaço de 2-3 dias entre conversas",
-      "Focar em atividades que te fazem bem",
-      "Comunicar necessidades de forma clara",
+      "Reconectar com atividades que te fazem única",
+      "Processar o luto sem pressa ou julgamento",
+      "Explorar quem você é fora da relação",
+      "Permitir-se sentir a dor sem tentar fugir",
     ],
     avoidList: [
-      "Cobrar respostas imediatas",
-      "Interpretar silêncios como rejeição",
-      "Tomar decisões baseadas em ansiedade",
+      "Stalking em redes sociais",
+      "Tentar 'ser amigos' antes de se curar",
+      "Pular para outro relacionamento",
+      "Negar a importância do que vocês viveram",
     ],
   },
 
   prognosis: {
     evolutionChance: 85,
-    timeFrame: "3-6",
-    longTermCompatibility: "Alta",
+    timeFrame: "4-8 meses",
+    longTermCompatibility: "Transformação pessoal",
   },
 };
 

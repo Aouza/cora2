@@ -196,7 +196,7 @@ export default function HowItWorksSection() {
             </div>
             <div className="text-left">
               <div className="text-2xl font-bold text-slate-900">
-                Apenas R$ 9,90
+                Apenas R$ 29,90
               </div>
               <div className="text-sm text-slate-500">
                 Pagamento único • Sem mensalidades
