@@ -1,5 +1,10 @@
 #!/usr/bin/env tsx
 
-import "./seeds";
+import { shouldRunSeeds } from "./config";
 
-console.log("🌱 Executando seeds do Cora.Deep...");
+if (shouldRunSeeds()) {
+  console.log("🌱 Executando seeds do Cora.Deep...");
+  import("./seeds");
+} else {
+  console.log("🚫 Seeds desabilitados para ambiente de produção");
+}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import DashboardHeader from "@/components/DashboardHeader";
+import EmptyState from "@/components/EmptyState";
 
 export default function Dashboard() {
   const [user] = useState({
@@ -10,6 +11,11 @@ export default function Dashboard() {
     joinedAt: "2024-01-15",
     currentMood: "Processando",
   });
+
+  // Estados para controlar se há dados disponíveis
+  const [hasGuideContent, setHasGuideContent] = useState(false);
+  const [hasMuralPosts, setHasMuralPosts] = useState(false);
+  const [hasEmotionalAnalysis, setHasEmotionalAnalysis] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -54,30 +60,19 @@ export default function Dashboard() {
                 Conteúdos escolhidos especificamente para o seu momento atual
               </p>
 
-              <div className="space-y-3">
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-1">
-                    📖 Como lidar com a saudade que não passa
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    Artigo • 5 min de leitura
-                  </p>
+              {!hasGuideContent ? (
+                <div className="py-6">
+                  <EmptyState
+                    icon="📚"
+                    title="Conteúdos sendo preparados"
+                    description="Nossa equipe está selecionando materiais personalizados para seu momento atual."
+                  />
                 </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-1">
-                    🎥 Por que você se sente perdida após o término
-                  </h4>
-                  <p className="text-sm text-gray-600">Vídeo • 8 minutos</p>
+              ) : (
+                <div className="space-y-3">
+                  {/* Conteúdo seria carregado dinamicamente */}
                 </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-medium text-gray-900 mb-1">
-                    🧘 Prática de grounding para momentos de ansiedade
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    Exercício prático • 10 minutos
-                  </p>
-                </div>
-              </div>
+              )}
 
               <Link
                 href="/dashboard/guia"
@@ -115,47 +110,19 @@ export default function Dashboard() {
                 mesmo
               </p>
 
-              <div className="space-y-4 mb-4">
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <p className="text-gray-700 mb-2">
-                    "Hoje acordei sem aquela dor no peito pela primeira vez em
-                    semanas. Pequenos progressos também contam, né?"
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
-                    <span>há 2 horas</span>
-                    <div className="flex items-center gap-2">
-                      <button className="hover:scale-110 transition-transform">
-                        🌱
-                      </button>
-                      <span>12</span>
-                      <button className="hover:scale-110 transition-transform">
-                        🫂
-                      </button>
-                      <span>5</span>
-                    </div>
-                  </div>
+              {!hasMuralPosts ? (
+                <div className="py-6">
+                  <EmptyState
+                    icon="💭"
+                    title="Seja a primeira a compartilhar"
+                    description="O mural está esperando por você. Compartilhe seus sentimentos e conecte-se com outras pessoas."
+                  />
                 </div>
-
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <p className="text-gray-700 mb-2">
-                    "Será que eu vou conseguir confiar em alguém de novo? Tenho
-                    medo que isso sempre aconteça comigo..."
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-gray-500">
-                    <span>há 5 horas</span>
-                    <div className="flex items-center gap-2">
-                      <button className="hover:scale-110 transition-transform">
-                        💧
-                      </button>
-                      <span>8</span>
-                      <button className="hover:scale-110 transition-transform">
-                        🫂
-                      </button>
-                      <span>15</span>
-                    </div>
-                  </div>
+              ) : (
+                <div className="space-y-4 mb-4">
+                  {/* Posts seriam carregados dinamicamente */}
                 </div>
-              </div>
+              )}
 
               <Link
                 href="/dashboard/mural"
@@ -195,81 +162,87 @@ export default function Dashboard() {
                 Mapa simbólico do seu momento atual
               </p>
 
-              <div className="p-4 bg-gradient-to-br from-purple-50 to-violet-50 rounded-lg mb-4">
-                <h4 className="font-medium text-gray-900 mb-2">
-                  ✨ Insights Principais
-                </h4>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>• Padrão de apego identificado</li>
-                  <li>• Pontos de reconstrução</li>
-                  <li>• Recursos emocionais disponíveis</li>
-                </ul>
-              </div>
+              {!hasEmotionalAnalysis ? (
+                <div className="py-6">
+                  <EmptyState
+                    icon="🔍"
+                    title="Análise sendo gerada"
+                    description="Complete seu perfil emocional para receber insights personalizados."
+                  />
+                </div>
+              ) : (
+                <div className="p-4 bg-gradient-to-br from-purple-50 to-violet-50 rounded-lg mb-4">
+                  <h4 className="font-medium text-gray-900 mb-2">
+                    ✨ Insights Principais
+                  </h4>
+                  {/* Conteúdo seria gerado dinamicamente */}
+                </div>
+              )}
 
               <Link
                 href="/dashboard/leitura"
-                className="w-full inline-flex items-center justify-center px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-sm font-medium"
+                className="inline-flex items-center gap-2 text-violet-600 font-medium hover:text-violet-700"
               >
-                Ver Leitura Completa
+                Ver análise completa
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
               </Link>
             </div>
 
-            {/* Eco Emocional */}
+            {/* Progresso Emocional */}
             <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                  <span className="text-xl">💬</span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Eco Emocional
-                </h3>
-              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                📈 Seu Progresso
+              </h3>
               <p className="text-gray-600 mb-4 text-sm">
-                Conexões simbólicas com a comunidade
+                Acompanhe sua jornada de recuperação
               </p>
 
-              <div className="text-center py-4">
-                <div className="text-2xl mb-2">🌱</div>
-                <p className="text-sm text-gray-600">
-                  Você recebeu 3 "Você vai florescer" hoje
-                </p>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Dias no Cora.Deep</span>
+                  <span className="font-medium">
+                    {Math.floor(
+                      (Date.now() - new Date(user.joinedAt).getTime()) /
+                        (1000 * 60 * 60 * 24)
+                    )}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">Sessões de reflexão</span>
+                  <span className="font-medium">-</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-gray-600">
+                    Desabafos compartilhados
+                  </span>
+                  <span className="font-medium">-</span>
+                </div>
               </div>
             </div>
 
-            {/* Progresso */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Seu Progresso
+            {/* Próxima Sessão */}
+            <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 border border-violet-200">
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                💫 Momento de Reflexão
               </h3>
-
-              <div className="space-y-3">
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-600">Jornada de Clareza</span>
-                    <span className="text-violet-600">30%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-violet-600 h-2 rounded-full w-[30%]"></div>
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <p className="text-xs text-gray-500 mb-2">
-                    Conquistas recentes:
-                  </p>
-                  <div className="flex gap-1">
-                    <span className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center text-xs">
-                      🏆
-                    </span>
-                    <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center text-xs">
-                      ✨
-                    </span>
-                    <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs">
-                      💎
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <p className="text-gray-600 mb-4 text-sm">
+                Reserve um tempo para si mesma hoje
+              </p>
+              <button className="w-full bg-violet-600 text-white py-2 px-4 rounded-lg hover:bg-violet-700 transition-colors">
+                Iniciar Reflexão
+              </button>
             </div>
           </div>
         </div>
