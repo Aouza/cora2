@@ -14,7 +14,7 @@ export const envSchema = z.object({
   NEXTAUTH_SECRET: z.string().optional(),
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
-  PORT: z.number().default(3000),
+  PORT: z.coerce.number().default(3000),
 });
 
 export const env = envSchema.parse(process.env);
