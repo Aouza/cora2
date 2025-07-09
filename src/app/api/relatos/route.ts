@@ -2,11 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   inserirRelatoSeguro,
   buscarRelatosComValidacao,
-} from "../../../../db/queries-validated";
-import {
-  safeValidateData,
-  createRelatoSchema,
-} from "../../../../db/validations";
+} from "../../../db/queries-validated";
+import { safeValidateData, createRelatoSchema } from "../../../db/validations";
 import { z } from "zod";
 
 // POST - Criar novo relato
