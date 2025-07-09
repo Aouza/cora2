@@ -1,7 +1,11 @@
 import { pgEnum } from "drizzle-orm/pg-core";
 
 // Enum para tipos de eco
-export const tipoEcoEnum = pgEnum("tipo_eco", ["🌱", "🫂", "💧"]);
+export const tipoEcoEnum = pgEnum("tipo_eco", [
+  "florescer",
+  "abraco",
+  "entendo",
+]);
 
 // Enum para tipos de relatório
 export const tipoRelatorioEnum = pgEnum("tipo_relatorio", [

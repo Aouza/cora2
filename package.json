@@ -13,8 +13,8 @@
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push",
     "db:example": "tsx db/queries.ts",
-    "db:seed": "tsx db/run-seeds.ts",
-    "db:seed-simple": "tsx db/simple-seeds.ts",
+    "db:seed": "tsx src/db/run-seeds.ts",
+    "db:seed-simple": "tsx src/db/simple-seeds.ts",
     "db:reset": "drizzle-kit push && yarn db:seed",
     "db:validate": "tsx db/queries-validated.ts"
   },
@@ -28,6 +28,7 @@
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.4",
     "@types/pg": "^8.15.4",
+    "dotenv": "^17.2.0",
     "drizzle-kit": "^0.31.4",
     "drizzle-orm": "^0.44.2",
     "drizzle-seed": "^0.3.1",
