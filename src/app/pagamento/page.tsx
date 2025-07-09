@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import { useCheckout } from "@/hooks/useCheckout";
-import { env } from "@/env";
+import { env } from "../../../src/env";
 
 export default function PagamentoPage() {
   const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutos

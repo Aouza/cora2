@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "../../../../lib/stripe";
 import { headers } from "next/headers";
 import { processPayment } from "../../../../lib/process-payment";
-import { env } from "@/env";
+import { env } from "../../../../src/env";
 
 const webhookSecret = env.STRIPE_WEBHOOK_SECRET!;
 

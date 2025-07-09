@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "../../../../lib/stripe";
 import { storeTempUserData } from "../../../../lib/temp-storage";
-import { env } from "@/env";
+import { env } from "../../../../src/env";
 
 export async function POST(request: NextRequest) {
   try {
