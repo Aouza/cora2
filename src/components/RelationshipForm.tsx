@@ -9,10 +9,18 @@ import {
 } from "../db/form-schemas";
 
 interface RelationshipFormProps {
-  onAnalyze: (data: RelationshipFormData) => void;
+  onAnalyze?: (data: RelationshipFormData) => void;
+  onSubmitStart?: () => void;
+  onReportReady?: (reportData: string) => void;
+  report?: string | null;
 }
 
-export default function RelationshipForm({ onAnalyze }: RelationshipFormProps) {
+export default function RelationshipForm({
+  onAnalyze,
+  onSubmitStart,
+  onReportReady,
+  report,
+}: RelationshipFormProps) {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const {
@@ -41,9 +49,16 @@ export default function RelationshipForm({ onAnalyze }: RelationshipFormProps) {
 
   const onSubmit = async (data: RelationshipFormData) => {
     setIsAnalyzing(true);
+    onSubmitStart?.(); // Notificar que o submit começou
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Simular processamento
-      onAnalyze(data);
+
+      // Simular geração de relatório
+      const mockReport = `Relatório para ${data.name1} e ${data.name2}...`;
+      onReportReady?.(mockReport);
+
+      onAnalyze?.(data);
     } catch (error) {
       console.error("Erro na análise:", error);
     } finally {

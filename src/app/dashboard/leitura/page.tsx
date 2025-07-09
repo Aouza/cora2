@@ -385,8 +385,6 @@ export default function LeituraEmocional() {
       {/* Header */}
       <DashboardHeader
         title="Configurações"
-        subtitle="Personalize sua experiência"
-        icon="⚙️"
         showBackButton={true}
         backHref="/dashboard"
       />

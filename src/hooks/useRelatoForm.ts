@@ -1,18 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { relatoFormSchema, type RelatoFormInput } from "../db/validations";
 import { safeValidateData } from "../db/validations";
 
 interface UseRelatoFormProps {
-  onSubmit: (data: RelatoFormInput) => Promise<void>;
+  onSubmitAction: (data: RelatoFormInput) => Promise<void>;
   onSuccess?: () => void;
   onError?: (errors: string[]) => void;
 }
 
 export function useRelatoForm({
-  onSubmit,
+  onSubmitAction,
   onSuccess,
   onError,
 }: UseRelatoFormProps) {
@@ -66,7 +67,7 @@ export function useRelatoForm({
       }
 
       // Submeter dados
-      await onSubmit(validation.data);
+      await onSubmitAction(validation.data);
 
       // Reset form
       setFormData({ texto: "" });

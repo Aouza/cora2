@@ -150,8 +150,6 @@ export default function Guia() {
       {/* Header */}
       <DashboardHeader
         title="Cora.Guia"
-        subtitle="Curadoria para Clareza"
-        icon="📚"
         showBackButton={true}
         backHref="/dashboard"
       />
