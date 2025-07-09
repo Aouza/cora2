@@ -7,11 +7,21 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="flex h-20 flex-col items-center justify-center text-center sm:h-16 sm:flex-row sm:justify-between">
           <Link href="/" className="text-2xl font-bold text-slate-900">
-            Cora
+            Cora<span className="text-violet-600">.Deep</span>
           </Link>
-          <div className="flex items-center gap-2 text-xs text-slate-600 sm:text-sm">
-            <Sparkles className="h-4 w-4 flex-shrink-0 text-violet-500" />
-            <span>1.200+ análises geradas com 92% de satisfação</span>
+
+          <div className="flex items-center gap-6">
+            <div className="hidden sm:flex items-center gap-2 text-xs text-slate-600">
+              <Sparkles className="h-4 w-4 flex-shrink-0 text-violet-500" />
+              <span>Hub emocional para reconstrução pós-término</span>
+            </div>
+
+            <Link
+              href="/login"
+              className="text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors"
+            >
+              Entrar
+            </Link>
           </div>
         </div>
       </div>
