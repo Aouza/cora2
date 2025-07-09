@@ -1,6 +1,7 @@
 import { stripe } from "./stripe";
 import { getTempUserData, deleteTempUserData } from "./temp-storage";
 import { generateReport, UserData } from "./generate-report";
+import { env } from "../src/env";
 
 export interface PaymentProcessResult {
   success: boolean;
@@ -68,7 +69,7 @@ export async function processPayment(
 
     // Enviar email com o relatório
     const emailResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/api/send-report`,
+      `${env.NEXT_PUBLIC_DOMAIN}/api/send-report`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

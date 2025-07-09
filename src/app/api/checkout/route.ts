@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "../../../../lib/stripe";
 import { storeTempUserData } from "../../../../lib/temp-storage";
+import { env } from "@/env";
 
 export async function POST(request: NextRequest) {
   try {
     const { priceId, userData } = await request.json();
 
     // Verificar se variáveis essenciais estão configuradas
-    if (!process.env.STRIPE_SECRET_KEY) {
+    if (!env.STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY não configurada");
     }
-    if (!process.env.NEXT_PUBLIC_DOMAIN) {
+    if (!env.NEXT_PUBLIC_DOMAIN) {
       throw new Error("NEXT_PUBLIC_DOMAIN não configurada");
     }
     if (!priceId) {
@@ -27,8 +28,8 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/pagamento`,
+      success_url: `${env.NEXT_PUBLIC_DOMAIN}/sucesso?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${env.NEXT_PUBLIC_DOMAIN}/pagamento`,
       customer_email: userData?.userEmail, // Pré-preenche email no checkout
       metadata: {
         product: "analise-emocional",

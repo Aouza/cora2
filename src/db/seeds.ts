@@ -2,9 +2,10 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { seed } from "drizzle-seed";
 import * as schema from "./schema";
+import { env } from "../env";
 
 // Conectar com o banco
-const client = postgres(process.env.DATABASE_URL!, { max: 1 });
+const client = postgres(env.DATABASE_URL, { max: 1 });
 const db = drizzle(client, { schema });
 
 async function main() {

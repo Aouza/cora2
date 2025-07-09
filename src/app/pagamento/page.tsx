@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/Header";
 import { useCheckout } from "@/hooks/useCheckout";
+import { env } from "@/env";
 
 export default function PagamentoPage() {
   const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutos
@@ -22,8 +23,7 @@ export default function PagamentoPage() {
   const { isLoading, createCheckoutSession } = useCheckout();
 
   // ID do preço no Stripe (você precisa criar este produto no dashboard do Stripe)
-  const PRICE_ID =
-    process.env.NEXT_PUBLIC_STRIPE_PRICE_ID || "price_1234567890";
+  const PRICE_ID = env.NEXT_PUBLIC_STRIPE_PRICE_ID || "price_1234567890";
 
   const handleCheckout = async () => {
     try {
