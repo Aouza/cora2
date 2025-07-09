@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import DashboardHeader from "@/components/DashboardHeader";
 
 export default function Mural() {
   const [newPost, setNewPost] = useState("");
-  const [posts] = useState([
+
+  // Posts de exemplo
+  const posts = [
     {
       id: 1,
       content:
@@ -18,30 +21,30 @@ export default function Mural() {
       content:
         "Será que eu vou conseguir confiar em alguém de novo? Tenho medo que isso sempre aconteça comigo...",
       timeAgo: "há 5 horas",
-      reactions: { entendo: 8, abraco: 15, florescer: 2 },
+      reactions: { florescer: 2, abraco: 15, entendo: 8 },
     },
     {
       id: 3,
       content:
-        "Descobri que não tava chorando por ele, mas por uma versão de mim que eu achava que tinha perdido. O Cora me ajudou a ver isso.",
+        "Vi ele com uma nova pessoa hoje no shopping. Doeu, mas não chorei. Acho que estou evoluindo.",
       timeAgo: "há 8 horas",
-      reactions: { florescer: 24, entendo: 18, abraco: 9 },
+      reactions: { florescer: 18, abraco: 7, entendo: 4 },
     },
     {
       id: 4,
       content:
-        "Às vezes acordo de madrugada e por um segundo esqueço que acabou. Aí a realidade bate e é como se perdesse ele de novo.",
-      timeAgo: "há 12 horas",
-      reactions: { entendo: 32, abraco: 28, florescer: 5 },
+        "Comecei terapia semana passada. É difícil falar sobre certas coisas, mas sinto que preciso. Alguém mais fez terapia?",
+      timeAgo: "há 1 dia",
+      reactions: { florescer: 9, abraco: 12, entendo: 6 },
     },
     {
       id: 5,
       content:
-        "Hoje consegui ouvir nossa música sem chorar. Ainda dói, mas é diferente. É como se a música fosse minha de novo.",
+        "Três meses depois e ainda sonho com ele quase toda noite. Como fazer isso parar?",
       timeAgo: "há 1 dia",
-      reactions: { florescer: 19, abraco: 11, entendo: 7 },
+      reactions: { florescer: 3, abraco: 20, entendo: 14 },
     },
-  ]);
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,39 +62,13 @@ export default function Mural() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                Voltar
-              </Link>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center">
-                  <span className="text-lg">🧱</span>
-                </div>
-                <h1 className="text-xl font-bold text-gray-900">Mural Vivo</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <DashboardHeader
+        title="Mural Vivo"
+        subtitle="Espaço de expressão anônima"
+        icon="🧱"
+        showBackButton={true}
+        backHref="/dashboard"
+      />
 
       {/* Conteúdo Principal */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

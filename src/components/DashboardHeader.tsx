@@ -4,14 +4,24 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
-import { Sparkles, Heart, LogOut, Settings, User } from "lucide-react";
+import { ArrowLeft, LogOut, Settings, User, Heart } from "lucide-react";
 import {
   getUserDisplayInfo,
   shouldShowAvatar,
   debugUserData,
 } from "../../lib/avatar-utils";
 
-export default function Header() {
+interface DashboardHeaderProps {
+  title?: string;
+  showBackButton?: boolean;
+  backHref?: string;
+}
+
+export default function DashboardHeader({
+  title = "Dashboard",
+  showBackButton = false,
+  backHref = "/dashboard",
+}: DashboardHeaderProps) {
   const { user, loading, signOut } = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
@@ -36,7 +46,7 @@ export default function Header() {
 
   // Debug do usuário (apenas em desenvolvimento)
   useEffect(() => {
-    debugUserData(user, "Header component");
+    debugUserData(user, "DashboardHeader component");
   }, [user]);
 
   // Resetar erro de avatar quando usuário mudar
@@ -49,12 +59,14 @@ export default function Header() {
   const showAvatar = shouldShowAvatar(user) && !avatarError;
 
   const handleAvatarError = () => {
-    console.warn("❌ Avatar falhou, usando iniciais como fallback");
+    console.warn(
+      "❌ Avatar falhou no DashboardHeader, usando iniciais como fallback"
+    );
     setAvatarError(true);
   };
 
   const handleAvatarLoad = () => {
-    console.log("✅ Avatar carregado com sucesso");
+    console.log("✅ Avatar carregado com sucesso no DashboardHeader");
     setAvatarError(false);
   };
 
@@ -70,46 +82,50 @@ export default function Header() {
     }
   };
 
+  if (loading) {
+    return (
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <div className="animate-pulse bg-gray-200 h-6 w-32 rounded"></div>
+            </div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center space-x-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600"
-          >
-            <Heart className="w-8 h-8 text-violet-600" />
-            <span>Cora.Deep</span>
-          </Link>
-
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/como-funciona"
-              className="text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              Como Funciona
-            </Link>
-            <Link
-              href="/depoimentos"
-              className="text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              Depoimentos
-            </Link>
-            <Link
-              href="/contato"
-              className="text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              Contato
-            </Link>
-          </nav>
-
-          {/* User Section */}
+          {/* Left side - Back button and title */}
           <div className="flex items-center space-x-4">
-            {loading ? (
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
-            ) : user ? (
+            {showBackButton && (
+              <Link
+                href={backHref}
+                className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-gray-100 transition-colors"
+                title="Voltar"
+              >
+                <ArrowLeft className="w-5 h-5 text-gray-600" />
+              </Link>
+            )}
+
+            <div className="flex items-center space-x-3">
+              <Link href="/dashboard" className="flex items-center space-x-2">
+                <Heart className="w-6 h-6 text-violet-600" />
+                <span className="text-lg font-semibold text-gray-900">
+                  {title}
+                </span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right side - User menu */}
+          <div className="flex items-center">
+            {user ? (
               <div className="relative" ref={menuRef}>
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -132,12 +148,11 @@ export default function Header() {
                     )}
                   </div>
 
-                  {/* Nome do usuário */}
-                  <div className="hidden sm:block">
+                  {/* Nome do usuário - visível apenas em telas maiores */}
+                  <div className="hidden md:block">
                     <p className="text-sm font-medium text-gray-900">
                       {userDisplay.name}
                     </p>
-                    <p className="text-xs text-gray-500">{userDisplay.email}</p>
                   </div>
                 </button>
 
@@ -158,7 +173,7 @@ export default function Header() {
                       className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       onClick={() => setIsUserMenuOpen(false)}
                     >
-                      <Sparkles className="w-4 h-4 mr-3" />
+                      <Heart className="w-4 h-4 mr-3" />
                       Dashboard
                     </Link>
 
@@ -200,12 +215,6 @@ export default function Header() {
                   className="text-gray-600 hover:text-violet-600 transition-colors"
                 >
                   Entrar
-                </Link>
-                <Link
-                  href="/formulario"
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 text-white px-6 py-2 rounded-full hover:from-violet-700 hover:to-purple-700 transition-all transform hover:scale-105"
-                >
-                  Começar Agora
                 </Link>
               </div>
             )}

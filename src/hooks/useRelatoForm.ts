@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { relatoFormSchema, type RelatoFormInput } from "../../db/validations";
-import { safeValidateData } from "../../db/validations";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { relatoFormSchema, type RelatoFormInput } from "../db/validations";
+import { safeValidateData } from "../db/validations";
 
 interface UseRelatoFormProps {
   onSubmit: (data: RelatoFormInput) => Promise<void>;

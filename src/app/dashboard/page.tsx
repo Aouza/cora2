@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import DashboardHeader from "@/components/DashboardHeader";
 
 export default function Dashboard() {
   const [user] = useState({
@@ -13,26 +14,7 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header do Dashboard */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-violet-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
-              <h1 className="text-xl font-bold text-gray-900">
-                Cora<span className="text-violet-600">.Deep</span>
-              </h1>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">Olá, {user.name}</span>
-              <div className="w-8 h-8 bg-violet-100 rounded-full flex items-center justify-center">
-                <span className="text-violet-600 text-sm font-medium">A</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <DashboardHeader />
 
       {/* Conteúdo Principal */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

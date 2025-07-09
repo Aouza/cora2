@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   relationshipFormSchema,
   type RelationshipFormData,
-} from "../../db/form-schemas";
+} from "../db/form-schemas";
 
 interface UseRelationshipFormOptions {
   onSubmit?: (data: RelationshipFormData) => void | Promise<void>;

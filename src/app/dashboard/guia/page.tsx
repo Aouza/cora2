@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import DashboardHeader from "@/components/DashboardHeader";
 
-export default function CoraGuia() {
-  const [activeCategory, setActiveCategory] = useState("todos");
+export default function Guia() {
+  const [selectedCategory, setSelectedCategory] = useState("todos");
 
   const categories = [
     { id: "todos", name: "Todos", icon: "📚" },
@@ -108,10 +109,10 @@ export default function CoraGuia() {
   ];
 
   const filteredContents =
-    activeCategory === "todos"
+    selectedCategory === "todos"
       ? contents
       : contents.filter(
-          (content) => content.type === activeCategory.slice(0, -1)
+          (content) => content.type === selectedCategory.slice(0, -1)
         );
 
   const getTypeIcon = (type: string) => {
@@ -147,39 +148,13 @@ export default function CoraGuia() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-4">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                Voltar
-              </Link>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-violet-100 rounded-xl flex items-center justify-center">
-                  <span className="text-lg">📚</span>
-                </div>
-                <h1 className="text-xl font-bold text-gray-900">Cora.Guia</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <DashboardHeader
+        title="Cora.Guia"
+        subtitle="Curadoria para Clareza"
+        icon="📚"
+        showBackButton={true}
+        backHref="/dashboard"
+      />
 
       {/* Conteúdo Principal */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -208,9 +183,9 @@ export default function CoraGuia() {
             {categories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => setSelectedCategory(category.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors ${
-                  activeCategory === category.id
+                  selectedCategory === category.id
                     ? "bg-violet-100 border-violet-300 text-violet-700"
                     : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
                 }`}
@@ -223,7 +198,7 @@ export default function CoraGuia() {
         </div>
 
         {/* Conteúdos em Destaque */}
-        {activeCategory === "todos" && (
+        {selectedCategory === "todos" && (
           <div className="mb-8">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               Em Destaque
@@ -278,7 +253,7 @@ export default function CoraGuia() {
         {/* Lista de Conteúdos */}
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {activeCategory === "todos"
+            {selectedCategory === "todos"
               ? "Todos os Conteúdos"
               : "Conteúdos Filtrados"}
           </h3>

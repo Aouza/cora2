@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import {
   relationshipFormSchema,
   type RelationshipFormData,
-} from "../../db/form-schemas";
+} from "../db/form-schemas";
 
 interface RelationshipFormProps {
   onAnalyze: (data: RelationshipFormData) => void;
