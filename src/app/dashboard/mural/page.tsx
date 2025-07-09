@@ -64,8 +64,6 @@ export default function Mural() {
       {/* Header */}
       <DashboardHeader
         title="Mural Vivo"
-        subtitle="Espaço de expressão anônima"
-        icon="🧱"
         showBackButton={true}
         backHref="/dashboard"
       />
