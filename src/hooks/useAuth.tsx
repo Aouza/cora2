@@ -55,6 +55,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
           hasUser: !!session?.user,
         });
 
+        console.log("🔍 Sessão inicial obtida:", { session });
+
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);

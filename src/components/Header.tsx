@@ -111,7 +111,7 @@ export default function Header() {
                   className="flex items-center space-x-3 p-2 rounded-full hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500"
                 >
                   {/* Avatar */}
-                  <Avatar user={user} size="sm" />
+                  <Avatar user={user} size="sm" showDebug={true} />
 
                   {/* Nome do usuário */}
                   <div className="hidden sm:block">

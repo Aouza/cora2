@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface AvatarProps {
   user: any;
   size?: "sm" | "md" | "lg";
   className?: string;
+  showDebug?: boolean;
 }
 
 export default function Avatar({
   user,
   size = "md",
   className = "",
+  showDebug = false,
 }: AvatarProps) {
   const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+
+  // Reset states when user changes
+  useEffect(() => {
+    setImageError(false);
+    setImageLoading(true);
+  }, [user?.user_metadata?.avatar_url]);
 
   const getSizeClasses = () => {
     switch (size) {
@@ -39,19 +48,56 @@ export default function Avatar({
     return name.substring(0, 2).toUpperCase();
   };
 
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+    if (showDebug) {
+      console.log("✅ Avatar loaded successfully:", user?.email);
+    }
+  };
+
+  const handleImageError = () => {
+    setImageLoading(false);
+    setImageError(true);
+    if (showDebug) {
+      console.warn("❌ Avatar failed to load:", user?.email, avatarUrl);
+    }
+  };
+
   const avatarUrl = user?.user_metadata?.avatar_url;
   const initials = getInitials(user);
   const baseClasses = `${getSizeClasses()} rounded-full ${className}`;
 
+  // Debug info
+  if (showDebug) {
+    console.log("🔍 Avatar Debug:", {
+      email: user?.email,
+      avatarUrl,
+      imageError,
+      imageLoading,
+      initials,
+    });
+  }
+
   // Se tem URL e não deu erro, tenta mostrar a imagem
   if (avatarUrl && !imageError) {
     return (
-      <img
-        src={avatarUrl}
-        alt={`Avatar de ${user?.user_metadata?.full_name || user?.email}`}
-        className={`${baseClasses} object-cover border-2 border-violet-200`}
-        onError={() => setImageError(true)}
-      />
+      <div className="relative">
+        <img
+          src={avatarUrl}
+          alt={`Avatar de ${user?.user_metadata?.full_name || user?.email}`}
+          className={`${baseClasses} object-cover border-2 border-violet-200 ${imageLoading ? "opacity-50" : "opacity-100"} transition-opacity`}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+        />
+        {imageLoading && (
+          <div
+            className={`absolute inset-0 ${baseClasses} bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-medium animate-pulse`}
+          >
+            {initials}
+          </div>
+        )}
+      </div>
     );
   }
 
