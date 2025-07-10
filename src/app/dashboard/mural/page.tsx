@@ -4,10 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import DashboardHeader from "@/components/DashboardHeader";
 import EmptyState from "@/components/EmptyState";
+import { useRelatosComEcos } from "@/hooks/useRelatosComEcos";
 
 export default function Mural() {
   const [newPost, setNewPost] = useState("");
-  const [posts, setPosts] = useState<any[]>([]); // Inicializar vazio para produção
+  const { data: posts = [], isLoading, error } = useRelatosComEcos();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,9 +19,49 @@ export default function Mural() {
     }
   };
 
-  const handleReaction = (postId: number, reaction: string) => {
+  const handleReaction = (postId: string, reaction: string) => {
     console.log(`Reação ${reaction} no post ${postId}`);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <DashboardHeader
+          title="Mural Vivo"
+          showBackButton={true}
+          backHref="/dashboard"
+        />
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+              <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
+              <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <DashboardHeader
+          title="Mural Vivo"
+          showBackButton={true}
+          backHref="/dashboard"
+        />
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-800">
+              Erro ao carregar os desabafos. Tente novamente mais tarde.
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -142,7 +183,7 @@ export default function Mural() {
                 className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm"
               >
                 <p className="text-gray-700 leading-relaxed mb-4">
-                  "{post.content}"
+                  "{post.texto}"
                 </p>
 
                 <div className="flex items-center justify-between">

@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { relatos } from "@/db/schema";
+import { profiles } from "@/db/schema";
 import { desc } from "drizzle-orm";
 
 export async function GET() {
   try {
-    const relatosData = await db
+    const usuariosData = await db
       .select()
-      .from(relatos)
-      .orderBy(desc(relatos.createdAt));
+      .from(profiles)
+      .orderBy(desc(profiles.createdAt));
 
-    return NextResponse.json(relatosData);
+    return NextResponse.json(usuariosData);
   } catch (error) {
-    console.error("Erro ao buscar relatos:", error);
+    console.error("Erro ao buscar usuários:", error);
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import DashboardHeader from "@/components/DashboardHeader";
 import EmptyState from "@/components/EmptyState";
+import { useEstatisticas } from "@/hooks/useEstatisticas";
+import { useRelatosComEcos } from "@/hooks/useRelatosComEcos";
 
 export default function Dashboard() {
   const [user] = useState({
@@ -12,10 +14,12 @@ export default function Dashboard() {
     currentMood: "Processando",
   });
 
-  // Estados para controlar se há dados disponíveis
-  const [hasGuideContent, setHasGuideContent] = useState(false);
-  const [hasMuralPosts, setHasMuralPosts] = useState(false);
-  const [hasEmotionalAnalysis, setHasEmotionalAnalysis] = useState(false);
+  const { data: estatisticas, isLoading: estatisticasLoading } =
+    useEstatisticas();
+  const { data: posts = [], isLoading: postsLoading } = useRelatosComEcos();
+
+  // Pegar os 3 posts mais recentes para preview
+  const recentPosts = posts.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -42,6 +46,36 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Estatísticas Rápidas */}
+        {!estatisticasLoading && estatisticas && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+              <div className="text-2xl font-bold text-violet-600">
+                {estatisticas.totalRelatos}
+              </div>
+              <div className="text-sm text-gray-600">Desabafos</div>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+              <div className="text-2xl font-bold text-blue-600">
+                {estatisticas.totalEcos}
+              </div>
+              <div className="text-sm text-gray-600">Ecos de apoio</div>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+              <div className="text-2xl font-bold text-green-600">
+                {estatisticas.totalUsuarios}
+              </div>
+              <div className="text-sm text-gray-600">Pessoas conectadas</div>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+              <div className="text-2xl font-bold text-purple-600">
+                {estatisticas.relatosRecentes}
+              </div>
+              <div className="text-sm text-gray-600">Novos esta semana</div>
+            </div>
+          </div>
+        )}
+
         {/* Grid Principal */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Área Principal - Esquerda */}
@@ -60,19 +94,13 @@ export default function Dashboard() {
                 Conteúdos escolhidos especificamente para o seu momento atual
               </p>
 
-              {!hasGuideContent ? (
-                <div className="py-6">
-                  <EmptyState
-                    icon="📚"
-                    title="Conteúdos sendo preparados"
-                    description="Nossa equipe está selecionando materiais personalizados para seu momento atual."
-                  />
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {/* Conteúdo seria carregado dinamicamente */}
-                </div>
-              )}
+              <div className="py-6">
+                <EmptyState
+                  icon="📚"
+                  title="Conteúdos sendo preparados"
+                  description="Nossa equipe está selecionando materiais personalizados para seu momento atual."
+                />
+              </div>
 
               <Link
                 href="/dashboard/guia"
@@ -110,7 +138,15 @@ export default function Dashboard() {
                 mesmo
               </p>
 
-              {!hasMuralPosts ? (
+              {postsLoading ? (
+                <div className="py-6">
+                  <div className="animate-pulse space-y-3">
+                    <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                    <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                  </div>
+                </div>
+              ) : recentPosts.length === 0 ? (
                 <div className="py-6">
                   <EmptyState
                     icon="💭"
@@ -120,7 +156,22 @@ export default function Dashboard() {
                 </div>
               ) : (
                 <div className="space-y-4 mb-4">
-                  {/* Posts seriam carregados dinamicamente */}
+                  {recentPosts.map((post) => (
+                    <div
+                      key={post.id}
+                      className="border-l-4 border-violet-200 pl-4 py-2"
+                    >
+                      <p className="text-gray-600 text-sm line-clamp-2">
+                        "{post.texto}"
+                      </p>
+                      <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
+                        <span>{post.timeAgo}</span>
+                        <span>🌱 {post.reactions.florescer}</span>
+                        <span>🫂 {post.reactions.abraco}</span>
+                        <span>💧 {post.reactions.entendo}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
 
@@ -162,22 +213,13 @@ export default function Dashboard() {
                 Mapa simbólico do seu momento atual
               </p>
 
-              {!hasEmotionalAnalysis ? (
-                <div className="py-6">
-                  <EmptyState
-                    icon="🔍"
-                    title="Análise sendo gerada"
-                    description="Complete seu perfil emocional para receber insights personalizados."
-                  />
-                </div>
-              ) : (
-                <div className="p-4 bg-gradient-to-br from-purple-50 to-violet-50 rounded-lg mb-4">
-                  <h4 className="font-medium text-gray-900 mb-2">
-                    ✨ Insights Principais
-                  </h4>
-                  {/* Conteúdo seria gerado dinamicamente */}
-                </div>
-              )}
+              <div className="py-6">
+                <EmptyState
+                  icon="🔍"
+                  title="Análise sendo gerada"
+                  description="Complete seu perfil emocional para receber insights personalizados."
+                />
+              </div>
 
               <Link
                 href="/dashboard/leitura"
@@ -220,17 +262,65 @@ export default function Dashboard() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Sessões de reflexão</span>
-                  <span className="font-medium">-</span>
+                  <span className="text-gray-600">Comunidade ativa</span>
+                  <span className="font-medium">
+                    {estatisticas?.totalUsuarios || 0} pessoas
+                  </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">
-                    Desabafos compartilhados
+                  <span className="text-gray-600">Desabafos na plataforma</span>
+                  <span className="font-medium">
+                    {estatisticas?.totalRelatos || 0}
                   </span>
-                  <span className="font-medium">-</span>
                 </div>
               </div>
             </div>
+
+            {/* Ecos de Apoio */}
+            {!estatisticasLoading && estatisticas && (
+              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  💫 Ecos de Apoio
+                </h3>
+                <p className="text-gray-600 mb-4 text-sm">
+                  Gestos simbólicos compartilhados
+                </p>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">🌱</span>
+                      <span className="text-sm text-gray-600">
+                        Você vai florescer
+                      </span>
+                    </div>
+                    <span className="font-medium text-green-600">
+                      {estatisticas.ecosPorTipo.florescer}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">🫂</span>
+                      <span className="text-sm text-gray-600">
+                        Senti algo parecido
+                      </span>
+                    </div>
+                    <span className="font-medium text-blue-600">
+                      {estatisticas.ecosPorTipo.abraco}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">💧</span>
+                      <span className="text-sm text-gray-600">Te entendo</span>
+                    </div>
+                    <span className="font-medium text-purple-600">
+                      {estatisticas.ecosPorTipo.entendo}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Próxima Sessão */}
             <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-6 border border-violet-200">
