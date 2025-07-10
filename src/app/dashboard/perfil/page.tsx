@@ -94,7 +94,9 @@ export default function Perfil() {
                   <Calendar className="w-5 h-5 text-violet-600" />
                   <span>
                     Membro desde{" "}
-                    {new Date(user.created_at).toLocaleDateString("pt-BR")}
+                    {user.created_at
+                      ? new Date(user.created_at).toLocaleDateString("pt-BR")
+                      : "Data não disponível"}
                   </span>
                 </div>
 
@@ -102,7 +104,11 @@ export default function Perfil() {
                   <Globe className="w-5 h-5 text-violet-600" />
                   <span>
                     Última atividade:{" "}
-                    {new Date(user.last_sign_in_at).toLocaleDateString("pt-BR")}
+                    {user.last_sign_in_at
+                      ? new Date(user.last_sign_in_at).toLocaleDateString(
+                          "pt-BR"
+                        )
+                      : "Nunca"}
                   </span>
                 </div>
               </div>
