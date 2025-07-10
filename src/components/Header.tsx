@@ -3,23 +3,18 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../hooks/useAuth";
-import { Sparkles, Heart, LogOut, Settings, User } from "lucide-react";
-import {
-  getUserDisplayInfo,
-  shouldShowAvatar,
-  debugUserData,
-} from "../../lib/avatar-utils";
+import { Heart, Sparkles, User, Settings, LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import Avatar from "./Avatar";
 
 export default function Header() {
   const { user, loading, signOut } = useAuth();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [avatarError, setAvatarError] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Fechar menu ao clicar fora
+  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -27,48 +22,48 @@ export default function Header() {
       }
     };
 
-    if (isUserMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isUserMenuOpen]);
 
-  // Debug do usuário (apenas em desenvolvimento)
+  // Debug simples
   useEffect(() => {
-    debugUserData(user, "Header component");
-  }, [user]);
+    console.log("🔍 Header - Auth state:", { loading, hasUser: !!user });
+    if (user) {
+      console.log("👤 User avatar URL:", user.user_metadata?.avatar_url);
+    }
+  }, [loading, user]);
 
-  // Resetar erro de avatar quando usuário mudar
-  useEffect(() => {
-    setAvatarError(false);
-  }, [user?.user_metadata?.avatar_url]);
-
-  // Extrair informações do usuário usando utilities modernas
-  const userDisplay = getUserDisplayInfo(user);
-  const showAvatar = shouldShowAvatar(user) && !avatarError;
-
-  const handleAvatarError = () => {
-    console.warn("❌ Avatar falhou, usando iniciais como fallback");
-    setAvatarError(true);
-  };
-
-  const handleAvatarLoad = () => {
-    console.log("✅ Avatar carregado com sucesso");
-    setAvatarError(false);
+  // Função simples para obter nome
+  const getDisplayName = (user: any) => {
+    if (!user) return "Usuário";
+    return (
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      user.email?.split("@")[0] ||
+      "Usuário"
+    );
   };
 
   const handleSignOut = async () => {
     try {
+      console.log("🔄 Iniciando logout no Header...");
       setIsSigningOut(true);
+
       await signOut();
-      router.push("/");
+
+      console.log("✅ Logout concluído, redirecionando...");
     } catch (error) {
-      console.error("Erro no logout:", error);
+      console.error("❌ Erro no logout:", error);
+      console.log("🔄 Forçando logout local e redirecionamento...");
     } finally {
+      // Sempre redirecionar e resetar estado, mesmo com erro
       setIsSigningOut(false);
+      router.push("/");
     }
   };
+
+  const displayName = getDisplayName(user);
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
@@ -115,29 +110,15 @@ export default function Header() {
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                   className="flex items-center space-x-3 p-2 rounded-full hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500"
                 >
-                  {/* Avatar ou Iniciais */}
-                  <div className="relative">
-                    {showAvatar && userDisplay.avatarUrl ? (
-                      <img
-                        src={userDisplay.avatarUrl}
-                        alt={`Avatar de ${userDisplay.name}`}
-                        className="w-8 h-8 rounded-full object-cover border-2 border-violet-200"
-                        onError={handleAvatarError}
-                        onLoad={handleAvatarLoad}
-                      />
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white text-sm font-medium">
-                        {userDisplay.initials}
-                      </div>
-                    )}
-                  </div>
+                  {/* Avatar */}
+                  <Avatar user={user} size="sm" />
 
                   {/* Nome do usuário */}
                   <div className="hidden sm:block">
                     <p className="text-sm font-medium text-gray-900">
-                      {userDisplay.name}
+                      {displayName}
                     </p>
-                    <p className="text-xs text-gray-500">{userDisplay.email}</p>
+                    <p className="text-xs text-gray-500">{user.email}</p>
                   </div>
                 </button>
 
@@ -146,11 +127,9 @@ export default function Header() {
                   <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
                     <div className="px-4 py-3 border-b border-gray-100">
                       <p className="text-sm font-medium text-gray-900">
-                        {userDisplay.name}
+                        {displayName}
                       </p>
-                      <p className="text-xs text-gray-500">
-                        {userDisplay.email}
-                      </p>
+                      <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
 
                     <Link

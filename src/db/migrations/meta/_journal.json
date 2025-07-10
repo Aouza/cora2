@@ -15,6 +15,13 @@
       "when": 1752104341006,
       "tag": "0001_lumpy_true_believers",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752111536723,
+      "tag": "0002_aberrant_meltdown",
+      "breakpoints": true
     }
   ]
 }
