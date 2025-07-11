@@ -44,19 +44,35 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
     let result;
 
     if (existingProfile.length > 0) {
-      // Atualizar perfil existente
-      result = await db
-        .update(profiles)
-        .set({
-          email: profileData.email,
-          fullName: profileData.fullName,
-          avatarUrl: profileData.avatarUrl,
-          updatedAt: profileData.updatedAt,
-        })
-        .where(eq(profiles.id, user.id))
-        .returning();
+      const currentProfile = existingProfile[0];
 
-      console.log("✅ [Drizzle] Perfil atualizado:", result[0]);
+      // Verificar se há mudanças reais antes de atualizar
+      const hasChanges =
+        currentProfile.email !== profileData.email ||
+        currentProfile.fullName !== profileData.fullName ||
+        currentProfile.avatarUrl !== profileData.avatarUrl;
+
+      if (hasChanges) {
+        // Atualizar perfil existente apenas se houver mudanças
+        result = await db
+          .update(profiles)
+          .set({
+            email: profileData.email,
+            fullName: profileData.fullName,
+            avatarUrl: profileData.avatarUrl,
+            updatedAt: profileData.updatedAt,
+          })
+          .where(eq(profiles.id, user.id))
+          .returning();
+
+        console.log("✅ [Drizzle] Perfil atualizado:", result[0]);
+      } else {
+        // Nenhuma mudança, retornar perfil existente
+        result = [currentProfile];
+        console.log(
+          "✅ [Drizzle] Perfil já está atualizado, nenhuma mudança necessária"
+        );
+      }
     } else {
       // Criar novo perfil
       result = await db.insert(profiles).values(profileData).returning();

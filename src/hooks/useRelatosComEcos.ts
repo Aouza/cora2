@@ -48,10 +48,9 @@ export const useRelatosComEcos = () => {
         const relatoEcos = ecos.filter((eco) => eco.relatoId === relato.id);
 
         const reactions = {
-          florescer: relatoEcos.filter((eco) => eco.tipo === "florescer")
-            .length,
-          abraco: relatoEcos.filter((eco) => eco.tipo === "abraco").length,
-          entendo: relatoEcos.filter((eco) => eco.tipo === "entendo").length,
+          florescer: relatoEcos.filter((eco) => eco.tipo === "🌱").length,
+          abraco: relatoEcos.filter((eco) => eco.tipo === "🫂").length,
+          entendo: relatoEcos.filter((eco) => eco.tipo === "💧").length,
         };
 
         return {

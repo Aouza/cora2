@@ -1,27 +1,115 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import DashboardHeader from "@/components/DashboardHeader";
 import EmptyState from "@/components/EmptyState";
 import { useRelatosComEcos } from "@/hooks/useRelatosComEcos";
+import { useCreateRelato } from "@/hooks/useRelatos";
+import { useCreateEco } from "@/hooks/useEcos";
+import { useAuth } from "@/hooks/useAuth";
+
+// Constantes de validação
+const MIN_CHARACTERS = 10;
+const MAX_CHARACTERS = 500;
 
 export default function Mural() {
   const [newPost, setNewPost] = useState("");
+  const [validationError, setValidationError] = useState("");
   const { data: posts = [], isLoading, error } = useRelatosComEcos();
+  const { mutate: createRelato, isPending: isCreatingRelato } =
+    useCreateRelato();
+  const { mutate: createEco, isPending: isCreatingEco } = useCreateEco();
+  const { user } = useAuth();
+
+  // Validação em tempo real
+  useEffect(() => {
+    const trimmedText = newPost.trim();
+
+    if (trimmedText.length === 0) {
+      setValidationError("");
+    } else if (trimmedText.length < MIN_CHARACTERS) {
+      setValidationError(`Mínimo de ${MIN_CHARACTERS} caracteres`);
+    } else if (trimmedText.length > MAX_CHARACTERS) {
+      setValidationError(`Máximo de ${MAX_CHARACTERS} caracteres`);
+    } else {
+      setValidationError("");
+    }
+  }, [newPost]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (newPost.trim()) {
-      // Aqui você implementaria a lógica para salvar o post
-      console.log("Novo post:", newPost);
-      setNewPost("");
+
+    const trimmedText = newPost.trim();
+
+    // Validação final antes de submeter
+    if (trimmedText.length < MIN_CHARACTERS) {
+      setValidationError(`Mínimo de ${MIN_CHARACTERS} caracteres`);
+      return;
+    }
+
+    if (trimmedText.length > MAX_CHARACTERS) {
+      setValidationError(`Máximo de ${MAX_CHARACTERS} caracteres`);
+      return;
+    }
+
+    if (!isCreatingRelato && !validationError) {
+      createRelato(trimmedText, {
+        onSuccess: () => {
+          setNewPost("");
+          setValidationError("");
+        },
+        onError: (error) => {
+          console.error("Erro ao criar relato:", error);
+          alert("Erro ao criar relato. Tente novamente.");
+        },
+      });
     }
   };
 
   const handleReaction = (postId: string, reaction: string) => {
-    console.log(`Reação ${reaction} no post ${postId}`);
+    if (isCreatingEco) return;
+
+    // Mapear reações para os tipos do banco
+    const reactionMap: Record<string, string> = {
+      florescer: "🌱",
+      abraco: "🫂",
+      entendo: "💧",
+    };
+
+    const tipo = reactionMap[reaction];
+    if (!tipo) return;
+
+    createEco(
+      { relatoId: postId, tipo },
+      {
+        onError: (error) => {
+          console.error("Erro ao criar eco:", error);
+          alert("Erro ao adicionar reação. Tente novamente.");
+        },
+      }
+    );
   };
+
+  // Se não estiver autenticado, mostrar mensagem
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <DashboardHeader
+          title="Mural Vivo"
+          showBackButton={true}
+          backHref="/dashboard"
+        />
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <p className="text-yellow-800">
+              Você precisa estar logado para acessar o mural.
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -63,6 +151,12 @@ export default function Mural() {
     );
   }
 
+  const canSubmit =
+    newPost.trim().length >= MIN_CHARACTERS &&
+    newPost.trim().length <= MAX_CHARACTERS &&
+    !validationError &&
+    !isCreatingRelato;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -103,20 +197,40 @@ export default function Mural() {
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
               placeholder="Desabafe aqui... Ninguém saberá quem você é, mas todos entenderão o que você sente."
-              className="w-full h-32 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-              maxLength={500}
+              className={`w-full h-32 p-4 border rounded-lg resize-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-colors ${
+                validationError
+                  ? "border-red-300 focus:ring-red-500"
+                  : newPost.trim().length >= MIN_CHARACTERS
+                    ? "border-green-300 focus:ring-green-500"
+                    : "border-gray-300"
+              }`}
+              maxLength={MAX_CHARACTERS}
+              disabled={isCreatingRelato}
             />
 
             <div className="flex justify-between items-center mt-4">
-              <span className="text-sm text-gray-500">
-                {newPost.length}/500 caracteres
-              </span>
+              <div className="flex flex-col">
+                <span
+                  className={`text-sm ${
+                    validationError ? "text-red-600" : "text-gray-500"
+                  }`}
+                >
+                  {newPost.length}/{MAX_CHARACTERS} caracteres
+                </span>
+                {validationError && (
+                  <span className="text-xs text-red-600 mt-1">
+                    {validationError}
+                  </span>
+                )}
+              </div>
               <button
                 type="submit"
-                disabled={!newPost.trim()}
+                disabled={!canSubmit}
                 className="px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                Compartilhar Anonimamente
+                {isCreatingRelato
+                  ? "Compartilhando..."
+                  : "Compartilhar Anonimamente"}
               </button>
             </div>
           </form>
@@ -192,7 +306,8 @@ export default function Mural() {
                   <div className="flex items-center gap-4">
                     <button
                       onClick={() => handleReaction(post.id, "florescer")}
-                      className="flex items-center gap-1 hover:scale-110 transition-transform"
+                      disabled={isCreatingEco}
+                      className="flex items-center gap-1 hover:scale-110 transition-transform disabled:opacity-50"
                     >
                       <span className="text-lg">🌱</span>
                       <span className="text-sm text-gray-600">
@@ -202,7 +317,8 @@ export default function Mural() {
 
                     <button
                       onClick={() => handleReaction(post.id, "abraco")}
-                      className="flex items-center gap-1 hover:scale-110 transition-transform"
+                      disabled={isCreatingEco}
+                      className="flex items-center gap-1 hover:scale-110 transition-transform disabled:opacity-50"
                     >
                       <span className="text-lg">🫂</span>
                       <span className="text-sm text-gray-600">
@@ -212,7 +328,8 @@ export default function Mural() {
 
                     <button
                       onClick={() => handleReaction(post.id, "entendo")}
-                      className="flex items-center gap-1 hover:scale-110 transition-transform"
+                      disabled={isCreatingEco}
+                      className="flex items-center gap-1 hover:scale-110 transition-transform disabled:opacity-50"
                     >
                       <span className="text-lg">💧</span>
                       <span className="text-sm text-gray-600">
