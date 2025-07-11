@@ -28,29 +28,23 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true); // começa true
-
-  console.log({ session: "JULIANO" });
+  const [loading, setLoading] = useState(true);
 
   // -------- boot + listener --------
   useEffect(() => {
     let active = true;
-    console.log({ active: "JULIANO" });
+
     const boot = async () => {
       try {
-        console.log({ boot: "JULIANO" });
         const { data, error } = await supabase.auth
           .getSession()
           .then(({ data, error }) => {
-            console.log({ data: "ALISON" });
             return { data, error };
           })
           .catch((e) => {
-            console.log({ e: "ALISON" });
             return { data: null, error: e };
           });
 
-        console.log({ data: "ALISON" });
         if (!active) return;
         if (error) console.error("getSession error:", error);
         setSession(data?.session ?? null);
@@ -91,15 +85,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { error } = await supabase.from("profiles").upsert({
-        id: user.id,
-        email: user.email!,
-        full_name:
-          user.user_metadata.full_name || user.user_metadata.name || null,
-        avatar_url: user.user_metadata.avatar_url || null,
-        updated_at: new Date().toISOString(),
-      });
-      if (error) console.error("syncProfile error:", error);
+      try {
+        const response = await fetch("/api/profiles/sync", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          console.error("syncProfile error: HTTP", response.status);
+        }
+      } catch (error) {
+        console.error("syncProfile error:", error);
+      }
     })();
   }, [user]);
 

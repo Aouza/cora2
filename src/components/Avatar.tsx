@@ -51,32 +51,20 @@ export default function Avatar({
   const handleImageLoad = () => {
     setImageLoading(false);
     setImageError(false);
-    if (showDebug) {
-      console.log("✅ Avatar loaded successfully:", user?.email);
-    }
   };
 
   const handleImageError = () => {
     setImageLoading(false);
     setImageError(true);
-    if (showDebug) {
-      console.warn("❌ Avatar failed to load:", user?.email, avatarUrl);
-    }
   };
 
   const avatarUrl = user?.user_metadata?.avatar_url;
   const initials = getInitials(user);
   const baseClasses = `${getSizeClasses()} rounded-full ${className}`;
 
-  // Debug info
-  if (showDebug) {
-    console.log("🔍 Avatar Debug:", {
-      email: user?.email,
-      avatarUrl,
-      imageError,
-      imageLoading,
-      initials,
-    });
+  // Debug info (apenas em desenvolvimento)
+  if (showDebug && process.env.NODE_ENV === "development") {
+    // Debug info removido para limpeza
   }
 
   // Se tem URL e não deu erro, tenta mostrar a imagem

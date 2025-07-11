@@ -40,12 +40,7 @@ export default function DashboardHeader({
 
   // Debug simples
   useEffect(() => {
-    console.log("🔍 DashboardHeader - Auth state:", {
-      loading,
-      hasUser: !!user,
-    });
     if (user) {
-      console.log("👤 User avatar URL:", user.user_metadata?.avatar_url);
     }
   }, [loading, user]);
 
@@ -62,15 +57,10 @@ export default function DashboardHeader({
 
   const handleSignOut = async () => {
     try {
-      console.log("🔄 Iniciando logout no DashboardHeader...");
       setIsSigningOut(true);
-
       await signOut();
-
-      console.log("✅ Logout concluído, redirecionando...");
     } catch (error) {
       console.error("❌ Erro no logout:", error);
-      console.log("🔄 Forçando logout local e redirecionamento...");
     } finally {
       // Sempre redirecionar e resetar estado, mesmo com erro
       setIsSigningOut(false);

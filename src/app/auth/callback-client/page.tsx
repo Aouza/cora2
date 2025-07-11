@@ -11,12 +11,10 @@ export default function AuthCallback() {
   const params = useSearchParams();
   const { user, loading } = useAuth();
 
-  console.log({ user });
-
   /**
    * 1.  Se a URL contém ?code=XYZ, trocamos por sessão.
    * 2.  Quando `useAuth` terminar de carregar, decidimos:
-   *     - Sessão OK → /dashboard
+   *     - Sessão OK → verificar se perfil está completo
    *     - Sem sessão  → /login?error=...
    */
   useEffect(() => {
@@ -27,16 +25,42 @@ export default function AuthCallback() {
         .exchangeCodeForSession(code)
         .catch(() => router.replace("/login?error=oauth_callback"));
 
-      console.log({ code });
-      return; // aguardamos `useAuth` atualizar user/​loading
+      return; // aguardamos `useAuth` atualizar user/loading
     }
 
-    // (2) redirecionamento final
-    if (!loading) {
-      if (user) router.replace("/dashboard");
-      else router.replace("/login?error=no_session");
+    // (2) redirecionamento final baseado no status do perfil
+    if (!loading && user) {
+      checkProfileAndRedirect();
+    } else if (!loading && !user) {
+      router.replace("/login?error=no_session");
     }
   }, [params, user, loading, router]);
+
+  const checkProfileAndRedirect = async () => {
+    try {
+      // Verificar se o perfil foi completado via API
+      const response = await fetch("/api/profiles/me");
+
+      if (!response.ok) {
+        // Se não conseguir verificar, redireciona para profile-setup
+        router.replace("/profile-setup");
+        return;
+      }
+
+      const profile = await response.json();
+
+      if (profile?.profileCompleted) {
+        // Perfil já completo, vai para dashboard
+        router.replace("/dashboard");
+      } else {
+        // Perfil não completo, vai para profile-setup
+        router.replace("/profile-setup");
+      }
+    } catch (error) {
+      // Em caso de erro, redireciona para profile-setup
+      router.replace("/profile-setup");
+    }
+  };
 
   // --- UI de loading ---
   return (
