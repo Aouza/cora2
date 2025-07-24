@@ -28,7 +28,7 @@ const profileSetupSchema = z.object({
       /^[a-zA-ZÀ-ÿ0-9\s\-_]+$/,
       "Apelido pode conter apenas letras, números, espaços, hífens e underscores"
     ),
-  useCustomAvatar: z.boolean().default(false),
+  useCustomAvatar: z.boolean(),
 });
 
 type ProfileSetupData = z.infer<typeof profileSetupSchema>;

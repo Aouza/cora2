@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, User, Settings, LogOut, Heart } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useDisplayName } from "@/hooks/useProfile";
 import Avatar from "./Avatar";
 
 interface DashboardHeaderProps {
@@ -21,6 +22,7 @@ export default function DashboardHeader({
   actions,
 }: DashboardHeaderProps) {
   const { user, loading, signOut } = useAuth();
+  const displayName = useDisplayName();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -38,23 +40,6 @@ export default function DashboardHeader({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isUserMenuOpen]);
 
-  // Debug simples
-  useEffect(() => {
-    if (user) {
-    }
-  }, [loading, user]);
-
-  // Função simples para obter nome
-  const getDisplayName = (user: any) => {
-    if (!user) return "Usuário";
-    return (
-      user.user_metadata?.full_name ||
-      user.user_metadata?.name ||
-      user.email?.split("@")[0] ||
-      "Usuário"
-    );
-  };
-
   const handleSignOut = async () => {
     try {
       setIsSigningOut(true);
@@ -62,13 +47,10 @@ export default function DashboardHeader({
     } catch (error) {
       console.error("❌ Erro no logout:", error);
     } finally {
-      // Sempre redirecionar e resetar estado, mesmo com erro
       setIsSigningOut(false);
       router.push("/");
     }
   };
-
-  const displayName = getDisplayName(user);
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">

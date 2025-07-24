@@ -46,9 +46,9 @@ export const useEstatisticas = () => {
       ).length;
 
       const ecosPorTipo = {
-        florescer: ecos.filter((eco) => eco.tipo === "florescer").length,
-        abraco: ecos.filter((eco) => eco.tipo === "abraco").length,
-        entendo: ecos.filter((eco) => eco.tipo === "entendo").length,
+        florescer: ecos.filter((eco) => eco.tipo === "🌱").length,
+        abraco: ecos.filter((eco) => eco.tipo === "🫂").length,
+        entendo: ecos.filter((eco) => eco.tipo === "💧").length,
       };
 
       return {

@@ -83,7 +83,7 @@ export async function updateLoginTracking(userId: string): Promise<{
     }
 
     const userProfile = profile[0];
-    const isFirstLogin = userProfile.isFirstLogin;
+    const isFirstLogin = userProfile.isFirstLogin ?? true; // Garantir que seja boolean
     const newLoginCount = (userProfile.loginCount || 0) + 1;
 
     // Atualizar tracking de login

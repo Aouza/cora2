@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { User, Settings, LogOut, Heart } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useDisplayName } from "@/hooks/useProfile";
 import Avatar from "./Avatar";
 
 export default function Header() {
   const { user, loading, signOut } = useAuth();
+  const displayName = useDisplayName();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -26,17 +28,6 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isUserMenuOpen]);
 
-  // Função para obter nome de exibição
-  const getDisplayName = (user: any) => {
-    if (!user) return "Usuário";
-    return (
-      user.user_metadata?.full_name ||
-      user.user_metadata?.name ||
-      user.email?.split("@")[0] ||
-      "Usuário"
-    );
-  };
-
   const handleSignOut = async () => {
     try {
       setIsSigningOut(true);
@@ -48,8 +39,6 @@ export default function Header() {
       router.push("/");
     }
   };
-
-  const displayName = getDisplayName(user);
 
   return (
     <header className="bg-white shadow-sm border-b">
