@@ -4,29 +4,7 @@
   "framework": "nextjs",
   "functions": {
     "src/app/api/**/*.ts": {
-      "maxDuration": 60
+      "maxDuration": 30
     }
-  },
-  "env": {
-    "NODE_ENV": "production",
-    "VERCEL": "1"
-  },
-  "build": {
-    "env": {
-      "NODE_ENV": "production",
-      "VERCEL": "1"
-    }
-  },
-  "regions": ["iad1"],
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-store, must-revalidate"
-        }
-      ]
-    }
-  ]
+  }
 }

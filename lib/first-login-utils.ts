@@ -1,104 +1,64 @@
 import { db, profiles } from "../src/db";
 import { eq } from "drizzle-orm";
-import { withRetry } from "./db-wrapper";
 
-/**
- * Detecta se é o primeiro login do usuário
- */
-export async function detectFirstLogin(userId: string): Promise<{
-  isFirstLogin: boolean;
-  reason: string;
-  profile?: any;
-}> {
+export async function detectFirstLogin(userId: string): Promise<boolean> {
   try {
-    const profile = await withRetry(
-      () => db.select().from(profiles).where(eq(profiles.id, userId)).limit(1),
-      `Detect first login for user: ${userId}`
-    );
+    const profile = await db
+      .select()
+      .from(profiles)
+      .where(eq(profiles.id, userId))
+      .limit(1);
 
     if (profile.length === 0) {
-      return {
-        isFirstLogin: true,
-        reason: "Perfil não encontrado",
-      };
+      return true; // Se não existe perfil, é primeiro login
     }
 
     const userProfile = profile[0];
-    const isFirstLogin = userProfile.isFirstLogin ?? true; // Garantir que seja boolean
 
-    return {
-      isFirstLogin,
-      reason: isFirstLogin
-        ? "Primeiro login detectado"
-        : "Usuário já logou antes",
-      profile: userProfile,
-    };
+    // Verificar se é realmente o primeiro login
+    const isFirstLogin = userProfile.isFirstLogin ?? true;
+
+    return isFirstLogin;
   } catch (error) {
     console.error("❌ [First Login] Erro ao detectar primeiro login:", error);
-    return {
-      isFirstLogin: true,
-      reason: "Erro ao verificar perfil",
-    };
+    return true; // Em caso de erro, assumir que é primeiro login
   }
 }
 
-/**
- * Atualiza o tracking de login do usuário
- */
-export async function updateLoginTracking(userId: string): Promise<{
-  success: boolean;
-  isFirstLogin: boolean;
-  loginCount: number;
-}> {
+export async function updateLoginTracking(userId: string): Promise<void> {
   try {
-    const profile = await withRetry(
-      () => db.select().from(profiles).where(eq(profiles.id, userId)).limit(1),
-      `Update login tracking for user: ${userId}`
-    );
+    const profile = await db
+      .select()
+      .from(profiles)
+      .where(eq(profiles.id, userId))
+      .limit(1);
 
     if (profile.length === 0) {
-      return {
-        success: false,
-        isFirstLogin: true,
-        loginCount: 1,
-      };
+      console.warn(
+        "⚠️ [First Login] Perfil não encontrado para atualizar tracking"
+      );
+      return;
     }
 
     const userProfile = profile[0];
-    const isFirstLogin = userProfile.isFirstLogin ?? true; // Garantir que seja boolean
-    const newLoginCount = (userProfile.loginCount || 0) + 1;
+    const isFirstLogin = userProfile.isFirstLogin ?? true;
+    const currentLoginCount = userProfile.loginCount || 0;
 
-    const updateData: any = {
-      isFirstLogin: false,
-      loginCount: newLoginCount,
-      lastLoginAt: new Date(),
-      updatedAt: new Date(),
-    };
+    await db
+      .update(profiles)
+      .set({
+        isFirstLogin: false, // Sempre marcar como não é mais primeiro login
+        loginCount: currentLoginCount + 1,
+        lastLoginAt: new Date(),
+        ...(isFirstLogin && {
+          firstLoginAt: new Date(), // Só atualizar se realmente for o primeiro
+        }),
+      })
+      .where(eq(profiles.id, userId));
 
-    if (isFirstLogin) {
-      updateData.firstLoginAt = new Date();
-    }
-
-    await withRetry(
-      () => db.update(profiles).set(updateData).where(eq(profiles.id, userId)),
-      `Update login tracking data for user: ${userId}`
-    );
-
-    return {
-      success: true,
-      isFirstLogin,
-      loginCount: newLoginCount,
-    };
+    console.log(`✅ [First Login] Tracking atualizado para usuário ${userId}`);
   } catch (error) {
-    console.error(
-      "❌ [First Login] Erro ao atualizar tracking de login:",
-      error
-    );
-    return {
-      success: false,
-      isFirstLogin: true,
-      loginCount: 1,
-    };
+    console.error("❌ [First Login] Erro ao atualizar tracking:", error);
   }
 }
 

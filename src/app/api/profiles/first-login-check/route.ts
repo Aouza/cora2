@@ -5,6 +5,7 @@ import {
   detectFirstLogin,
   updateLoginTracking,
 } from "../../../../../lib/first-login-utils";
+import { getProfileById } from "../../../../../lib/drizzle-server";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -27,23 +28,24 @@ export async function GET() {
     }
 
     // Detectar se é primeiro login
-    const firstLoginResult = await detectFirstLogin(user.id);
+    const isFirstLogin = await detectFirstLogin(user.id);
 
     // Atualizar tracking de login
-    const trackingResult = await updateLoginTracking(user.id);
+    await updateLoginTracking(user.id);
+
+    // Buscar perfil atualizado
+    const profile = await getProfileById(user.id);
 
     console.log("🔍 [First Login Check]", {
       userId: user.id,
-      isFirstLogin: firstLoginResult.isFirstLogin,
-      reason: firstLoginResult.reason,
-      loginCount: trackingResult.loginCount,
+      isFirstLogin,
+      loginCount: profile?.loginCount,
     });
 
     return NextResponse.json({
-      isFirstLogin: firstLoginResult.isFirstLogin,
-      reason: firstLoginResult.reason,
-      loginCount: trackingResult.loginCount,
-      profile: firstLoginResult.profile,
+      isFirstLogin,
+      loginCount: profile?.loginCount || 1,
+      profile,
     });
   } catch (error) {
     console.error("Erro ao verificar primeiro login:", error);

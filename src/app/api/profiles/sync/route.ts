@@ -24,16 +24,16 @@ export async function POST() {
     }
 
     // Sincronizar perfil via Drizzle
-    const result = await syncUserProfileWithDrizzle(user);
+    const profile = await syncUserProfileWithDrizzle(user);
 
-    if (!result.success) {
+    if (!profile) {
       return NextResponse.json(
-        { error: result.error || "Erro ao sincronizar perfil" },
+        { error: "Erro ao sincronizar perfil" },
         { status: 500 }
       );
     }
 
-    return NextResponse.json(result.profile);
+    return NextResponse.json(profile);
   } catch (error) {
     console.error("Erro ao sincronizar perfil:", error);
     return NextResponse.json(
