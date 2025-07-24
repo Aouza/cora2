@@ -5,6 +5,7 @@ import { db, profiles } from "../src/db";
 import { eq } from "drizzle-orm";
 import type { User } from "@supabase/supabase-js";
 import { getFixedAvatarUrl } from "./avatar-utils";
+import { withRetry } from "./db-wrapper";
 
 export interface ProfileData {
   id: string;
@@ -44,19 +45,22 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
       updatedAt: new Date(),
     };
 
-    // Verificar se perfil já existe por ID
-    const existingProfileById = await db
-      .select()
-      .from(profiles)
-      .where(eq(profiles.id, user.id))
-      .limit(1);
+    // Verificar se perfil já existe por ID com retry
+    const existingProfileById = await withRetry(
+      () => db.select().from(profiles).where(eq(profiles.id, user.id)).limit(1),
+      `SELECT profile by ID: ${user.id}`
+    );
 
-    // Verificar se perfil já existe por email (caso de inconsistência)
-    const existingProfileByEmail = await db
-      .select()
-      .from(profiles)
-      .where(eq(profiles.email, user.email!))
-      .limit(1);
+    // Verificar se perfil já existe por email com retry
+    const existingProfileByEmail = await withRetry(
+      () =>
+        db
+          .select()
+          .from(profiles)
+          .where(eq(profiles.email, user.email!))
+          .limit(1),
+      `SELECT profile by email: ${user.email}`
+    );
 
     let result;
 
@@ -72,16 +76,20 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
 
       if (hasChanges) {
         // Atualizar perfil existente apenas se houver mudanças
-        result = await db
-          .update(profiles)
-          .set({
-            email: profileData.email,
-            fullName: profileData.fullName,
-            avatarUrl: profileData.avatarUrl,
-            updatedAt: profileData.updatedAt,
-          })
-          .where(eq(profiles.id, user.id))
-          .returning();
+        result = await withRetry(
+          () =>
+            db
+              .update(profiles)
+              .set({
+                email: profileData.email,
+                fullName: profileData.fullName,
+                avatarUrl: profileData.avatarUrl,
+                updatedAt: profileData.updatedAt,
+              })
+              .where(eq(profiles.id, user.id))
+              .returning(),
+          `UPDATE profile: ${user.id}`
+        );
 
         console.log("✅ [Drizzle] Perfil atualizado:", result[0]);
       } else {
@@ -104,33 +112,35 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
         }
       );
 
-      // Atualizar o ID do perfil existente
-      result = await db
-        .update(profiles)
-        .set({
-          id: user.id, // Atualizar para o ID correto
-          fullName: profileData.fullName,
-          avatarUrl: profileData.avatarUrl,
-          updatedAt: profileData.updatedAt,
-        })
-        .where(eq(profiles.email, user.email!))
-        .returning();
+      result = await withRetry(
+        () =>
+          db
+            .update(profiles)
+            .set({
+              id: user.id,
+              fullName: profileData.fullName,
+              avatarUrl: profileData.avatarUrl,
+              updatedAt: profileData.updatedAt,
+            })
+            .where(eq(profiles.email, user.email!))
+            .returning(),
+        `UPDATE profile ID: ${currentProfile.id} -> ${user.id}`
+      );
 
       console.log("✅ [Drizzle] ID do perfil atualizado:", result[0]);
     } else {
-      // Criar novo perfil
-      result = await db.insert(profiles).values(profileData).returning();
+      // Perfil não existe, criar novo
+      result = await withRetry(
+        () => db.insert(profiles).values(profileData).returning(),
+        `INSERT new profile: ${user.id}`
+      );
 
       console.log("✅ [Drizzle] Novo perfil criado:", result[0]);
     }
 
-    return {
-      success: true,
-      profile: result[0],
-    };
+    return { success: true, profile: result[0] };
   } catch (error) {
     console.error("❌ [Drizzle] Erro na sincronização:", error);
-
     return {
       success: false,
       error: error instanceof Error ? error.message : "Erro desconhecido",
@@ -139,33 +149,33 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
 }
 
 /**
- * Busca perfil por ID via Drizzle
- * ⚠️ USO APENAS NO SERVIDOR
+ * Busca perfil por ID com retry logic
  */
 export async function getProfileById(userId: string) {
   try {
-    const profile = await db
-      .select()
-      .from(profiles)
-      .where(eq(profiles.id, userId))
-      .limit(1);
+    const result = await withRetry(
+      () => db.select().from(profiles).where(eq(profiles.id, userId)).limit(1),
+      `GET profile by ID: ${userId}`
+    );
 
-    return profile[0] || null;
+    return result.length > 0 ? result[0] : null;
   } catch (error) {
-    console.error("❌ [Drizzle] Erro ao buscar perfil:", error);
+    console.error("❌ [Drizzle] Erro ao buscar perfil por ID:", error);
     return null;
   }
 }
 
 /**
- * Lista todos os perfis (para admin)
- * ⚠️ USO APENAS NO SERVIDOR
+ * Busca todos os perfis com retry logic
  */
 export async function getAllProfiles() {
   try {
-    return await db.select().from(profiles);
+    return await withRetry(
+      () => db.select().from(profiles),
+      "GET all profiles"
+    );
   } catch (error) {
-    console.error("❌ [Drizzle] Erro ao listar perfis:", error);
+    console.error("❌ [Drizzle] Erro ao buscar todos os perfis:", error);
     return [];
   }
 }

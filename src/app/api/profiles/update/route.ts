@@ -3,6 +3,10 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { db, profiles } from "../../../../../src/db";
 import { eq } from "drizzle-orm";
+import { withRetry } from "../../../../../lib/db-wrapper";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function PUT(request: NextRequest) {
   try {
@@ -47,12 +51,16 @@ export async function PUT(request: NextRequest) {
       updateData.customAvatarUrl = customAvatarUrl;
     }
 
-    // Atualizar perfil via Drizzle
-    const result = await db
-      .update(profiles)
-      .set(updateData)
-      .where(eq(profiles.id, user.id))
-      .returning();
+    // Atualizar perfil via Drizzle com retry
+    const result = await withRetry(
+      () =>
+        db
+          .update(profiles)
+          .set(updateData)
+          .where(eq(profiles.id, user.id))
+          .returning(),
+      `UPDATE profile: ${user.id}`
+    );
 
     if (result.length === 0) {
       return NextResponse.json(
