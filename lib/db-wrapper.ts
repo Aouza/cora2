@@ -1,4 +1,4 @@
-import { db } from "../src/db";
+import { db, client, checkDatabaseHealth } from "../src/db";
 
 // Configurações de retry para Vercel serverless
 const RETRY_CONFIG = {
@@ -7,6 +7,10 @@ const RETRY_CONFIG = {
   maxDelay: 5000, // 5 segundos
   backoffMultiplier: 2,
 };
+
+// Cache para health check
+let lastHealthCheck = 0;
+const HEALTH_CHECK_CACHE_DURATION = 30000; // 30 segundos
 
 // Função para calcular delay exponencial
 function calculateDelay(attempt: number): number {
@@ -17,28 +21,110 @@ function calculateDelay(attempt: number): number {
 
 // Função para verificar se o erro é de timeout
 function isTimeoutError(error: any): boolean {
-  return (
-    error?.code === "ETIMEDOUT" ||
-    error?.code === "CONNECT_TIMEOUT" ||
-    (typeof error?.message === "string" && error.message.includes("timeout")) ||
-    (typeof error?.message === "string" &&
-      error.message.includes("ETIMEDOUT")) ||
-    (typeof error?.message === "string" &&
-      error.message.includes("CONNECT_TIMEOUT"))
-  );
+  // Verificar códigos de erro diretos
+  if (error?.code === "ETIMEDOUT" || error?.code === "CONNECT_TIMEOUT") {
+    return true;
+  }
+
+  // Verificar mensagens de erro
+  const errorMessage = error?.message || "";
+  if (typeof errorMessage === "string") {
+    return (
+      errorMessage.includes("timeout") ||
+      errorMessage.includes("ETIMEDOUT") ||
+      errorMessage.includes("CONNECT_TIMEOUT")
+    );
+  }
+
+  // Verificar causa do erro (para DrizzleQueryError)
+  if (error?.cause) {
+    const cause = error.cause;
+    if (cause?.code === "ETIMEDOUT" || cause?.code === "CONNECT_TIMEOUT") {
+      return true;
+    }
+    if (typeof cause?.message === "string") {
+      return (
+        cause.message.includes("timeout") ||
+        cause.message.includes("ETIMEDOUT") ||
+        cause.message.includes("CONNECT_TIMEOUT")
+      );
+    }
+  }
+
+  return false;
 }
 
 // Função para verificar se o erro é de conexão
 function isConnectionError(error: any): boolean {
-  return (
-    isTimeoutError(error) ||
-    error?.code === "ECONNREFUSED" ||
-    error?.code === "ENOTFOUND" ||
-    (typeof error?.message === "string" && error.message.includes("connection"))
-  );
+  // Erros de timeout
+  if (isTimeoutError(error)) {
+    return true;
+  }
+
+  // Erros de conexão diretos
+  if (error?.code === "ECONNREFUSED" || error?.code === "ENOTFOUND") {
+    return true;
+  }
+
+  // Verificar mensagens de erro
+  const errorMessage = error?.message || "";
+  if (typeof errorMessage === "string") {
+    return (
+      errorMessage.includes("connection") ||
+      errorMessage.includes("connect") ||
+      errorMessage.includes("network")
+    );
+  }
+
+  // Verificar causa do erro (para DrizzleQueryError)
+  if (error?.cause) {
+    const cause = error.cause;
+    if (cause?.code === "ECONNREFUSED" || cause?.code === "ENOTFOUND") {
+      return true;
+    }
+    if (typeof cause?.message === "string") {
+      return (
+        cause.message.includes("connection") ||
+        cause.message.includes("connect") ||
+        cause.message.includes("network")
+      );
+    }
+  }
+
+  // Para DrizzleQueryError, verificar se é um erro de conexão
+  if (
+    error?.name === "DrizzleQueryError" ||
+    error?.constructor?.name === "DrizzleQueryError"
+  ) {
+    // Se tem causa com ETIMEDOUT, é erro de conexão
+    if (error?.cause && isTimeoutError(error)) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
-// Wrapper genérico com retry logic
+// Função para verificar saúde do banco com cache
+async function checkHealthWithCache(): Promise<boolean> {
+  const now = Date.now();
+
+  // Se o último check foi há menos de 30 segundos, usar cache
+  if (now - lastHealthCheck < HEALTH_CHECK_CACHE_DURATION) {
+    return true; // Assumir que está saudável se check recente
+  }
+
+  try {
+    const isHealthy = await checkDatabaseHealth();
+    lastHealthCheck = now;
+    return isHealthy;
+  } catch (error) {
+    console.error("❌ [DB] Health check failed:", error);
+    return false;
+  }
+}
+
+// Wrapper genérico com retry logic e health check
 export async function withRetry<T>(
   operation: () => Promise<T>,
   operationName: string = "database operation"
@@ -47,12 +133,24 @@ export async function withRetry<T>(
 
   for (let attempt = 0; attempt <= RETRY_CONFIG.maxRetries; attempt++) {
     try {
+      // Verificar saúde do banco antes da operação (apenas na primeira tentativa)
+      if (attempt === 0) {
+        const isHealthy = await checkHealthWithCache();
+        if (!isHealthy) {
+          console.warn(
+            `⚠️ [DB] Database health check failed, proceeding anyway for: ${operationName}`
+          );
+        }
+      }
+
       return await operation();
     } catch (error) {
       lastError = error;
 
-      // Se não é erro de conexão, não tentar novamente
-      if (!isConnectionError(error)) {
+      // Verificar se é erro de conexão
+      const shouldRetry = isConnectionError(error);
+
+      if (!shouldRetry) {
         console.error(
           `❌ [DB] ${operationName} failed (non-retryable):`,
           error
