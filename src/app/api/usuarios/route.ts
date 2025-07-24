@@ -3,6 +3,9 @@ import { db } from "@/db";
 import { profiles } from "@/db/schema";
 import { desc } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET() {
   try {
     const usuariosData = await db

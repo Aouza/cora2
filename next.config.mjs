@@ -27,6 +27,33 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["postgres", "pg", "drizzle-orm"],
   },
+  // Configurações para resolver problemas de build na Vercel
+  output: "standalone",
+  // Configurar páginas que não devem ser renderizadas estaticamente
+  async headers() {
+    return [
+      {
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, must-revalidate",
+          },
+        ],
+      },
+    ];
+  },
+  // Configurações para evitar problemas de build
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  // Configurações de imagem
+  images: {
+    domains: ["lh3.googleusercontent.com", "graph.facebook.com"],
+  },
 };
 
 export default nextConfig;
