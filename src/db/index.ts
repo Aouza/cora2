@@ -27,7 +27,6 @@ const postgresConfig = {
     max: 1, // Pool de 1 conexão no Vercel
     idle_timeout: 10, // Timeout menor no Vercel
     connect_timeout: 35, // Timeout de conexão maior no Vercel
-    ssl: "require" as const, // Forçar SSL
     connection: {
       application_name: "cora2-vercel",
       // Configurações específicas para Supabase
@@ -39,7 +38,7 @@ const postgresConfig = {
 
   // Configurações específicas para connection pooling
   ...(isUsingPooling && {
-    ssl: { rejectUnauthorized: false }, // Necessário para PgBouncer
+    ssl: "require" as const, // Usar 'require' em vez de objeto para PgBouncer
     connection: {
       application_name: "cora2-vercel-pooler",
       // Timeouts mais curtos para connection pooling
