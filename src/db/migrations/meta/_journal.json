@@ -43,6 +43,13 @@
       "when": 1753314895603,
       "tag": "0005_rainy_sway",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1753315576780,
+      "tag": "0006_smiling_gideon",
+      "breakpoints": true
     }
   ]
 }

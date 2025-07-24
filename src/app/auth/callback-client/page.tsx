@@ -14,7 +14,7 @@ export default function AuthCallback() {
   /**
    * 1.  Se a URL contém ?code=XYZ, trocamos por sessão.
    * 2.  Quando `useAuth` terminar de carregar, decidimos:
-   *     - Sessão OK → verificar se perfil está completo
+   *     - Sessão OK → verificar se é primeiro login
    *     - Sem sessão  → /login?error=...
    */
   useEffect(() => {
@@ -30,15 +30,15 @@ export default function AuthCallback() {
 
     // (2) redirecionamento final baseado no status do perfil
     if (!loading && user) {
-      checkProfileAndRedirect();
+      checkFirstLoginAndRedirect();
     } else if (!loading && !user) {
       router.replace("/login?error=no_session");
     }
   }, [params, user, loading, router]);
 
-  const checkProfileAndRedirect = async () => {
+  const checkFirstLoginAndRedirect = async () => {
     try {
-      // Primeiro, garantir que o perfil existe
+      // Primeiro, garantir que o perfil existe e atualizar tracking
       const syncResponse = await fetch("/api/profiles/sync", {
         method: "POST",
         headers: {
@@ -53,23 +53,28 @@ export default function AuthCallback() {
         return;
       }
 
-      // Verificar se o perfil foi completado via API
-      const response = await fetch("/api/profiles/me");
+      // Verificar se é primeiro login via API
+      const firstLoginResponse = await fetch("/api/profiles/first-login-check");
 
-      if (!response.ok) {
+      if (!firstLoginResponse.ok) {
         // Se não conseguir verificar, redireciona para profile-setup
         router.replace("/profile-setup");
         return;
       }
 
-      const profile = await response.json();
+      const { isFirstLogin, reason } = await firstLoginResponse.json();
 
-      if (profile?.profileCompleted) {
-        // Perfil já completo, vai para dashboard
-        router.replace("/dashboard");
-      } else {
-        // Perfil não completo, vai para profile-setup
+      console.log("🔍 [Callback] Verificação de primeiro login:", {
+        isFirstLogin,
+        reason,
+      });
+
+      if (isFirstLogin) {
+        // Primeiro login, vai para profile-setup
         router.replace("/profile-setup");
+      } else {
+        // Usuário já existe, vai para dashboard
+        router.replace("/dashboard");
       }
     } catch (error) {
       console.error("Erro no callback:", error);
@@ -87,7 +92,7 @@ export default function AuthCallback() {
           Processando seu login…
         </h1>
         <p className="text-gray-600 mb-8">
-          Aguarde enquanto concluímos sua autenticação.
+          Aguarde enquanto verificamos sua conta.
         </p>
         <div className="flex gap-2 justify-center">
           {[0, 1, 2].map((i) => (

@@ -36,20 +36,33 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
       customAvatarUrl: null,
       useCustomAvatar: false,
       profileCompleted: false,
+      // Campos de tracking de primeiro login
+      isFirstLogin: true,
+      loginCount: 1,
+      firstLoginAt: new Date(),
+      lastLoginAt: new Date(),
       updatedAt: new Date(),
     };
 
-    // Verificar se perfil já existe
-    const existingProfile = await db
+    // Verificar se perfil já existe por ID
+    const existingProfileById = await db
       .select()
       .from(profiles)
       .where(eq(profiles.id, user.id))
       .limit(1);
 
+    // Verificar se perfil já existe por email (caso de inconsistência)
+    const existingProfileByEmail = await db
+      .select()
+      .from(profiles)
+      .where(eq(profiles.email, user.email!))
+      .limit(1);
+
     let result;
 
-    if (existingProfile.length > 0) {
-      const currentProfile = existingProfile[0];
+    if (existingProfileById.length > 0) {
+      // Perfil existe com o ID correto
+      const currentProfile = existingProfileById[0];
 
       // Verificar se há mudanças reais antes de atualizar
       const hasChanges =
@@ -78,6 +91,32 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
           "✅ [Drizzle] Perfil já está atualizado, nenhuma mudança necessária"
         );
       }
+    } else if (existingProfileByEmail.length > 0) {
+      // Perfil existe com email mas ID diferente - ATUALIZAR o ID
+      const currentProfile = existingProfileByEmail[0];
+
+      console.log(
+        "⚠️ [Drizzle] Perfil encontrado por email com ID diferente:",
+        {
+          existingId: currentProfile.id,
+          newId: user.id,
+          email: user.email,
+        }
+      );
+
+      // Atualizar o ID do perfil existente
+      result = await db
+        .update(profiles)
+        .set({
+          id: user.id, // Atualizar para o ID correto
+          fullName: profileData.fullName,
+          avatarUrl: profileData.avatarUrl,
+          updatedAt: profileData.updatedAt,
+        })
+        .where(eq(profiles.email, user.email!))
+        .returning();
+
+      console.log("✅ [Drizzle] ID do perfil atualizado:", result[0]);
     } else {
       // Criar novo perfil
       result = await db.insert(profiles).values(profileData).returning();
