@@ -4,7 +4,6 @@ import { relatos } from "@/db/schema";
 import { desc } from "drizzle-orm";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { syncUserProfileWithDrizzle } from "../../../../lib/drizzle-server";
 
 export async function GET() {
   try {
@@ -49,16 +48,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Garantir que o perfil existe antes de criar o relato
-    const profileSync = await syncUserProfileWithDrizzle(user);
-    if (!profileSync.success) {
-      console.error("Erro ao sincronizar perfil:", profileSync.error);
-      return NextResponse.json(
-        { error: "Erro ao sincronizar perfil do usuário" },
-        { status: 500 }
-      );
-    }
-
+    // Criar relato diretamente
     const [novoRelato] = await db
       .insert(relatos)
       .values({
@@ -69,7 +59,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json(novoRelato, { status: 201 });
   } catch (error) {
-    console.error("Erro ao criar relato:", error);
+    console.error(
+      "Erro ao criar relato:",
+      error instanceof Error ? error.stack || error.message : error
+    );
     return NextResponse.json(
       { error: "Erro interno do servidor" },
       { status: 500 }

@@ -1,15 +1,12 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { ecos } from "@/db/schema";
-import { desc } from "drizzle-orm";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { syncUserProfileWithDrizzle } from "../../../../lib/drizzle-server";
 
 export async function GET() {
   try {
-    const ecosData = await db.select().from(ecos).orderBy(desc(ecos.createdAt));
-
+    const ecosData = await db.select().from(ecos);
     return NextResponse.json(ecosData);
   } catch (error) {
     console.error("Erro ao buscar ecos:", error);
@@ -55,16 +52,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Garantir que o perfil existe
-    const profileSync = await syncUserProfileWithDrizzle(user);
-    if (!profileSync.success) {
-      console.error("Erro ao sincronizar perfil:", profileSync.error);
-      return NextResponse.json(
-        { error: "Erro ao sincronizar perfil do usuário" },
-        { status: 500 }
-      );
-    }
-
+    // Criar eco diretamente - o perfil já deve existir via auth callback
     const [novoEco] = await db
       .insert(ecos)
       .values({

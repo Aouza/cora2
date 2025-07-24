@@ -1,30 +1,29 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { AuthProvider } from "../hooks/useAuth";
-import QueryProvider from "../providers/QueryProvider";
+import { AuthProvider } from "@/hooks/useAuth";
+import QueryProvider from "@/providers/QueryProvider";
+import { ToastProvider } from "@/components/ToastContainer";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Cora.Deep - Hub Emocional para Superar Términos",
-  description:
-    "Transforme a dor do término em clareza emocional. Acesso a conteúdo curado, comunidade anônima e análise emocional profunda.",
+  title: "Cora - Conexões Emocionais",
+  description: "Plataforma de análise emocional e conexões humanas",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-BR">
-      <body className={`${inter.variable} antialiased`}>
+      <body className={inter.className}>
         <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

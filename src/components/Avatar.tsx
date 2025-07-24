@@ -37,6 +37,7 @@ export default function Avatar({
 
   const getInitials = (user: any) => {
     if (!user) return "U";
+
     const name =
       user.user_metadata?.full_name || user.user_metadata?.name || user.email;
     if (!name) return "U";

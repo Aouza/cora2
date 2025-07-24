@@ -31,6 +31,11 @@ export async function syncUserProfileWithDrizzle(user: User): Promise<{
       email: user.email!,
       fullName: user.user_metadata.full_name || user.user_metadata.name || null,
       avatarUrl: getFixedAvatarUrl(user.user_metadata.avatar_url),
+      // Campos de anonimato com valores default
+      nickname: null,
+      customAvatarUrl: null,
+      useCustomAvatar: false,
+      profileCompleted: false,
       updatedAt: new Date(),
     };
 

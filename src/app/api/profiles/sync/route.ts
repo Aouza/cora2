@@ -1,79 +1,40 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { db, profiles } from "../../../../db";
-import { eq } from "drizzle-orm";
-import { getFixedAvatarUrl } from "../../../../../lib/avatar-utils";
+import { syncUserProfileWithDrizzle } from "../../../../../lib/drizzle-server";
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
-    // Verificar autenticação via Supabase
-    const cookieStore = cookies();
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+    const supabase = createRouteHandlerClient({ cookies });
 
+    // Verificar autenticação
     const {
-      data: { session },
-    } = await supabase.auth.getSession();
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
-    if (!session?.user) {
-      return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: "Usuário não autenticado" },
+        { status: 401 }
+      );
     }
 
-    const user = session.user;
+    // Sincronizar perfil via Drizzle
+    const result = await syncUserProfileWithDrizzle(user);
 
-    // Dados do perfil com avatar URL corrigida
-    const profileData = {
-      id: user.id,
-      email: user.email!,
-      fullName: user.user_metadata.full_name || user.user_metadata.name || null,
-      avatarUrl: getFixedAvatarUrl(user.user_metadata.avatar_url),
-      updatedAt: new Date(),
-    };
-
-    // Verificar se perfil já existe no Drizzle
-    const existingProfile = await db
-      .select()
-      .from(profiles)
-      .where(eq(profiles.id, user.id))
-      .limit(1);
-
-    let result;
-
-    if (existingProfile.length > 0) {
-      // Atualizar perfil existente
-      result = await db
-        .update(profiles)
-        .set({
-          email: profileData.email,
-          fullName: profileData.fullName,
-          avatarUrl: profileData.avatarUrl,
-          updatedAt: profileData.updatedAt,
-        })
-        .where(eq(profiles.id, user.id))
-        .returning();
-
-      console.log("✅ Perfil atualizado via Drizzle:", result[0]);
-    } else {
-      // Criar novo perfil
-      result = await db.insert(profiles).values(profileData).returning();
-
-      console.log("✅ Novo perfil criado via Drizzle:", result[0]);
+    if (!result.success) {
+      return NextResponse.json(
+        { error: result.error || "Erro ao sincronizar perfil" },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({
-      success: true,
-      profile: result[0],
-      message:
-        existingProfile.length > 0 ? "Perfil atualizado" : "Perfil criado",
-    });
+    return NextResponse.json(result.profile);
   } catch (error) {
-    console.error("❌ Erro na sincronização do perfil:", error);
-
+    console.error("Erro ao sincronizar perfil:", error);
     return NextResponse.json(
-      {
-        error: "Erro interno do servidor",
-        details: error instanceof Error ? error.message : "Erro desconhecido",
-      },
+      { error: "Erro interno do servidor" },
       { status: 500 }
     );
   }

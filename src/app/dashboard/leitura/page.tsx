@@ -27,7 +27,6 @@ export default function LeituraEmocional() {
           actionText="Fazer diagnóstico"
           onAction={() => {
             // Redirecionar para formulário de diagnóstico
-            console.log("Redirecionar para diagnóstico");
           }}
         />
       );

@@ -81,27 +81,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setSession(null);
   };
 
-  // -------- profile sync --------
-  useEffect(() => {
-    if (!user) return;
-    (async () => {
-      try {
-        const response = await fetch("/api/profiles/sync", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          console.error("syncProfile error: HTTP", response.status);
-        }
-      } catch (error) {
-        console.error("syncProfile error:", error);
-      }
-    })();
-  }, [user]);
-
   return (
     <AuthContext.Provider value={{ user, session, loading, signIn, signOut }}>
       {children}

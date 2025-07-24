@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Heart, Sparkles, User, Settings, LogOut } from "lucide-react";
+import { User, Settings, LogOut, Heart } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import Avatar from "./Avatar";
 
@@ -26,15 +26,7 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isUserMenuOpen]);
 
-  // Debug simples
-  useEffect(() => {
-    console.log("🔍 Header - Auth state:", { loading, hasUser: !!user });
-    if (user) {
-      console.log("👤 User avatar URL:", user.user_metadata?.avatar_url);
-    }
-  }, [loading, user]);
-
-  // Função simples para obter nome
+  // Função para obter nome de exibição
   const getDisplayName = (user: any) => {
     if (!user) return "Usuário";
     return (
@@ -47,17 +39,11 @@ export default function Header() {
 
   const handleSignOut = async () => {
     try {
-      console.log("🔄 Iniciando logout no Header...");
       setIsSigningOut(true);
-
       await signOut();
-
-      console.log("✅ Logout concluído, redirecionando...");
     } catch (error) {
       console.error("❌ Erro no logout:", error);
-      console.log("🔄 Forçando logout local e redirecionamento...");
     } finally {
-      // Sempre redirecionar e resetar estado, mesmo com erro
       setIsSigningOut(false);
       router.push("/");
     }
@@ -66,41 +52,34 @@ export default function Header() {
   const displayName = getDisplayName(user);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <header className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center space-x-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600"
-          >
-            <Heart className="w-8 h-8 text-violet-600" />
-            <span>Cora.Deep</span>
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">
+              <Heart className="w-6 h-6 text-violet-600" />
+              <span>Cora.Deep</span>
+            </div>
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex space-x-8">
             <Link
-              href="/como-funciona"
-              className="text-gray-600 hover:text-violet-600 transition-colors"
+              href="/dashboard"
+              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              Como Funciona
+              Dashboard
             </Link>
             <Link
-              href="/depoimentos"
-              className="text-gray-600 hover:text-violet-600 transition-colors"
+              href="/dashboard/mural"
+              className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              Depoimentos
-            </Link>
-            <Link
-              href="/contato"
-              className="text-gray-600 hover:text-violet-600 transition-colors"
-            >
-              Contato
+              Mural Vivo
             </Link>
           </nav>
 
-          {/* User Section */}
+          {/* User Menu */}
           <div className="flex items-center space-x-4">
             {loading ? (
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
@@ -111,10 +90,10 @@ export default function Header() {
                   className="flex items-center space-x-3 p-2 rounded-full hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500"
                 >
                   {/* Avatar */}
-                  <Avatar user={user} size="sm" showDebug={true} />
+                  <Avatar user={user} size="sm" showDebug={false} />
 
-                  {/* Nome do usuário */}
-                  <div className="hidden sm:block">
+                  {/* Nome do usuário (apenas em telas maiores) */}
+                  <div className="hidden md:block">
                     <p className="text-sm font-medium text-gray-900">
                       {displayName}
                     </p>
@@ -131,15 +110,6 @@ export default function Header() {
                       </p>
                       <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
-
-                    <Link
-                      href="/dashboard"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <Sparkles className="w-4 h-4 mr-3" />
-                      Dashboard
-                    </Link>
 
                     <Link
                       href="/dashboard/perfil"
@@ -173,20 +143,12 @@ export default function Header() {
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-4">
-                <Link
-                  href="/login"
-                  className="text-gray-600 hover:text-violet-600 transition-colors"
-                >
-                  Entrar
-                </Link>
-                <Link
-                  href="/formulario"
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 text-white px-6 py-2 rounded-full hover:from-violet-700 hover:to-purple-700 transition-all transform hover:scale-105"
-                >
-                  Começar Agora
-                </Link>
-              </div>
+              <Link
+                href="/login"
+                className="bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-violet-700 transition-colors text-sm font-medium"
+              >
+                Entrar
+              </Link>
             )}
           </div>
         </div>

@@ -38,6 +38,21 @@ export default function AuthCallback() {
 
   const checkProfileAndRedirect = async () => {
     try {
+      // Primeiro, garantir que o perfil existe
+      const syncResponse = await fetch("/api/profiles/sync", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!syncResponse.ok) {
+        console.error("Erro ao sincronizar perfil:", syncResponse.status);
+        // Se não conseguir criar o perfil, redireciona para profile-setup
+        router.replace("/profile-setup");
+        return;
+      }
+
       // Verificar se o perfil foi completado via API
       const response = await fetch("/api/profiles/me");
 
@@ -57,6 +72,7 @@ export default function AuthCallback() {
         router.replace("/profile-setup");
       }
     } catch (error) {
+      console.error("Erro no callback:", error);
       // Em caso de erro, redireciona para profile-setup
       router.replace("/profile-setup");
     }

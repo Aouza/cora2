@@ -8,6 +8,7 @@ import { useRelatosComEcos } from "@/hooks/useRelatosComEcos";
 import { useCreateRelato } from "@/hooks/useRelatos";
 import { useCreateEco } from "@/hooks/useEcos";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/components/ToastContainer";
 
 // Constantes de validação
 const MIN_CHARACTERS = 10;
@@ -16,11 +17,13 @@ const MAX_CHARACTERS = 500;
 export default function Mural() {
   const [newPost, setNewPost] = useState("");
   const [validationError, setValidationError] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const { data: posts = [], isLoading, error } = useRelatosComEcos();
   const { mutate: createRelato, isPending: isCreatingRelato } =
     useCreateRelato();
   const { mutate: createEco, isPending: isCreatingEco } = useCreateEco();
   const { user } = useAuth();
+  const { showToast } = useToast();
 
   // Validação em tempo real
   useEffect(() => {
@@ -58,10 +61,27 @@ export default function Mural() {
         onSuccess: () => {
           setNewPost("");
           setValidationError("");
+          setShowSuccessMessage(true);
+
+          // Toast de sucesso
+          showToast({
+            type: "success",
+            title: "Desabafo compartilhado!",
+            message: "Sua mensagem foi enviada anonimamente para o mural.",
+          });
+
+          // Esconder mensagem de sucesso após 3 segundos
+          setTimeout(() => {
+            setShowSuccessMessage(false);
+          }, 3000);
         },
         onError: (error) => {
           console.error("Erro ao criar relato:", error);
-          alert("Erro ao criar relato. Tente novamente.");
+          showToast({
+            type: "error",
+            title: "Erro ao criar relato",
+            message: "Tente novamente em alguns instantes.",
+          });
         },
       });
     }
@@ -85,7 +105,11 @@ export default function Mural() {
       {
         onError: (error) => {
           console.error("Erro ao criar eco:", error);
-          alert("Erro ao adicionar reação. Tente novamente.");
+          showToast({
+            type: "error",
+            title: "Erro ao adicionar reação",
+            message: "Tente novamente em alguns instantes.",
+          });
         },
       }
     );
@@ -226,11 +250,19 @@ export default function Mural() {
               <button
                 type="submit"
                 disabled={!canSubmit}
-                className="px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
               >
-                {isCreatingRelato
-                  ? "Compartilhando..."
-                  : "Compartilhar Anonimamente"}
+                {isCreatingRelato ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Compartilhando...
+                  </>
+                ) : (
+                  <>
+                    <span>💭</span>
+                    Compartilhar Anonimamente
+                  </>
+                )}
               </button>
             </div>
           </form>

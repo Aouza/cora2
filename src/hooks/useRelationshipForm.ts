@@ -111,7 +111,6 @@ export const useRelationshipForm = (
   const saveFormProgress = () => {
     // Nota: Como o projeto não permite localStorage,
     // esta função pode ser adaptada para usar react-query cache
-    console.log("Form progress saved:", watchedFields);
   };
 
   // Pré-validação de campos específicos

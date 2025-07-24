@@ -1,4 +1,11 @@
-import { pgTable, uuid, varchar, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  uuid,
+  varchar,
+  text,
+  timestamp,
+  boolean,
+} from "drizzle-orm/pg-core";
 
 // ========== TABELAS DE AUTENTICAÇÃO ==========
 
@@ -8,6 +15,11 @@ export const profiles = pgTable("profiles", {
   email: varchar("email", { length: 255 }).notNull().unique(),
   fullName: text("full_name"),
   avatarUrl: text("avatar_url"),
+  // Campos de anonimato
+  nickname: varchar("nickname", { length: 50 }),
+  customAvatarUrl: text("custom_avatar_url"),
+  useCustomAvatar: boolean("use_custom_avatar").default(false),
+  profileCompleted: boolean("profile_completed").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
