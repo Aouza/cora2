@@ -11,7 +11,11 @@ const postgresConfig = {
   max: 10,
   idle_timeout: 20,
   connect_timeout: 30,
-  ssl: "require" as const,
+
+  // Configuração SSL condicional baseada no ambiente
+  ...(process.env.NODE_ENV === "production"
+    ? { ssl: "require" as const }
+    : { ssl: false }),
 
   // Debug apenas em desenvolvimento
   ...(process.env.NODE_ENV === "development" && {
